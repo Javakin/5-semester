@@ -1,0 +1,20 @@
+﻿  Building Custom Rule D:/Smartgit/5-semester/Robotter_i_kontekst/bug_algo/code_BB/CMakeLists.txt
+  CMake does not need to re-run because D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\Build_Bug_Algo\CMakeFiles\generate.stamp is up-to-date.
+  readpgmtest.cpp
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\readpgmtest.cpp(19): warning C4018: '<': signed/unsigned mismatch
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\readpgmtest.cpp(20): warning C4018: '<': signed/unsigned mismatch
+  PPMLoader.cpp
+  Image.cpp
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\Image.cpp(234): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\Image.cpp(236): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\Image.cpp(255): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\Image.cpp(257): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\Image.cpp(314): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\Image.cpp(402): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\Image.cpp(447): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\Image.cpp(492): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+  Generating Code...
+  readpgmtest.vcxproj -> D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\code_BB\Debug\readpgmtest.exe
