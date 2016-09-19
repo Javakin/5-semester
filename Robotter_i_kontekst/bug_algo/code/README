@@ -1,0 +1,19 @@
+
+This project is setup using cmake. please install if you don't have it:
+
+http://www.cmake.org
+
+to build the project run cmake in the console. 
+
+The following example will generate makefiles on linux (gcc):
+
+cmake -G"Unix Makefiles" .
+make
+
+
+On windows choose a generator that fits. This could be to generate a visual studio project
+
+cmake -G"Visual Studio 10" .
+
+A .sln file should have been generated which you can open in visual studio
+
