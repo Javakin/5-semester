@@ -1,0 +1,3 @@
+D:/Smartgit/5-semester/Robotter_i_kontekst/bug_algo/CMakeFiles/readpgmtest.dir
+D:/Smartgit/5-semester/Robotter_i_kontekst/bug_algo/CMakeFiles/ALL_BUILD.dir
+D:/Smartgit/5-semester/Robotter_i_kontekst/bug_algo/CMakeFiles/ZERO_CHECK.dir
