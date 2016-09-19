@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Smartgit\5-semester\Robotter_i_kontekst\bug_algo\Build_Bug_Algo\CMakeFiles\4b1d2f1779fac200115bb24ea01533d3\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{4F5D93B7-C01E-3C86-87BD-5099A5717979}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

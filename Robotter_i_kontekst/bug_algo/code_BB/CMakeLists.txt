@@ -11,7 +11,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 
 # The name of the project. (EDIT THIS)
-PROJECT(UGE1)
+PROJECT(Bug_Algo)
 
 # Used to resolve absolute path names
 SET(ROOT ${CMAKE_CURRENT_SOURCE_DIR})
