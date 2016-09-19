@@ -7,10 +7,12 @@ using namespace rw::loaders;
 
 int main(int argc, char** argv) {
     std::string filename(argv[1]);
+	std::cout << filename << std::endl;
 
+	
     std::cout << "loading image..." << std::endl;
     Image* img = PPMLoader::load(filename);
-
+	
     // do stuff here
     int channel = 0; // allways 0 on grayscale image
 
@@ -26,11 +28,19 @@ int main(int argc, char** argv) {
             }
         }
     }
-
+	
     std::cout << "saving image..." << std::endl;
-    // save image
+    // save image HELT UDE I ROOT MAPPEN OMG!!!	
     img->saveAsPGM("testout.pgm");
         
     // cleanup
     delete img;
+
+	// test til debugging
+
+	//std::cout << argv[1] << std::endl;
+
+	// final statements
+	system("pause");
+	return 0;
 }
