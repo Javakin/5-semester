@@ -43,14 +43,12 @@ public:
 
 private:
 
-	int x = 0;
-	int y = 0;
-	int tempx = 0;
-	int tempy = 0;
-	int orientation = 0;
+
+	double theta;
 
 
 	Point current_point;
+	Point temporary_point;
 
 	rw::sensor::Image* map;
 

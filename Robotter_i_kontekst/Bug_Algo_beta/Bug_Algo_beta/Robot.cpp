@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Robot.h"
 #include "Point.h"
 #include "Image.h"
