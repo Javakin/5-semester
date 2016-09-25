@@ -21,10 +21,10 @@ Transform::Transform(double x, double y, double theta)
 Transform::~Transform()
 
 	{
-		for (size_t i = 0; i < 3; i++) {
+		/*for (size_t i = 0; i < 3; i++) {
 			delete[] _mat[i];
 		}
-		delete[] _mat;
+		delete[] _mat;*/
 	}
 
 Point Transform::mult(const Point & p)

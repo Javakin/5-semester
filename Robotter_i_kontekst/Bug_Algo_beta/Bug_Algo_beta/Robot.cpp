@@ -17,6 +17,9 @@ Robot::Robot()
 
 Robot::Robot(rw::sensor::Image * aMap)
 {
+	Point p(0, 0);
+	current_point = p;
+	current_theta = 0;
 	map = aMap;
 }
 
@@ -32,8 +35,7 @@ Robot::Robot(rw::sensor::Image* aMap, double x, double y, double theta)
 
 Robot::~Robot()
 {
-	// remove all the variables
-	delete map;
+
 }
 
 void Robot::goTo(double x, double y, double theta)
@@ -43,6 +45,8 @@ void Robot::goTo(double x, double y, double theta)
 
 void Robot::goTo(Transform motion)
 {
+	
+
 	// print motoin
 	printMotionSequence(current_point, motion);
 
@@ -53,22 +57,33 @@ void Robot::goTo(Transform motion)
 	std::cout << calcualteWorkSpace(motion) << std::endl;
 }
 
-void Robot::printMotionSequence(Point, Transform)
+void Robot::printMotionSequence(Point cur_point, Transform motion)
 {
+	// w = 1 rad/sec
+	// calculate step 1 - rotate
+
+	// Tabel of the movement for the two wheels and the time they move
+	std::cout << "| Wheel 1 " << "| Wheel 2 " << "| Time [sec] |" << std::endl;
+	std::cout << "Step 1 | " << current_point(0) << " | " << current_point(1) << " | " << sec << " | " << std::endl;
+
+	// calculate step 2 - motion
+
+
+	// calculate step 3 - rotate
+
+
 	//int sec;
 	//int x;
 	//int y;
 	
-	// Tabel of the movement for the two wheels and the time they move
-	//std::cout << "| Wheel 1 " << "| Wheel 2 " << "| Time [sec] |" << std::endl;
-	//std::cout << "Step 1 | " << x << " | " << y << " | " << sec << " | " << std::endl;
+	
 	//std::cout << "Step 2 | " << x << " | " << y << " | " << sec << " | " << std::endl;
 	//std::cout << "Step 3 | " << x << " | " << y << " | " << sec << " | " << std::endl; 
 }
 
 void Robot::traceRoute(Transform motion)
 {
-
+	std::cout << "her" << std::endl;
 }
 
 int Robot::calcualteWorkSpace(Transform motion)
