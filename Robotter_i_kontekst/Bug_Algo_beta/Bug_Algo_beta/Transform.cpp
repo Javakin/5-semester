@@ -1,28 +1,51 @@
 #include "Transform.h"
 
 
-
-
-int main(int argc, char** argv)
+Transform::Transform(double x, double y, double theta)
 {
-	std::cout << "Hello" << std::endl;
+	_mat = new double*[3];
+	_mat[0] = new double[3];
+	_mat[1] = new double[3];
+	_mat[2] = new double[3];
 
-	Transform transform1(1, 0, 0);
-	Transform transform2(0, 0, 45 * PI / 180.0);
-	Transform transform3(1, 0, 0);
-	Transform transform4(0, 0, 45 * PI / 180.0);
+	_mat[0][0] = cos(theta);
+	_mat[0][1] = -sin(theta);
+	_mat[1][0] = sin(theta);
+	_mat[1][1] = cos(theta);
 
-	std::cout << "Transform1:";
-	for (size_t i = 0; i < 3; i++) {
-		for (size_t j = 0; j < 3; j++) {
-			std::cout << transform1(i, j) << "  ";
+	_mat[0][2] = x;
+	_mat[1][2] = y;
+	_mat[2][0] = _mat[2][1] = 0;
+	_mat[2][2] = 1;
+}
+Transform::~Transform()
+
+	{
+		for (size_t i = 0; i < 3; i++) {
+			delete[] _mat[i];
 		}
-		std::cout << std::endl;
+		delete[] _mat;
 	}
 
-
-	Point p(0, 0);
-	Point p2 = transform1.mult(transform2.mult(transform3.mult(transform4.mult(p))));
-	std::cout << "Transformed Point " << p2(0) << ", " << p2(1) << ", " << p2(2) << std::endl;
-	return 0;
+Point Transform::mult(const Point & p)
+{
+	Point res(0, 0);
+	for (size_t i = 0; i < 2; i++) {
+		for (size_t j = 0; j < 3; j++) {
+			res(i) += _mat[i][j] * p(j);
+		}
+	}
+	return res;
 }
+
+double & Transform::operator()(size_t i, size_t j)
+{
+	return _mat[i][j];
+}
+
+const double & Transform::operator()(size_t i, size_t j) const
+{
+	return _mat[i][j];
+}
+
+

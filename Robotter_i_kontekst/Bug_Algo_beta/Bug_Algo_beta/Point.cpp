@@ -7,6 +7,7 @@ Point::Point()
 }
 
 
+
 Point::~Point()
 {
 }
