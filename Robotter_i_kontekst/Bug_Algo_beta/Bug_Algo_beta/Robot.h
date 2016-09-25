@@ -30,6 +30,7 @@ public:
 
 private:
 	Point current_point;
+	double current_theta;
 
 	rw::sensor::Image* map;
 
