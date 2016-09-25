@@ -26,11 +26,30 @@ public:
 	// Calcualte the requierd work space
 	int calcualteWorkSpace(Transform motion);
 
+	// Move the robot forward
+	void moveahead(int enafstand);
+
+	// Rotate the robot
+	void rotate(int degrees);
+
+	// Print the trajectory of the robot on the map
+	void printtrajectory();
+
+	// 
+	void move(int x, int y, int rot);
+
+
 	~Robot();
 
 private:
+
+
+	double theta;
+
+
 	Point current_point;
 	double current_theta;
+	Point temporary_point;
 
 	rw::sensor::Image* map;
 

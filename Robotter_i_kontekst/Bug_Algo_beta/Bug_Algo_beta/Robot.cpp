@@ -1,5 +1,9 @@
-#include "Robot.h"
+#pragma once
 
+#include "Robot.h"
+#include "Point.h"
+#include "Image.h"
+#include "Transform.h"
 
 
 Robot::Robot()
