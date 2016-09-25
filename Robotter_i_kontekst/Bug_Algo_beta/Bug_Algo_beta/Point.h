@@ -5,8 +5,6 @@
 
 class Point {
 public:
-	Point();
-
 	Point(double x, double y)
 	{
 		_p = new double[3];
@@ -18,7 +16,7 @@ public:
 	Point(const Point& p)
 	{
 		_p = new double[3];
-		for (size_t i = 0; i < 3; i++)
+		for (size_t i = 0; i<3; i++)
 			_p[i] = p._p[i];
 	}
 
@@ -42,5 +40,3 @@ public:
 
 private:
 	double* _p;
-
-};
