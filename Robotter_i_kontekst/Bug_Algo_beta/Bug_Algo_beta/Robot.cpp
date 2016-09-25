@@ -33,9 +33,9 @@ void Robot::goTo(double x, double y, double theta)
 
 void Robot::printMotionSequence(Point, Transform)
 {
-	int sec;
-	int x;
-	int y;
+	//int sec;
+	//int x;
+	//int y;
 	
 	// Tabel of the movement for the two wheels and the time they move
 	//std::cout << "| Wheel 1 " << "| Wheel 2 " << "| Time [sec] |" << std::endl;
