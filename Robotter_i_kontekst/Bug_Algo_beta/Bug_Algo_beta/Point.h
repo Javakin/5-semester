@@ -13,9 +13,8 @@ public:
 	Point(const Point& p);
 	
 
-	~Point() {
-		delete[] _p;
-	}
+	~Point();
+	
 
 
 	double& operator()(size_t i);
