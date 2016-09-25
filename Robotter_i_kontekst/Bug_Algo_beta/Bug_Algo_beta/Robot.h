@@ -48,6 +48,7 @@ private:
 
 
 	Point current_point;
+	double current_theta;
 	Point temporary_point;
 
 	rw::sensor::Image* map;
