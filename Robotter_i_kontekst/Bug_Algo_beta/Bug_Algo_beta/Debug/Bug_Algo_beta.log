@@ -1,0 +1,5 @@
+﻿  readpgmtest.cpp
+d:\smartgit\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\readpgmtest.cpp(21): warning C4018: '<': signed/unsigned mismatch
+d:\smartgit\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\readpgmtest.cpp(22): warning C4018: '<': signed/unsigned mismatch
+  Bug_Algo_beta.vcxproj -> D:\Smartgit\5-semester\Robotter_i_kontekst\Bug_Algo_beta\Debug\Bug_Algo_beta.exe
+  Bug_Algo_beta.vcxproj -> D:\Smartgit\5-semester\Robotter_i_kontekst\Bug_Algo_beta\Debug\Bug_Algo_beta.pdb (Full PDB)
