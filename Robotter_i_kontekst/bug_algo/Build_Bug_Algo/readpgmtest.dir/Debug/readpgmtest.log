@@ -1,4 +1,0 @@
-﻿C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets(1611,5): warning : The referenced project 'D:/Smartgit/5-semester/Robotter_i_kontekst/bug_algo/Build_Bug_Algo/ZERO_CHECK.vcxproj' does not exist.
-  Building Custom Rule D:/Smartgit/5-semester/Robotter_i_kontekst/bug_algo/code_BB/CMakeLists.txt
-  The system cannot find the path specified.
-C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code 3.
