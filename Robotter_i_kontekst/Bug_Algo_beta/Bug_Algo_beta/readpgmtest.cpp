@@ -32,9 +32,9 @@ int main(int argc, char** argv) {
 	Transform Hc(0, 0, 60 * PI / 180);
 
 	// make a move
-	wall_e.move(Ha);
-	wall_e.move(Hb);
-	wall_e.move(Hc);
+	wall_e.goTo(Ha);
+	wall_e.goTo(Hb);
+	wall_e.goTo(Hc);
 
 	// printing image
 	std::cout << "saving image..." << std::endl;
