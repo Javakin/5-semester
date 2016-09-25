@@ -6,13 +6,13 @@
 
 #include <iostream>
 
-class Robot_3
+class Robot
 {
 public:
-	Robot_3();
+	Robot();
 
 	// Construct a robot at the position x,y and with the facing theta
-	Robot_3(double x, double y, double theta);
+	Robot(double x, double y, double theta);
 
 	// Move robot to new position
 	void goTo(double x, double y, double theta);
@@ -26,7 +26,7 @@ public:
 	// Calcualte the requierd work space
 	int calcualteWorkSpace(Transform motion);
 
-	~Robot_3();
+	~Robot();
 
 private:
 	Point current_point;

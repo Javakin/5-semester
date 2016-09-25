@@ -1,23 +1,23 @@
-#include "Robot_3.h"
+#include "Robot.h"
 
 
 
-Robot_3::Robot_3()
+Robot::Robot()
 {
 }
 
 
 
-Robot_3::~Robot_3()
+Robot::~Robot()
 {
 }
 
-void Robot_3::goTo(double x, double y, double theta)
+void Robot::goTo(double x, double y, double theta)
 {
 
 }
 
-void Robot_3::printMotionSequence(Point, Transform)
+void Robot::printMotionSequence(Point, Transform)
 {
 	int sec;
 	int x;
@@ -30,12 +30,12 @@ void Robot_3::printMotionSequence(Point, Transform)
 	//std::cout << "Step 3 | " << x << " | " << y << " | " << sec << " | " << std::endl; 
 }
 
-void Robot_3::traceRoute(Transform motion)
+void Robot::traceRoute(Transform motion)
 {
 
 }
 
-int Robot_3::calcualteWorkSpace(Transform motion)
+int Robot::calcualteWorkSpace(Transform motion)
 {
 	return 0;
 }
