@@ -1,5 +1,7 @@
 #include "Robot.h"
-
+#include "Point.h"
+#include "Image.h"
+#include "Transform.h"
 
 
 Robot::Robot()
