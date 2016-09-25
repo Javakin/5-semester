@@ -1,15 +1,1 @@
-﻿  Robot_3.cpp
-  readpgmtest.cpp
-c:\users\korbu\desktop\smartgitmappe\kode\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\readpgmtest.cpp(21): warning C4018: '<': signed/unsigned mismatch
-c:\users\korbu\desktop\smartgitmappe\kode\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\readpgmtest.cpp(22): warning C4018: '<': signed/unsigned mismatch
-  PPMLoader.cpp
-  Image.cpp
-c:\users\korbu\desktop\smartgitmappe\kode\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\image.cpp(237): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\korbu\desktop\smartgitmappe\kode\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\image.cpp(239): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\korbu\desktop\smartgitmappe\kode\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\image.cpp(258): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\korbu\desktop\smartgitmappe\kode\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\image.cpp(260): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\korbu\desktop\smartgitmappe\kode\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\image.cpp(320): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-  LINK : C:\Users\Korbu\Desktop\SmartgitMappe\Kode\5-semester\Robotter_i_kontekst\Bug_Algo_beta\Debug\Bug_Algo_beta.exe not found or not built by the last incremental link; performing full link
-  Bug_Algo_beta.vcxproj -> C:\Users\Korbu\Desktop\SmartgitMappe\Kode\5-semester\Robotter_i_kontekst\Bug_Algo_beta\Debug\Bug_Algo_beta.exe
-  Bug_Algo_beta.vcxproj -> C:\Users\Korbu\Desktop\SmartgitMappe\Kode\5-semester\Robotter_i_kontekst\Bug_Algo_beta\Debug\Bug_Algo_beta.pdb (Full PDB)
+﻿
