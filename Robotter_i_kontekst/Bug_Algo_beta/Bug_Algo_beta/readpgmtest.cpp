@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Image.h"
 #include "PPMLoader.h"
-
+//#include <windows.h>
 using namespace rw::sensor;
 using namespace rw::loaders;
 
@@ -9,6 +9,7 @@ int main(int argc, char** argv) {
 	std::string filename(argv[1]);
 	std::cout << filename << std::endl;
 
+	//PlaySound("C:\\Users\\Korbu\\Desktop\\Recording.m4a", NULL, SND_FILENAME);
 
 	std::cout << "loading image..." << std::endl;
 	Image* img = PPMLoader::load(filename);
