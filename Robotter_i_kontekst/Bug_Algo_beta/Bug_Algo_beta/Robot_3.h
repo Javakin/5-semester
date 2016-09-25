@@ -26,9 +26,8 @@ public:
 	// Calcualte the requierd work space
 	int calcualteWorkSpace(Transform motion);
 
-
-
 	~Robot_3();
+
 private:
 	Point current_point;
 
