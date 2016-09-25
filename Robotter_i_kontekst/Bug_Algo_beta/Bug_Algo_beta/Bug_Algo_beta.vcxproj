@@ -149,11 +149,13 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="PPMLoader.cpp" />
     <ClCompile Include="readpgmtest.cpp" />
+    <ClCompile Include="Robot_3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h" />
     <ClInclude Include="macros.h" />
     <ClInclude Include="PPMLoader.h" />
+    <ClInclude Include="Robot_3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
