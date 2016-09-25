@@ -59,15 +59,15 @@ void Robot::goTo(Transform motion)
 
 void Robot::printMotionSequence(Point cur_point, Transform motion)
 {
+	// setup
+
+
 	// w = 1 rad/sec
 	// calculate step 1 - rotate
 
-	// Tabel of the movement for the two wheels and the time they move
-	std::cout << "| Wheel 1 " << "| Wheel 2 " << "| Time [sec] |" << std::endl;
-	std::cout << "Step 1 | " << current_point(0) << " | " << current_point(1) << " | " << sec << " | " << std::endl;
 
 	// calculate step 2 - motion
-
+	
 
 	// calculate step 3 - rotate
 
@@ -76,7 +76,9 @@ void Robot::printMotionSequence(Point cur_point, Transform motion)
 	//int x;
 	//int y;
 	
-	
+	// Tabel of the movement for the two wheels and the time they move
+	//std::cout << "| Wheel 1 " << "| Wheel 2 " << "| Time [sec] |" << std::endl;
+	//std::cout << "Step 1 | " << x << " | " << y << " | " << sec << " | " << std::endl;
 	//std::cout << "Step 2 | " << x << " | " << y << " | " << sec << " | " << std::endl;
 	//std::cout << "Step 3 | " << x << " | " << y << " | " << sec << " | " << std::endl; 
 }
