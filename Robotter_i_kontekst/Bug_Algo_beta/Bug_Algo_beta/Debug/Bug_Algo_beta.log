@@ -1,6 +1,0 @@
-﻿  Robot_3.cpp
-d:\smartgit\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\robot_3.cpp(24): warning C4101: 'y': unreferenced local variable
-d:\smartgit\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\robot_3.cpp(23): warning C4101: 'x': unreferenced local variable
-d:\smartgit\5-semester\robotter_i_kontekst\bug_algo_beta\bug_algo_beta\robot_3.cpp(22): warning C4101: 'sec': unreferenced local variable
-  Bug_Algo_beta.vcxproj -> D:\Smartgit\5-semester\Robotter_i_kontekst\Bug_Algo_beta\Debug\Bug_Algo_beta.exe
-  Bug_Algo_beta.vcxproj -> D:\Smartgit\5-semester\Robotter_i_kontekst\Bug_Algo_beta\Debug\Bug_Algo_beta.pdb (Full PDB)
