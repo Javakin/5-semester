@@ -11,8 +11,10 @@ class Robot
 public:
 	Robot();
 
+	Robot(rw::sensor::Image* aMap);
+
 	// Construct a robot at the position x,y and with the facing theta
-	Robot(double x, double y, double theta);
+	Robot(rw::sensor::Image* aMap, double x, double y, double theta);
 
 	// Move robot to new position
 	void goTo(double x, double y, double theta);

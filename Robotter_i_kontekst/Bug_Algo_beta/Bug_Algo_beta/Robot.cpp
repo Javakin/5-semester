@@ -53,3 +53,14 @@ int Robot::calcualteWorkSpace(Transform motion)
 {
 	return 0;
 }
+
+void Robot::moveahead(int enafstand)
+{
+	
+	tempx = x;
+	tempy = y;
+	x = x + (enafstand * cos(theta * 3.14159265358979323846 / 180));
+	y = y + (enafstand * sin(theta * 3.14159265358979323846 / 180));
+	printtrajectory();
+	Point
+}
