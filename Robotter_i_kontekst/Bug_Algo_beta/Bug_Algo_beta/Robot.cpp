@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include "Robot.h"
 #include "Point.h"
 #include "Image.h"
@@ -11,24 +12,45 @@ Robot::Robot()
 	Point p(0,0);
 	current_point = p;
 	current_theta = 0;
+	map = NULL;
 }
 
-Robot::Robot(double x, double y, double theta)
+Robot::Robot(rw::sensor::Image * aMap)
 {
-	Point p(0, 0);
+	map = aMap;
+}
+
+Robot::Robot(rw::sensor::Image* aMap, double x, double y, double theta)
+{
+	Point p(x, y);
 	current_point = p;
 	current_theta = theta;
+	map = aMap;
 }
 
 
 
 Robot::~Robot()
 {
+	// remove all the variables
+	delete map;
 }
 
 void Robot::goTo(double x, double y, double theta)
 {
 
+}
+
+void Robot::goTo(Transform motion)
+{
+	// print motoin
+	printMotionSequence(current_point, motion);
+
+	// trace route
+	traceRoute(motion);
+
+	// calculate workspace
+	std::cout << calcualteWorkSpace(motion) << std::endl;
 }
 
 void Robot::printMotionSequence(Point, Transform)
@@ -54,7 +76,7 @@ int Robot::calcualteWorkSpace(Transform motion)
 	return 0;
 }
 
-void Robot::moveahead(int enafstand)
+/*void Robot::moveahead(int enafstand)
 {
 	
 	tempx = x;
@@ -63,4 +85,4 @@ void Robot::moveahead(int enafstand)
 	y = y + (enafstand * sin(theta * 3.14159265358979323846 / 180));
 	printtrajectory();
 	Point
-}
+}*/
