@@ -15,7 +15,8 @@ Robot::Robot()
 
 Robot::Robot(double x, double y, double theta)
 {
-	current_point = Point p(0, 0);
+	Point p(0, 0);
+	current_point = p;
 	current_theta = theta;
 }
 
