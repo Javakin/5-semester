@@ -7,35 +7,20 @@ class Point {
 public:
 	Point();
 
-	Point(double x, double y)
-	{
-		_p = new double[3];
-		_p[0] = x;
-		_p[1] = y;
-		_p[2] = 1;
-	}
+	Point(double x, double y);
 
-	Point(const Point& p)
-	{
-		_p = new double[3];
-		for (size_t i = 0; i < 3; i++)
-			_p[i] = p._p[i];
-	}
+
+	Point(const Point& p);
+	
 
 	~Point() {
 		delete[] _p;
 	}
 
 
-	double& operator()(size_t i)
-	{
-		return _p[i];
-	}
+	double& operator()(size_t i);
 
-	const double& operator()(size_t i) const
-	{
-		return _p[i];
-	}
+	const double& operator()(size_t i) const;
 
 
 
