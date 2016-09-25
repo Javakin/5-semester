@@ -1,48 +1,49 @@
 #include <iostream>
 #include "Image.h"
 #include "PPMLoader.h"
-//#include <windows.h>
+#include "Robot.h"
+#include "Transform.h"
+
+#define PI 3.14159265358979323846 
+
 using namespace rw::sensor;
 using namespace rw::loaders;
+
 
 int main(int argc, char** argv) {
 	std::string filename(argv[1]);
 	std::cout << filename << std::endl;
 
-	//PlaySound("C:\\Users\\Korbu\\Desktop\\Recording.m4a", NULL, SND_FILENAME);
 
 	std::cout << "loading image..." << std::endl;
 	Image* img = PPMLoader::load(filename);
 
-	// do stuff here
-	int channel = 0; // allways 0 on grayscale image
+	// initiate robot
+	Robot wall_e(img);
 
-	std::cout << "inverting image..." << std::endl;
-	// change all 0 pixels to 255 and all 255 pixels to 0
-	for (int x = 0; x<img->getWidth(); x++) {
-		for (int y = 0; y<img->getHeight(); y++) {
-			int val = img->getPixelValuei(x, y, channel);
-			if (val == 0) {
-				img->setPixel8U(x, y, 255);
-			}
-			else if (val == 255) {
-				img->setPixel8U(x, y, 0);
-			}
-		}
-	}
+	// initiate transform matrixes 
+	Transform H1(100, 0, 0);
+	Transform H2(0, 200, 0);
+	Transform H3(0, 0, 30 * PI / 180);
+	
+	//Transform H4():
+	Transform Ha(200, 0, 0);
+	Transform Hb(500, 0, 0);
+	Transform Hc(0, 0, 60 * PI / 180);
 
+	// make a move
+	wall_e.move(Ha);
+	wall_e.move(Hb);
+	wall_e.move(Hc);
+
+	// printing image
 	std::cout << "saving image..." << std::endl;
-	// save image HELT UDE I ROOT MAPPEN OMG!!!	
 	img->saveAsPGM("testout.pgm");
-
+	
 	// cleanup
 	delete img;
 
-	// test til debugging
-
-	//std::cout << argv[1] << std::endl;
-
-	// final statements
 	system("pause");
+	
 	return 0;
 }
