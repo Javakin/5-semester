@@ -36,6 +36,8 @@ int main(int argc, char** argv) {
 	wall_e.goTo(Hb);
 	wall_e.goTo(Hc);
 
+//	std::cout << "hej"; << Hc(1);
+
 	// printing image
 	std::cout << "saving image..." << std::endl;
 	img->saveAsPGM("testout.pgm");

@@ -17,6 +17,11 @@ Robot::Robot()
 
 Robot::Robot(rw::sensor::Image * aMap)
 {
+
+}
+
+Robot::Robot(rw::sensor::Image* aMap, double x, double y, double theta)
+{
 	Point p(0, 0);
 	current_point = p;
 	current_theta = 0;
@@ -38,7 +43,8 @@ Robot::~Robot()
 
 }
 
-void Robot::goTo(double x, double y, double theta)
+//void Robot::goTo(double x, double y, double theta)
+void Robot::goTo(Transform motion)
 {
 
 }
@@ -96,7 +102,7 @@ int Robot::calcualteWorkSpace(Transform motion)
 /*void Robot::moveahead(int enafstand)
 {
 	
-	tempx = x;
+	/*tempx = x;
 	tempy = y;
 	x = x + (enafstand * cos(theta * 3.14159265358979323846 / 180));
 	y = y + (enafstand * sin(theta * 3.14159265358979323846 / 180));
