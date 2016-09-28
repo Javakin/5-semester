@@ -53,7 +53,8 @@ void Robot::goTo(Transform motion)
 
 void Robot::moveahead(double enxafstand, double enyafstand)
 {
-	tempx = x;
+
+	/*tempx = x;
 	tempy = y;
 	x += enxafstand;
 	y += enyafstand;
@@ -63,7 +64,27 @@ void Robot::moveahead(double enxafstand, double enyafstand)
 	std::cout << "Lenght is " << hyp << std::endl;
 	std::cout << "DeltaX is  " << deltax << std::endl;
 
+	printtrajectory();*/
+
+	//Point p(0, 0);
+	
+	//target_point = p;
+
+	target_point(0) += current_point(0);
+	target_point(1) += current_point(1);
+
+	current_point(0) += enxafstand;
+	current_point(1) += enyafstand;
+
+	hyp = sqrt(enxafstand*enxafstand + enyafstand*enyafstand);
+	delta_point(0) = enxafstand / hyp;
+	delta_point(1) = enyafstand / hyp;
+	std::cout << "Lenght is " << hyp << std::endl;
+	std::cout << "DeltaX is  " << delta_point(0) << std::endl;
+
 	printtrajectory();
+
+
 }
 
 
@@ -89,12 +110,32 @@ void Robot::rotate(double degrees)
 
 void Robot::printtrajectory()
 {
-	tempx += deltax;
+	/*tempx += deltax;
 	tempy += deltay;
 	std::cout << counter << " The position is:	x: " << tempx << "	y: " << tempy << std::endl;
 
+	if (round(tempx) != x || round(tempy) != y)*/
+
+	
+	/*target_point[0] += delta_point[0];
+	std::cout << counter << " The position is:	x: " << tempx << "	y: " << tempy << std::endl;
+
 	if (round(tempx) != x || round(tempy) != y)
+		printtrajectory();*/
+
+	target_point(0) += delta_point(0);
+	target_point(1) += delta_point(1);
+	std::cout << counter << " The position is:	x: " << target_point(0) << "	y: " << target_point(1) << std::endl;
+
+	if (round(target_point(0)) != current_point(0) || round(target_point(1)) != current_point(1))
+
+
+		target_point(0) += delta_point(0);
+		std::cout << counter << " The position is:	x: " << target_point(0) << "	y: " << target_point(1) << std::endl;
+
+		if (round(target_point(0)) != current_point(1) || round(target_point(1)) != current_point(1))
 		printtrajectory();
+
 }
 
 void Robot::move(double enx, double eny, double enrot)
@@ -156,14 +197,3 @@ void Robot::calcualteWorkSpace(Transform motion)
 
 	
 }
-
-/*void Robot::moveahead(int enafstand)
-{
-	
-	/*tempx = x;
-	tempy = y;
-	x = x + (enafstand * cos(theta * 3.14159265358979323846 / 180));
-	y = y + (enafstand * sin(theta * 3.14159265358979323846 / 180));
-	printtrajectory();
-	Point
-}*/
