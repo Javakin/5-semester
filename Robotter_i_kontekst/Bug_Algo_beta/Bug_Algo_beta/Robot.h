@@ -22,6 +22,18 @@ public:
 	// @ - goal for robot
 	void goTo(Transform motion);
 
+	// Move the robot forward
+	void moveahead(double enxafstand, double enyafstand);
+
+	// Rotate the robot
+	void rotate(double degrees);
+
+	// Print the movement of the robot to the therminal
+	void printtrajectory();
+
+	// The function that uses the
+	void move(double enx, double eny, double enrot);
+
 	// bugalgorithms deciding the next move
 	void bug0();
 	void bug1();
@@ -30,6 +42,17 @@ public:
 	~Robot();
 
 private:
+
+	double x = 0;
+	double y = 0;
+	double tempx = 0;
+	double tempy = 0;
+	double orientation = 0;
+	double hyp = 0;
+	double deltax = 0;
+	double deltay = 0;
+	int counter = 0;
+
 
 	// Print out the movement from the input transformation
 	void displayPoint(Point position);
