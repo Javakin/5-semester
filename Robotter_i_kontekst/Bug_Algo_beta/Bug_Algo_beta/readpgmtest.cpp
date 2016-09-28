@@ -26,10 +26,10 @@ int main(int argc, char** argv) {
 	Robot wall_e(img);
 
 	// initiate transform matrixes 
+	double dir = 90 * PI / 180;
+
 	Transform H1(100, 0, 0);
 	Transform H2(0, 200, 0);
-	
-	double dir = 30 * PI / 180;
 	Transform H3(0, 0, dir);
 	
 	H1.printTransform("H1");
