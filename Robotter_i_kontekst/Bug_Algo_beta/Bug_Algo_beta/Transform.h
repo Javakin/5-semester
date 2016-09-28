@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Point.h"
-#include <iostream>
-#include <string>
 
 class Transform {
 public:
@@ -18,8 +16,7 @@ public:
 
 	
 	
-	void printTransform(std::string aName);
-
+	
 
 
 private:

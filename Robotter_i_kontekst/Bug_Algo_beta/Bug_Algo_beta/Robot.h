@@ -17,31 +17,53 @@ public:
 	// Construct a robot at the position x,y and with the facing theta
 	Robot(rw::sensor::Image* aMap, double x, double y, double theta);
 
-
 	// Move robot to new position
-	// @ - goal for robot
+	//void goTo(double x, double y, double theta);
 	void goTo(Transform motion);
 
-	// bugalgorithms deciding the next move
-	void bug0();
-	void bug1();
-	void bug2();
+
+	/*// Move the robot forward
+	//void moveahead(int enafstand);
+
+	// Rotate the robot
+	//void rotate(int degrees);
+
+	// Print the trajectory of the robot on the map
+	//void printtrajectory();
+
+	// 
+	//void move(int x, int y, int rot);*/
 
 	~Robot();
 
 private:
 
 	// Print out the movement from the input transformation
-	void displayPoint(Point position);
+	void printMotionSequence(Point position, Transform motion);
 
 	// Trace the movment of the robot on the map(image)
-	//void traceRoute(Transform motion);
+	void traceRoute(Transform motion);
 
 	// Calcualte the requierd work space
-	void calcualteWorkSpace(Transform motion);
+	int calcualteWorkSpace(Transform motion);
+
+	// Move the robot forward
+	void moveahead(int enafstand);
+
+	// Rotate the robot
+	void rotate(int degrees);
+
+	// Print the trajectory of the robot on the map
+	void printtrajectory();
+
+	// variables
+	double theta;
 
 	Point current_point;
-	Point target_point;
+	
+	double current_theta;
+	
+	//Point temporary_point;
 
 	rw::sensor::Image* map;
 };
