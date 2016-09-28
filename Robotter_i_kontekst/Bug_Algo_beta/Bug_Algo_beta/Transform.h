@@ -17,6 +17,9 @@ public:
 	const double& operator()(size_t i, size_t j) const;
 	
 	void printTransform(std::string aName);
+	
+	void remove();
+
 
 
 

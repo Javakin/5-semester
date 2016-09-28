@@ -43,5 +43,5 @@ const double & Point::operator()(size_t i) const
 
 Point::~Point()
 {
-	delete[] _p;
+	//delete[] _p;
 }

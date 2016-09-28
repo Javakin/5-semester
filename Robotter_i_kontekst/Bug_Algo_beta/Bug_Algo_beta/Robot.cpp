@@ -23,7 +23,6 @@ Robot::Robot(rw::sensor::Image * aMap)
 	map = aMap;
 }
 
-
 Robot::Robot(rw::sensor::Image* aMap, double x, double y, double theta)
 {
 	Point p(x, y);
@@ -32,14 +31,10 @@ Robot::Robot(rw::sensor::Image* aMap, double x, double y, double theta)
 	map = aMap;
 }
 
-
-
 Robot::~Robot()
 {
-
+	
 }
-
-//void Robot::goTo(double x, double y, double theta)
 
 
 void Robot::goTo(Transform motion)
@@ -48,7 +43,7 @@ void Robot::goTo(Transform motion)
 	target_point = motion.mult(current_point);
 
 	// move robit to target
-
+	move(10, 20, 0);
 		// print motoin
 
 

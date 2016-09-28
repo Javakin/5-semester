@@ -58,4 +58,12 @@ void Transform::printTransform(std::string aName)
 	std::cout << std::endl;
 }
 
+void Transform::remove()
+{
+	for (size_t i = 0; i < 3; i++) {
+	delete[] _mat[i];
+	}
+	delete[] _mat;
+}
+
 

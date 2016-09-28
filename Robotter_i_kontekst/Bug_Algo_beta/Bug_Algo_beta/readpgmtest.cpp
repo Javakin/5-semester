@@ -31,36 +31,22 @@ int main(int argc, char** argv) {
 	Transform H1(100, 0, 0);
 	Transform H2(0, 200, 0);
 	Transform H3(0, 0, dir);
-	
-	H1.printTransform("H1");
-	H2.printTransform("H2");
-	H3.printTransform("H3");
-
-	//Transform H4():
-	//Transform Ha(200, 0, 0);
-	//Transform Hb(500, 0, 0);
-	//Transform Hc(0, 0, 60 * PI / 180);
-
-	// make a point
-	Point pos(0, 0);
-	pos.printPoint("pos");
-	
-	
-	Point p2 = H3.mult(H2.mult(H1.mult(pos)));
-	p2.printPoint("p2");
+	Transform H4(200, 500, 60 * PI / 180);
 
 	// make a move
-	//wall_e.goTo(H1);
+	wall_e.goTo(H1);
 	
 
-//	std::cout << "hej"; << Hc(1);
-
 	// printing image
-	//std::cout << "saving image..." << std::endl;
-	//img->saveAsPGM("testout.pgm");
+	std::cout << "saving image..." << std::endl;
+	img->saveAsPGM("testout.pgm");
 	
 	// cleanup
 	delete img;
+	H1.remove();
+	H2.remove();
+	H3.remove();
+	H4.remove();
 
 	system("pause");
 	
