@@ -34,11 +34,6 @@ public:
 	// The function that uses the rotate and moveahead function
 	void move(double enx, double eny, double enrot);
 
-	// bugalgorithms deciding the next move
-	void bug0();
-	void bug1();
-	void bug2();
-
 	~Robot();
 
 private:
