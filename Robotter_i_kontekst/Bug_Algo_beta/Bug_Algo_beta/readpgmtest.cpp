@@ -8,11 +8,15 @@
 
 using namespace rw::sensor;
 using namespace rw::loaders;
+using namespace std;
 
 
 int main(int argc, char** argv) {
 	std::string filename(argv[1]);
 	std::cout << filename << std::endl;
+
+	double trig = cos(0);
+	trig = cos(1);
 
 
 	std::cout << "loading image..." << std::endl;
@@ -24,23 +28,36 @@ int main(int argc, char** argv) {
 	// initiate transform matrixes 
 	Transform H1(100, 0, 0);
 	Transform H2(0, 200, 0);
-	Transform H3(0, 0, 30 * PI / 180);
 	
+	double dir = 30 * PI / 180;
+	Transform H3(0, 0, dir);
+	
+	H1.printTransform("H1");
+	H2.printTransform("H2");
+	H3.printTransform("H3");
+
 	//Transform H4():
-	Transform Ha(200, 0, 0);
-	Transform Hb(500, 0, 0);
-	Transform Hc(0, 0, 60 * PI / 180);
+	//Transform Ha(200, 0, 0);
+	//Transform Hb(500, 0, 0);
+	//Transform Hc(0, 0, 60 * PI / 180);
+
+	// make a point
+	Point pos(0, 0);
+	pos.printPoint("pos");
+	
+	
+	Point p2 = H3.mult(pos);
+	p2.printPoint("p2");
 
 	// make a move
-	wall_e.goTo(Ha);
-	wall_e.goTo(Hb);
-	wall_e.goTo(Hc);
+	//wall_e.goTo(H1);
+	
 
 //	std::cout << "hej"; << Hc(1);
 
 	// printing image
-	std::cout << "saving image..." << std::endl;
-	img->saveAsPGM("testout.pgm");
+	//std::cout << "saving image..." << std::endl;
+	//img->saveAsPGM("testout.pgm");
 	
 	// cleanup
 	delete img;

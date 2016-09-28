@@ -21,6 +21,14 @@ Point::Point(const Point & p)
 		_p[i] = p._p[i];
 }
 
+void Point::printPoint(std::string aName)
+{
+	std::cout << aName << ":\n";
+	for (int i = 0; i < 3; i++)
+		std::cout << _p[i] << std::endl;
+	std::cout << std::endl;
+}
+
 double & Point::operator()(size_t i)
 {
 	return _p[i];

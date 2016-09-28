@@ -30,7 +30,7 @@ Transform::~Transform()
 Point Transform::mult(const Point & p)
 {
 	Point res(0, 0);
-	for (size_t i = 0; i < 2; i++) {
+	for (size_t i = 0; i < 3; i++) {
 		for (size_t j = 0; j < 3; j++) {
 			res(i) += _mat[i][j] * p(j);
 		}
@@ -46,6 +46,16 @@ double & Transform::operator()(size_t i, size_t j)
 const double & Transform::operator()(size_t i, size_t j) const
 {
 	return _mat[i][j];
+}
+
+void Transform::printTransform(std::string aName)
+{
+	// display the content of the transformation matrix
+	std::cout << aName << ": " << std::endl;
+	for (int i = 0; i < 3; i++) {
+		std::cout << _mat[i][0] << "\t" << _mat[i][1] << "\t" << _mat[i][2] << std::endl;
+	}
+	std::cout << std::endl;
 }
 
 

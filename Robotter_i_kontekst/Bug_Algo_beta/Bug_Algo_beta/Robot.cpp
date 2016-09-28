@@ -11,28 +11,24 @@ Robot::Robot()
 {
 	Point p(0,0);
 	current_point = p;
-	current_theta = 0;
+	//current_theta = 0;
 	map = NULL;
 }
 
 Robot::Robot(rw::sensor::Image * aMap)
 {
-
-}
-
-Robot::Robot(rw::sensor::Image* aMap, double x, double y, double theta)
-{
 	Point p(0, 0);
 	current_point = p;
-	current_theta = 0;
+	//current_theta = 0;
 	map = aMap;
 }
+
 
 Robot::Robot(rw::sensor::Image* aMap, double x, double y, double theta)
 {
 	Point p(x, y);
 	current_point = p;
-	current_theta = theta;
+	//current_theta = theta;
 	map = aMap;
 }
 
@@ -44,27 +40,24 @@ Robot::~Robot()
 }
 
 //void Robot::goTo(double x, double y, double theta)
-void Robot::goTo(Transform motion)
-{
 
-}
 
 void Robot::goTo(Transform motion)
 {
-	
+	// set target
+	target_point = motion.mult(current_point);
 
-	// print motoin
-	printMotionSequence(current_point, motion);
+	// move robit to target
 
-	// trace route
-	traceRoute(motion);
+		// print motoin
 
-	// calculate workspace
-	std::cout << calcualteWorkSpace(motion) << std::endl;
+
+	// Target has been reatched - calculate
+	std::cout << "done" << std::endl;
 }
 
-void Robot::printMotionSequence(Point cur_point, Transform motion)
-{
+/*void Robot::printMotionSequence(Point cur_point, Transform motion)
+//{
 	// setup
 
 
@@ -87,16 +80,15 @@ void Robot::printMotionSequence(Point cur_point, Transform motion)
 	//std::cout << "Step 1 | " << x << " | " << y << " | " << sec << " | " << std::endl;
 	//std::cout << "Step 2 | " << x << " | " << y << " | " << sec << " | " << std::endl;
 	//std::cout << "Step 3 | " << x << " | " << y << " | " << sec << " | " << std::endl; 
-}
+//}*/
 
-void Robot::traceRoute(Transform motion)
-{
-	std::cout << "her" << std::endl;
-}
 
-int Robot::calcualteWorkSpace(Transform motion)
+
+void Robot::calcualteWorkSpace(Transform motion)
 {
-	return 0;
+	// her skal der udregnes et n*m workspace, som opdateres hvergang denne metode bliver kaldt
+
+	
 }
 
 /*void Robot::moveahead(int enafstand)
