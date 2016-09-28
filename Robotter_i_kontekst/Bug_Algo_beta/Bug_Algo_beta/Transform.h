@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Point.h"
+#include <iostream>
+#include <string>
 
 class Transform {
 public:
@@ -10,16 +12,15 @@ public:
 
 	Point mult(const Point& p);
 		
-	double operator()(size_t i, size_t j);
+	double& operator()(size_t i, size_t j);
 
-	const double operator()(size_t i, size_t j) const;
+	const double& operator()(size_t i, size_t j) const;
+	
+	void printTransform(std::string aName);
 
-	
-	
-	
 
 
 private:
-	double _mat[3][3];
+	double** _mat;
 
 };

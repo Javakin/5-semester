@@ -11,7 +11,7 @@ public:
 
 	Point(double x, double y);
 
-	Point(const Point & p);
+	Point(const Point& p);
 
 	void printPoint(std::string aName);
 
@@ -27,6 +27,6 @@ public:
 
 
 private:
-	double _p[3];
+	double* _p;
 
 };
