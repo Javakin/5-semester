@@ -71,20 +71,6 @@ void Robot::moveahead(double enxafstand, double enyafstand)
 	printtrajectory();
 }
 
-void Robot::moveahead(double enxafstand, double enyafstand)
-{
-	tempx = x;
-	tempy = y;
-	x += enxafstand;
-	y += enyafstand;
-	hyp = sqrt(enxafstand*enxafstand + enyafstand*enyafstand);
-	deltax = enxafstand / hyp;
-	deltay = enyafstand / hyp;
-	std::cout << "Lenght is " << hyp << std::endl;
-	std::cout << "DeltaX is  " << deltax << std::endl;
-
-	printtrajectory();
-}
 
 void Robot::rotate(double degrees)
 {
@@ -94,7 +80,7 @@ void Robot::rotate(double degrees)
 			if (orientation > 359) {
 				orientation = 0;
 			}
-			std::cout << "The orientation is: " << orientation << " degrees" << endl;
+			std::cout << "The orientation is: " << orientation << " degrees" << std::endl;
 		}
 	if (degrees < 0)
 		for (int i = 0; i > degrees; i--) {

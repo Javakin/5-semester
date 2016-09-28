@@ -31,7 +31,7 @@ public:
 	// Print the movement of the robot to the therminal
 	void printtrajectory();
 
-	// The function that uses the
+	// The function that uses the rotate and moveahead function
 	void move(double enx, double eny, double enrot);
 
 	// bugalgorithms deciding the next move
