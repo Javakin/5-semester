@@ -152,28 +152,28 @@ void Robot::move(double enx, double eny, double enrot)
 
 /*void Robot::printMotionSequence(Point cur_point, Transform motion)
 //{
-	// setup
+// setup
 
 
-	// w = 1 rad/sec
-	// calculate step 1 - rotate
+// w = 1 rad/sec
+// calculate step 1 - rotate
 
 
-	// calculate step 2 - motion
-	
-
-	// calculate step 3 - rotate
+// calculate step 2 - motion
 
 
-	//int sec;
-	//int x;
-	//int y;
-	
-	// Tabel of the movement for the two wheels and the time they move
-	//std::cout << "| Wheel 1 " << "| Wheel 2 " << "| Time [sec] |" << std::endl;
-	//std::cout << "Step 1 | " << x << " | " << y << " | " << sec << " | " << std::endl;
-	//std::cout << "Step 2 | " << x << " | " << y << " | " << sec << " | " << std::endl;
-	//std::cout << "Step 3 | " << x << " | " << y << " | " << sec << " | " << std::endl; 
+// calculate step 3 - rotate
+
+
+//int sec;
+//int x;
+//int y;
+
+// Tabel of the movement for the two wheels and the time they move
+//std::cout << "| Wheel 1 " << "| Wheel 2 " << "| Time [sec] |" << std::endl;
+//std::cout << "Step 1 | " << x << " | " << y << " | " << sec << " | " << std::endl;
+//std::cout << "Step 2 | " << x << " | " << y << " | " << sec << " | " << std::endl;
+//std::cout << "Step 3 | " << x << " | " << y << " | " << sec << " | " << std::endl;
 //}*/
 
 
@@ -181,5 +181,7 @@ void Robot::calcualteWorkSpace(Transform motion)
 {
 	// her skal der udregnes et n*m workspace, som opdateres hvergang denne metode bliver kaldt
 
-	
+
 }
+
+

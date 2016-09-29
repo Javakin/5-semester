@@ -30,7 +30,7 @@ public:
 	void rotate(double degrees);
 
 	// Print the movement of the robot to the therminal
-	void printtrajectory();
+	void printpoint(Transform aMatrix);
 
 	// The function that uses the rotate and moveahead function
 	void move(double enx, double eny, double enrot);
