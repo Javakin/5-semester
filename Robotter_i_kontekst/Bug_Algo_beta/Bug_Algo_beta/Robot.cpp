@@ -66,7 +66,7 @@ void Robot::goTo(Transform motion)
 	
 
 	// move robut to target
-	move(target_point(0)-current_point(0), target_point(1)-current_point(1), getOrientation(location_trans.mult(new_trans)));
+	move(target_point(0) - current_point(0), target_point(1) - current_point(1), getOrientation(location_trans.mult(new_trans)));
 		
 	// update possition transformation
 	location_trans = location_trans.mult(new_trans);
@@ -74,11 +74,11 @@ void Robot::goTo(Transform motion)
 
 void Robot::moveahead(double enxafstand, double enyafstand)
 {
-	target_point(0) += current_point(0);
-	target_point(1) += current_point(1);
+	current_point(0) = target_point(0);
+	current_point(1) = target_point(1);
 
-	current_point(0) += enxafstand;
-	current_point(1) += enyafstand;
+	//target_point(0) += enxafstand;
+	//target_point(1) += enyafstand;
 
 	hyp = sqrt(enxafstand*enxafstand + enyafstand*enyafstand);
 	delta_point(0) = enxafstand / hyp;
@@ -86,7 +86,7 @@ void Robot::moveahead(double enxafstand, double enyafstand)
 	std::cout << "Lenght is " << hyp << std::endl;
 	std::cout << "DeltaX is  " << delta_point(0) << std::endl;
 
-	printtrajectory();
+	printpoint(location_trans);
 }
 
 
@@ -110,7 +110,7 @@ void Robot::rotate(double degrees)
 		}
 }
 
-void Robot::printtrajectory()
+void Robot::printpoint(Transform aMatrix)
 {
 	/*tempx += deltax;
 	tempy += deltay;
@@ -118,25 +118,19 @@ void Robot::printtrajectory()
 
 	if (round(tempx) != x || round(tempy) != y)*/
 
-	
+
 	/*target_point[0] += delta_point[0];
 	std::cout << counter << " The position is:	x: " << tempx << "	y: " << tempy << std::endl;
 
 	if (round(tempx) != x || round(tempy) != y)
-		printtrajectory();*/
-
-	target_point(0) += delta_point(0);
-	target_point(1) += delta_point(1);
-	std::cout << counter << " The position is:	x: " << target_point(0) << "	y: " << target_point(1) << std::endl;
-
-	if (round(target_point(0)) != current_point(0) || round(target_point(1)) != current_point(1))
-
-
-		target_point(0) += delta_point(0);
-		std::cout << counter << " The position is:	x: " << target_point(0) << "	y: " << target_point(1) << std::endl;
-
-		if (round(target_point(0)) != current_point(1) || round(target_point(1)) != current_point(1))
-		printtrajectory();
+	printtrajectory();*/
+	while (round(current_point(0)) != target_point(0) || round(current_point(1)) != target_point(1))
+	{
+		current_point(0) = current_point(0) + target_point(0) / hyp;
+		current_point(1) = current_point(1) + target_point(1) / hyp;
+		std::cout << " The position is:	x: " << round(current_point(0)) << "	y: " << round(current_point(1)) << std::endl;
+		map->setPixel8U(current_point(0), current_point(1), 0);
+	}
 
 }
 
