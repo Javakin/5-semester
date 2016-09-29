@@ -190,28 +190,33 @@ void Robot::move(double enx, double eny, double enrot)
 	rotate(target_orientation);
 	moveahead(hyp);
 	rotate(enrot);
-
-	int sec3 = abs(enrot - target_orientation);
-
-	int x = 3;
-	int y = 4;
-
-	if (target_orientation == initial_orientation)
-		x = 1; y = 1;
-	if (target_orientation > initial_orientation)
-		x = 1; y = -1;
-	if (target_orientation < initial_orientation)
-		x = -1; y = -1;
-
 	calcualteWorkSpace(enx, eny);
+
+	// display
+	double sec1 = abs((target_orientation - initial_orientation) * WEEL_DIST /
+						(WEEL_RADIUS * (ROT_SPEED * 2)));
+
+	double sec3 = abs((enrot - target_orientation)* WEEL_DIST /
+						(WEEL_RADIUS * (ROT_SPEED * 2)));
+
+
+	int x = ROT_SPEED;
+	int y = ROT_SPEED;
+
+	if (target_orientation > initial_orientation)
+		x *= -1;
+	if (target_orientation < enrot)
+		y *= -1;
+
+	
 	// Tabel of the movement for the two wheels and the time they move
-	std::cout << "| Wheel L [rad/sec] " << "| Wheel R [rad/sec] " << "| Time [sec] |" << std::endl;
+	std::cout << "\t| Wheel L [rad/sec] " << "| Wheel R [rad/sec] " << "| Time [sec] |" << std::endl;
 
-	std::cout << "Step 1 | " << x << " | " << y << " | " << ((target_orientation - initial_orientation) * hyp) / (WEEL_RADIUS * (ROT_SPEED * ROT_SPEED)) << " | " << std::endl;
+	std::cout << "Step 1 | \t" << x << " \t|\t" << -x << " \t|\t " << sec1 << " \t|\t " << std::endl;
 
-	std::cout << "Step 2 | " << ROT_SPEED << " | " << ROT_SPEED << " | " << hyp/(WEEL_RADIUS * ROT_SPEED) << " | " << std::endl;
+	std::cout << "Step 2 | \t" << ROT_SPEED << " \t|\t " << ROT_SPEED << "\t|\t " << hyp/(WEEL_RADIUS * ROT_SPEED) << " | " << std::endl;
 
-	std::cout << "Step 3 | " << x << " | " << y << " | " << sec3 << " | " << std::endl;
+	std::cout << "Step 3 | \t" << y << "\t|\t " << -y << "\t|\t" << sec3 << " \t|\t " << std::endl;
 }
 
 
