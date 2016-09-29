@@ -38,6 +38,9 @@ public:
 	// returns a the orientation of the transformation matrix
 	double getOrientation(Transform aMatrix);
 
+	// Calculate the required workspace
+	void calcualteWorkSpace(double enx, double eny);
+
 	~Robot();
 
 private:
@@ -49,7 +52,9 @@ private:
 
 
 	// Calcualte the requierd work space
-	void calcualteWorkSpace(Transform motion);
+	//void calcualteWorkSpace(Transform motion);
+	Point lower_lim;
+	Point upppppppppper_lim;
 
 	Point delta_point;				// holds the intervals in witch the robot is to move at a time. 
 	Point current_point;			// holds the current possition of the robot

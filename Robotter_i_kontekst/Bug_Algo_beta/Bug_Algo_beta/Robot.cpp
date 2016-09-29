@@ -142,8 +142,45 @@ void Robot::printpoint(Transform aMatrix)
 
 }
 
-void Robot::move(double enx, double eny, double enrot)
+void Robot::calcualteWorkSpace(double ennx, double enny)
 {
+	//double temp_x = 0;
+	//double temp_y = 0;
+		
+	//if (enh > temp_x)
+	//	temp_x = enh;
+	//if (enb > temp_y)
+	//	temp_y = enb;
+
+	//std::cout << "The required workspace is: " << " x " << temp_x << " y " << temp_y << std::endl;
+	//std::cout << temp_x << std::endl;
+	//std::cout << temp_y << std::endl;
+	// her skal der udregnes et n*m workspace, som opdateres hvergang denne metode bliver kaldt
+
+	//lower_lim(0) = 0;
+	//lower_lim(1) = 0;
+	//upppppppppper_lim(0) = 0;
+	//upppppppppper_lim(1) = 0;
+
+	if (ennx > lower_lim(0))
+		lower_lim(0) = ennx;
+	if (enny > lower_lim(1))
+		lower_lim(1) = enny;
+
+	if (lower_lim(0) > upppppppppper_lim(0))
+		upppppppppper_lim(0) = lower_lim(0);
+	if (lower_lim(1) > upppppppppper_lim(1))
+		upppppppppper_lim(1) = lower_lim(1);
+
+
+	//upppppppppper_lim(0) = 0;
+	//upppppppppper_lim(1) = 0;
+
+	//if (ennx > upppppppppper_lim(0))
+	//	lower_lim(0) = enh;
+	std::cout << "The required workspace is: " <<" x " << upppppppppper_lim(0) << " y " << upppppppppper_lim(1) << std::endl;
+}
+
 
 	double initial_orientation = getOrientation(initial_trans);
 	double target_orientation = std::atan2(eny, enx);
@@ -157,6 +194,9 @@ void Robot::move(double enx, double eny, double enrot)
 	moveahead(hyp);
 	rotate(enrot);
 
+	calcualteWorkSpace(enx, eny);
+	
+	std::cout << "test222222" << std::endl;
 }
 
 
@@ -187,11 +227,12 @@ void Robot::move(double enx, double eny, double enrot)
 //}*/
 
 
-void Robot::calcualteWorkSpace(Transform motion)
-{
-	// her skal der udregnes et n*m workspace, som opdateres hvergang denne metode bliver kaldt
-
-
-}
+//void Robot::calcualteWorkSpace(double enx, double eny)
+//{
+//	std::cout << "test" << std::endl;
+//	// her skal der udregnes et n*m workspace, som opdateres hvergang denne metode bliver kaldt
+//
+//
+//}
 
 
