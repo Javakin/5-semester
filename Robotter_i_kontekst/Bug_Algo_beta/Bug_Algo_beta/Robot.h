@@ -24,7 +24,7 @@ public:
 	void goTo(Transform motion);
 
 	// Move the robot forward
-	void moveahead(double enxafstand, double enyafstand);
+	void moveahead(double aDistance);
 
 	// Rotate the robot
 	void rotate(double degrees);

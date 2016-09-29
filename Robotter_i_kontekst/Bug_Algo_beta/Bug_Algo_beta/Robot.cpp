@@ -8,6 +8,8 @@
 #include <cmath>
 
 #define PI 3.14159265358979323846 
+#define DELTA_PHI 0.02
+#define DELTA_DIST 1
 
 
 Robot::Robot()
@@ -35,7 +37,6 @@ Robot::Robot(rw::sensor::Image * aMap)
 	initial_trans = t;
 	map = aMap;
 }
-
 
 double Robot::getOrientation(Transform aMatrix)
 {
@@ -66,6 +67,7 @@ void Robot::goTo(Transform motion)
 	Point p(0, 0);
 	current_point = initial_trans.mult(p);
 	target_point = motion.mult(current_point);
+	current_trans = initial_trans;
 
 	// move robut to target
 	move(target_point(0)-current_point(0), target_point(1)-current_point(1), getOrientation(initial_trans.mult(new_trans)));
@@ -74,30 +76,32 @@ void Robot::goTo(Transform motion)
 	initial_trans = initial_trans.mult(new_trans);
 }
 
-void Robot::moveahead(double enxafstand, double enyafstand)
+void Robot::moveahead(double aDistance)
 {
-	current_point(0) = target_point(0);
-	current_point(1) = target_point(1);
+	// initiate variables
+	Transform delta_trans(DELTA_DIST, 0, 0);
+	double current_dist = 0;
+	Point p(0, 0);
 
-	//target_point(0) += enxafstand;
-	//target_point(1) += enyafstand;
+	// move the distance
+	while (current_dist < aDistance) {
+		current_trans = current_trans.mult(delta_trans);
+		current_dist += DELTA_DIST;
 
-	hyp = sqrt(enxafstand*enxafstand + enyafstand*enyafstand);
-	delta_point(0) = enxafstand / hyp;
-	delta_point(1) = enyafstand / hyp;
-	std::cout << "Lenght is " << hyp << std::endl;
-	std::cout << "DeltaX is " << delta_point(0) << std::endl;
+		// display result
+		p = current_trans.mult(p);
+		std::cout << "The location is x: " << p(0) << " \ty: " << p(1) << std::endl;
+	}
+	
 
 	printpoint(current_trans);
 }
 
 void Robot::rotate(double radians)
 {
-	// initiate variables
-	double orientation = getOrientation(initial_trans);
-	current_trans = initial_trans;	
-	Transform delta_trans1(0, 0, 0.002);
-	Transform delta_trans2(0, 0, -0.002);
+	// initiate variables	
+	Transform delta_trans1(0, 0, DELTA_PHI);
+	Transform delta_trans2(0, 0, -DELTA_PHI);
 
 	// if positive rotation rotate counter clockwise
 	if (radians > 0)
@@ -110,7 +114,7 @@ void Robot::rotate(double radians)
 	if (radians < 0)
 		while (getOrientation(current_trans) > radians ) {
 			current_trans = current_trans.mult(delta_trans2);
-			std::cout << "The orientation is: " << orientation << "\ttarget: " << radians << std::endl;
+			std::cout << "The orientation is: " << getOrientation(current_trans) << "\ttarget: " << radians << std::endl;
 		}
 }
 
@@ -143,13 +147,14 @@ void Robot::move(double enx, double eny, double enrot)
 
 	double initial_orientation = getOrientation(initial_trans);
 	double target_orientation = std::atan2(eny, enx);
+	double hyp = sqrt(enx*enx + eny*eny);
 
 	std::cout << "Step 1: " << std::endl;
 	std::cout << "Initial orientation is: " << initial_orientation << " target orientation is: " << target_orientation << std::endl;
 
 	// begin robot motion 
 	rotate(target_orientation);
-	moveahead(enx, eny);
+	moveahead(hyp);
 	rotate(enrot);
 
 }
