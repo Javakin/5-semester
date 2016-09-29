@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
 
 	// initiate robot
 	Robot wall_e(img);
+	Robot test;
 
 	// initiate transform matrixes 
 	double dir = -90 * PI / 180;
@@ -33,8 +34,9 @@ int main(int argc, char** argv) {
 	Transform H3(0, 0, dir);
 	Transform H4(200, 500, 60 * PI / 180);
 
+
 	// make a move
-	wall_e.goTo(H1);
+	//wall_e.goTo(H1);
 	
 
 	// printing image

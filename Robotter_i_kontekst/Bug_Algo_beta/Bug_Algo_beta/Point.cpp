@@ -4,6 +4,10 @@
 
 Point::Point()
 {
+	_p = new double[3];
+	_p[0] = 0;
+	_p[1] = 0;
+	_p[2] = 0;
 }
 
 Point::Point(double x, double y)

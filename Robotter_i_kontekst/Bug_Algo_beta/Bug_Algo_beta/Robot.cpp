@@ -43,7 +43,7 @@ Robot::~Robot()
 void Robot::goTo(Transform motion)
 {
 	// update possition transformation
-
+	location_trans.mult(motion);
 
 	// set target
 	target_point = motion.mult(current_point);

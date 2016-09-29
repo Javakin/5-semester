@@ -45,8 +45,8 @@ Transform::~Transform()
 
 Point Transform::mult(const Point & p)
 {
-	Point res(0, 0);
-	for (size_t i = 0; i < 2; i++) {
+	Point res;
+	for (size_t i = 0; i < 3; i++) {
 		for (size_t j = 0; j < 3; j++) {
 			res(i) += _mat[i][j] * p(j);
 		}
@@ -56,12 +56,15 @@ Point Transform::mult(const Point & p)
 
 Transform Transform::mult(const Transform & T)
 {
-
-	Transform res(0, 0, 0);
+	Transform res;
 	
-	for (size_t i = 0; i < 2; i++) {
+	for (size_t i = 0; i < 3; i++) {
 		for (size_t j = 0; j < 3; j++) {
-			//res(i) += _mat[i][j] * p(j);
+			// for each unit in the result matrice
+			for (size_t k = 0; k < 3; k++) {
+				// do the three multiplications
+				res(i, j) += T(i, k)*_mat[k][j];
+			}
 		}
 	}
 	return res;
