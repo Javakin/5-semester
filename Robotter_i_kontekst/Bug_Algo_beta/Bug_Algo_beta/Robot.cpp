@@ -12,6 +12,7 @@
 #define DELTA_DIST		0.1
 #define WEEL_DIST		40
 #define WEEL_RADIUS		1
+#define ROT_SPEED		1
 
 
 Robot::Robot()
@@ -155,23 +156,7 @@ void Robot::printpoint(Transform aMatrix)
 }
 void Robot::calcualteWorkSpace(double ennx, double enny)
 {
-	//double temp_x = 0;
-	//double temp_y = 0;
 
-	//if (enh > temp_x)
-	//	temp_x = enh;
-	//if (enb > temp_y)
-	//	temp_y = enb;
-
-	//std::cout << "The required workspace is: " << " x " << temp_x << " y " << temp_y << std::endl;
-	//std::cout << temp_x << std::endl;
-	//std::cout << temp_y << std::endl;
-	// her skal der udregnes et n*m workspace, som opdateres hvergang denne metode bliver kaldt
-
-	//lower_lim(0) = 0;
-	//lower_lim(1) = 0;
-	//upppppppppper_lim(0) = 0;
-	//upppppppppper_lim(1) = 0;
 
 	if (ennx > lower_lim(0))
 		lower_lim(0) = ennx;
@@ -184,11 +169,7 @@ void Robot::calcualteWorkSpace(double ennx, double enny)
 		upppppppppper_lim(1) = lower_lim(1);
 
 
-	//upppppppppper_lim(0) = 0;
-	//upppppppppper_lim(1) = 0;
 
-	//if (ennx > upppppppppper_lim(0))
-	//	lower_lim(0) = enh;
 	std::cout << "The required workspace is: " << " x " << upppppppppper_lim(0) << " y " << upppppppppper_lim(1) << std::endl;
 }
 
@@ -198,17 +179,39 @@ void Robot::move(double enx, double eny, double enrot)
 	double target_orientation = std::atan2(eny, enx);
 	double hyp = sqrt(enx*enx + eny*eny);
 
-	std::cout << "Step 1: " << std::endl;
-	std::cout << "Initial orientation is: " << initial_orientation << " target orientation is: " << target_orientation << std::endl;
+
+
+	//std::cout << "Step 1: " << std::endl;
+	//std::cout << "Initial orientation is: " << initial_orientation << " target orientation is: " << target_orientation << std::endl;
+
+	
 
 	// begin robot motion 
 	rotate(target_orientation);
 	moveahead(hyp);
 	rotate(enrot);
 
+	int sec3 = abs(enrot - target_orientation);
+
+	int x = 3;
+	int y = 4;
+
+	if (target_orientation == initial_orientation)
+		x = 1; y = 1;
+	if (target_orientation > initial_orientation)
+		x = 1; y = -1;
+	if (target_orientation < initial_orientation)
+		x = -1; y = -1;
+
 	calcualteWorkSpace(enx, eny);
-	
-	std::cout << "test222222" << std::endl;
+	// Tabel of the movement for the two wheels and the time they move
+	std::cout << "| Wheel L [rad/sec] " << "| Wheel R [rad/sec] " << "| Time [sec] |" << std::endl;
+
+	std::cout << "Step 1 | " << x << " | " << y << " | " << ((target_orientation - initial_orientation) * hyp) / (WEEL_RADIUS * (ROT_SPEED * ROT_SPEED)) << " | " << std::endl;
+
+	std::cout << "Step 2 | " << ROT_SPEED << " | " << ROT_SPEED << " | " << hyp/(WEEL_RADIUS * ROT_SPEED) << " | " << std::endl;
+
+	std::cout << "Step 3 | " << x << " | " << y << " | " << sec3 << " | " << std::endl;
 }
 
 

@@ -41,6 +41,8 @@ public:
 	// Calculate the required workspace
 	void calcualteWorkSpace(double enx, double eny);
 
+
+
 	~Robot();
 
 private:
