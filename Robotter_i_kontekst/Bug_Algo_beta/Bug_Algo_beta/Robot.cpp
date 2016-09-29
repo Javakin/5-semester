@@ -88,7 +88,7 @@ void Robot::moveahead(double enxafstand, double enyafstand)
 	std::cout << "Lenght is " << hyp << std::endl;
 	std::cout << "DeltaX is " << delta_point(0) << std::endl;
 
-	printpoint(location_trans);
+	printpoint(current_trans);
 }
 
 void Robot::rotate(double radians)
