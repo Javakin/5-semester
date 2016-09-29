@@ -7,9 +7,11 @@
 #include "Transform.h"
 #include <cmath>
 
-#define PI 3.14159265358979323846 
-#define DELTA_PHI 0.02
-#define DELTA_DIST 1
+#define PI				3.14159265358979323846 
+#define DELTA_PHI		0.02
+#define DELTA_DIST		0.1
+#define WEEL_DIST		40
+#define WEEL_RADIUS		1
 
 
 Robot::Robot()
@@ -88,13 +90,13 @@ void Robot::moveahead(double aDistance)
 		current_trans = current_trans.mult(delta_trans);
 		current_dist += DELTA_DIST;
 
-		// display result
-		p = current_trans.mult(p);
-		std::cout << "The location is x: " << p(0) << " \ty: " << p(1) << std::endl;
-	}
-	
+		// print point on the image
+		printpoint(current_trans);
 
-	printpoint(current_trans);
+		// display result - for debugging
+		//p = current_trans.mult(p);
+		//std::cout << "The location is x: " << p(0) << " \ty: " << p(1) << std::endl;
+	}
 }
 
 void Robot::rotate(double radians)
@@ -107,38 +109,48 @@ void Robot::rotate(double radians)
 	if (radians > 0)
 		while (getOrientation(current_trans) < radians) {
 			current_trans = current_trans.mult(delta_trans1);
-			std::cout << "The orientation is: " << getOrientation(current_trans) << "\ttarget: " << radians << std::endl;
+
+			// print point on the image
+			printpoint(current_trans);
+
+			// display - for debugging
+			//std::cout << "The orientation is: " << getOrientation(current_trans) << "\ttarget: " << radians << std::endl;
 		}
 
 	// if negative rotation rotate clockwise
 	if (radians < 0)
 		while (getOrientation(current_trans) > radians ) {
 			current_trans = current_trans.mult(delta_trans2);
-			std::cout << "The orientation is: " << getOrientation(current_trans) << "\ttarget: " << radians << std::endl;
+
+			// print point on the image
+			printpoint(current_trans);
+
+			// display - for debugging
+			//std::cout << "The orientation is: " << getOrientation(current_trans) << "\ttarget: " << radians << std::endl;
 		}
 }
 
 void Robot::printpoint(Transform aMatrix)
-{
-	/*tempx += deltax;
-	tempy += deltay;
-	std::cout << counter << " The position is:	x: " << tempx << "	y: " << tempy << std::endl;
+{	
+	// setup 
+	Point p1(0, 0);
+	Point p2(0, 0);
+	Transform wl(0, WEEL_DIST, 0);
+	Transform wr(0, -WEEL_DIST, 0);
 
-	if (round(tempx) != x || round(tempy) != y)*/
+	// calculate weellocation
+	p1 = aMatrix.mult(wl).mult(p1);
+	p2 = aMatrix.mult(wr).mult(p2);
 
+	// paint pixel black
+	//std::cout << (int)p1(0) << " " << (int)p1(1) << std::endl;
+	//std::cout << (int)p2(0) << " " << (int)p2(1) << std::endl;
 
-	/*target_point[0] += delta_point[0];
-	std::cout << counter << " The position is:	x: " << tempx << "	y: " << tempy << std::endl;
-
-	if (round(tempx) != x || round(tempy) != y)
-	printtrajectory();*/
-	while (round(current_point(0)) != target_point(0) || round(current_point(1)) != target_point(1))
-	{
-		current_point(0) = current_point(0) + target_point(0) / hyp;
-		current_point(1) = current_point(1) + target_point(1) / hyp;
-		std::cout << " The position is:	x: " << round(current_point(0)) << "	y: " << round(current_point(1)) << std::endl;
-		map->setPixel8U(current_point(0), current_point(1), 0);
-	}
+	// display the point
+	if ((int)p1(0) >= 0 && (int)p1(1)>=0)
+		map->setPixel8U((int)p1(0), (int)p1(1), 0);
+	if ((int)p2(0) >= 0 && (int)p2(1) >= 0)
+		map->setPixel8U((int)p2(0), (int)p2(1), 0);
 
 }
 
