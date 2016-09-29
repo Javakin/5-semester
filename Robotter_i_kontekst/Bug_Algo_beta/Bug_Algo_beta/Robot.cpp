@@ -95,27 +95,22 @@ void Robot::rotate(double radians)
 {
 	// initiate variables
 	double orientation = getOrientation(initial_trans);
-	double inc = 0.002;
+	current_trans = initial_trans;	
+	Transform delta_trans1(0, 0, 0.002);
+	Transform delta_trans2(0, 0, -0.002);
 
 	// if positive rotation rotate counter clockwise
 	if (radians > 0)
-
-		for (int i = 0; i < radians; i++) {
-			orientation = orientation + inc;
-			if (orientation > PI) {
-				orientation = - PI;
-			}
-			std::cout << "The orientation is: " << orientation << " target: " << radians << std::endl;
+		while (getOrientation(current_trans) < radians) {
+			current_trans = current_trans.mult(delta_trans1);
+			std::cout << "The orientation is: " << getOrientation(current_trans) << "\ttarget: " << radians << std::endl;
 		}
 
 	// if negative rotation rotate clockwise
 	if (radians < 0)
-		for (int i = 0; i > radians; i--) {
-			orientation = orientation - inc;
-			if (orientation < - PI) {
-				orientation = PI;
-			}
-			std::cout << "The orientation is: " << orientation << " target: " << radians << std::endl;
+		while (getOrientation(current_trans) > radians ) {
+			current_trans = current_trans.mult(delta_trans2);
+			std::cout << "The orientation is: " << orientation << "\ttarget: " << radians << std::endl;
 		}
 }
 
@@ -149,12 +144,13 @@ void Robot::move(double enx, double eny, double enrot)
 	double initial_orientation = getOrientation(initial_trans);
 	double target_orientation = std::atan2(eny, enx);
 
+	std::cout << "Step 1: " << std::endl;
 	std::cout << "Initial orientation is: " << initial_orientation << " target orientation is: " << target_orientation << std::endl;
 
 	// begin robot motion 
-	rotate(target_orientation - orientation);
+	rotate(target_orientation);
 	moveahead(enx, eny);
-	rotate(enrot - orientation);
+	rotate(enrot);
 
 }
 

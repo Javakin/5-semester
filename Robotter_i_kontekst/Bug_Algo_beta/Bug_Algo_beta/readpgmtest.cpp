@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 	Transform H1(100, 0, 0);
 	Transform H2(0, 200, 0);
 	Transform H3(0, 0, dir);
-	Transform H4(200, 500, 1.2);
+	Transform H4(200, 500, 3);
 
 	//H1.printTransform("H1");
 	//H2.printTransform("H2");
