@@ -11,7 +11,8 @@ Robot::Robot()
 {
 	Point p(0,0);
 	current_point = p;
-	//current_theta = 0;
+	delta_point = p;
+	target_point = p;
 	map = NULL;
 }
 
@@ -19,17 +20,14 @@ Robot::Robot(rw::sensor::Image * aMap)
 {
 	Point p(0, 0);
 	current_point = p;
-	//current_theta = 0;
+	delta_point = p;
+	target_point = p;
+
+	Transform t(0, 0, 0);
+	trans = t;
 	map = aMap;
 }
 
-Robot::Robot(rw::sensor::Image* aMap, double x, double y, double theta)
-{
-	Point p(x, y);
-	current_point = p;
-	//current_theta = theta;
-	map = aMap;
-}
 
 Robot::~Robot()
 {
