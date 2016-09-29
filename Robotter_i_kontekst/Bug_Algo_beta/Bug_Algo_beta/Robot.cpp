@@ -84,7 +84,7 @@ void Robot::moveahead(double enxafstand, double enyafstand)
 	delta_point(0) = enxafstand / hyp;
 	delta_point(1) = enyafstand / hyp;
 	std::cout << "Lenght is " << hyp << std::endl;
-	std::cout << "DeltaX is  " << delta_point(0) << std::endl;
+	std::cout << "DeltaX is " << delta_point(0) << std::endl;
 
 	printpoint(location_trans);
 }

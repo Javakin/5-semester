@@ -42,6 +42,7 @@ int main(int argc, char** argv) {
 
 	// make a move
 	wall_e.goTo(H1);
+	wall_e.goTo(H2);
 	
 
 	// printing image
