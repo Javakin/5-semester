@@ -7,6 +7,8 @@
 #include "Transform.h"
 #include <cmath>
 
+#define PI 3.14159265358979323846 
+
 
 Robot::Robot()
 {
@@ -17,7 +19,7 @@ Robot::Robot()
 	target_point = p;
 
 	Transform t(0, 0, 0);
-	location_trans = t;
+	initial_trans= t;
 
 	map = NULL;
 }
@@ -30,7 +32,7 @@ Robot::Robot(rw::sensor::Image * aMap)
 	target_point = p;
 
 	Transform t(0, 0, 0);
-	location_trans = t;
+	initial_trans = t;
 	map = aMap;
 }
 
@@ -60,16 +62,29 @@ Robot::~Robot()
 void Robot::goTo(Transform motion)
 {
 	new_trans = motion;
+	Point current_point(0, 0);
+
+	// debugging
+	motion.printTransform("motion");
+	initial_trans.printTransform("Initial transform");
+	initial_trans.mult(motion).printTransform("final transform");
+
+	std::cout << getOrientation(initial_trans) << std::endl;
+	std::cout << getOrientation(initial_trans.mult(new_trans)) << std::endl;
+
 
 	// set target
 	target_point = motion.mult(current_point);
 	
+	target_point.printPoint("Target point");
+	current_point.printPoint("current ");
+	std::cout << getOrientation(initial_trans.mult(new_trans)) << std::endl;
 
 	// move robut to target
-	move(target_point(0) - current_point(0), target_point(1) - current_point(1), getOrientation(location_trans.mult(new_trans)));
+	move(target_point(0)-current_point(0), target_point(1)-current_point(1), getOrientation(initial_trans.mult(new_trans)));
 		
 	// update possition transformation
-	location_trans = location_trans.mult(new_trans);
+	initial_trans = initial_trans.mult(new_trans);
 }
 
 void Robot::moveahead(double enxafstand, double enyafstand)
@@ -90,23 +105,31 @@ void Robot::moveahead(double enxafstand, double enyafstand)
 }
 
 
-void Robot::rotate(double degrees)
+void Robot::rotate(double radians)
 {
-	if (degrees > 0)
-		for (int i = 0; i < degrees; i++) {
-			orientation++;
-			if (orientation > 359) {
-				orientation = 0;
+	// initiate variables
+	double orientation = getOrientation(initial_trans);
+	double inc = 0.002;
+
+	// if positive rotation rotate counter clockwise
+	if (radians > 0)
+
+		for (int i = 0; i < radians; i++) {
+			orientation = orientation + inc;
+			if (orientation > PI) {
+				orientation = - PI;
 			}
-			std::cout << "The orientation is: " << orientation << " degrees" << std::endl;
+			std::cout << "The orientation is: " << orientation << " target: " << radians << std::endl;
 		}
-	if (degrees < 0)
-		for (int i = 0; i > degrees; i--) {
-			orientation--;
-			if (orientation < 1) {
-				orientation = 360;
+
+	// if negative rotation rotate clockwise
+	if (radians < 0)
+		for (int i = 0; i > radians; i--) {
+			orientation = orientation - inc;
+			if (orientation < - PI) {
+				orientation = PI;
 			}
-			std::cout << "The orientation is: " << orientation << " degrees" << std::endl;
+			std::cout << "The orientation is: " << orientation << " target: " << radians << std::endl;
 		}
 }
 
@@ -137,15 +160,15 @@ void Robot::printpoint(Transform aMatrix)
 void Robot::move(double enx, double eny, double enrot)
 {
 
-	double save_orientation = getOrientation(location_trans);
+	double initial_orientation = getOrientation(initial_trans);
+	double target_orientation = std::atan2(eny, enx);
 
-	double temp_Orientation = std::atan2(eny, enx);
+	std::cout << "Initial orientation is: " << initial_orientation << " target orientation is: " << target_orientation << std::endl;
 
-	std::cout << "Current orientation is: " << orientation << " temp orientation is: " << temp_Orientation << std::endl;
-
-	rotate(temp_Orientation - orientation);
+	// begin robot motion 
+	rotate(target_orientation - orientation);
 	moveahead(enx, eny);
-	rotate(save_orientation - orientation);
+	rotate(enrot - orientation);
 
 }
 

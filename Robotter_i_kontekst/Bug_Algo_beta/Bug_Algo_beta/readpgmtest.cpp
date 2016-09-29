@@ -24,25 +24,24 @@ int main(int argc, char** argv) {
 	Robot wall_e(img);
 	
 	// initiate transform matrixes 
-	double dir = -90 * PI / 180;
+	double dir = PI;
 
 	Transform H1(100, 0, 0);
 	Transform H2(0, 200, 0);
 	Transform H3(0, 0, dir);
 	Transform H4(200, 500, 60 * PI / 180);
 
-	H1.printTransform("H1");
-	H2.printTransform("H2");
-	H3.printTransform("H3");
+	//H1.printTransform("H1");
+	//H2.printTransform("H2");
+	//H3.printTransform("H3");
 
 
 	// matrix multipluer
-	H1.mult(H2).mult(H3).printTransform("H3 * H2 * H1");
-	H3.mult(H2).mult(H1).printTransform("H1 * H2 * H3");
+	//H1.mult(H2).mult(H3).printTransform("H1 * H2 * H3");
+	//H3.mult(H2).mult(H1).printTransform("H3 * H2 * H1");
 
 	// make a move
-	wall_e.goTo(H1);
-	wall_e.goTo(H2);
+	wall_e.goTo(H3);
 	
 
 	// printing image

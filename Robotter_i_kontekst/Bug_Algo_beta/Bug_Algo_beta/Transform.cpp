@@ -63,7 +63,7 @@ Transform Transform::mult(const Transform & T)
 			// for each unit in the result matrice
 			for (size_t k = 0; k < 3; k++) {
 				// do the three multiplications
-				res(i, j) += T(i, k)*_mat[k][j];
+				res(i, j) += _mat[i][k]*T(k, j);
 			}
 		}
 	}

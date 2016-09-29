@@ -51,11 +51,12 @@ private:
 	// Calcualte the requierd work space
 	void calcualteWorkSpace(Transform motion);
 
-	Point delta_point;		// holds the intervals in witch the robot is to move at a time. 
-	Point current_point;	// holds the current possition of the robot
-	Point target_point;		// holds the destination of the robot
+	Point delta_point;				// holds the intervals in witch the robot is to move at a time. 
+	Point current_point;			// holds the current possition of the robot
+	Point target_point;				// holds the destination of the robot
 
-	Transform location_trans;		// holds the position and orientation of the robot
+	Transform initial_trans;		// holds the position and orientation of the robot
+	Transform current_trans;		// holds the current possition of the robot
 	Transform new_trans;			// the transform to the new point
 
 	rw::sensor::Image* map;
