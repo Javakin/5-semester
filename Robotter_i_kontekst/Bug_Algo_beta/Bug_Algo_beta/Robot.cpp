@@ -143,7 +143,7 @@ void Robot::printtrajectory()
 void Robot::move(double enx, double eny, double enrot)
 {
 
-	double save_orientation = getOrientation();
+	double save_orientation = getOrientation(location_trans);
 
 	double temp_Orientation = std::atan2(eny, enx);
 
