@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 	Transform H1(100, 0, 0);
 	Transform H2(0, 200, 0);
 	Transform H3(0, 0, dir);
-	Transform H4(200, 500, 60 * PI / 180);
+	Transform H4(200, 500, 1.2);
 
 	//H1.printTransform("H1");
 	//H2.printTransform("H2");
@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 	//H3.mult(H2).mult(H1).printTransform("H3 * H2 * H1");
 
 	// make a move
-	wall_e.goTo(H3);
+	wall_e.goTo(H4);
 	
 
 	// printing image

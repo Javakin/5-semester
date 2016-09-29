@@ -61,24 +61,11 @@ Robot::~Robot()
 
 void Robot::goTo(Transform motion)
 {
+	// setup
 	new_trans = motion;
-	Point current_point(0, 0);
-
-	// debugging
-	motion.printTransform("motion");
-	initial_trans.printTransform("Initial transform");
-	initial_trans.mult(motion).printTransform("final transform");
-
-	std::cout << getOrientation(initial_trans) << std::endl;
-	std::cout << getOrientation(initial_trans.mult(new_trans)) << std::endl;
-
-
-	// set target
+	Point p(0, 0);
+	current_point = initial_trans.mult(p);
 	target_point = motion.mult(current_point);
-	
-	target_point.printPoint("Target point");
-	current_point.printPoint("current ");
-	std::cout << getOrientation(initial_trans.mult(new_trans)) << std::endl;
 
 	// move robut to target
 	move(target_point(0)-current_point(0), target_point(1)-current_point(1), getOrientation(initial_trans.mult(new_trans)));
@@ -103,7 +90,6 @@ void Robot::moveahead(double enxafstand, double enyafstand)
 
 	printpoint(location_trans);
 }
-
 
 void Robot::rotate(double radians)
 {
