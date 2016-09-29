@@ -35,6 +35,9 @@ public:
 	// The function that uses the rotate and moveahead function
 	void move(double enx, double eny, double enrot);
 
+	// returns a the orientation of the transformation matrix
+	double getOrientation(Transform aMatrix);
+
 	~Robot();
 
 private:
@@ -53,6 +56,7 @@ private:
 	Point target_point;		// holds the destination of the robot
 
 	Transform location_trans;		// holds the position and orientation of the robot
+	Transform new_trans;			// the transform to the new point
 
 	rw::sensor::Image* map;
 };

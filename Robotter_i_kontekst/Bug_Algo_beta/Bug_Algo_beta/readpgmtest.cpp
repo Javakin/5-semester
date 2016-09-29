@@ -3,6 +3,7 @@
 #include "PPMLoader.h"
 #include "Robot.h"
 #include "Transform.h"
+//#include <cmath>
 
 #define PI 3.14159265358979323846 
 
@@ -15,17 +16,13 @@ int main(int argc, char** argv) {
 	std::string filename(argv[1]);
 	std::cout << filename << std::endl;
 
-	double trig = cos(0);
-	trig = cos(1);
-
 
 	std::cout << "loading image..." << std::endl;
 	Image* img = PPMLoader::load(filename);
 
 	// initiate robot
 	Robot wall_e(img);
-	Robot test;
-
+	
 	// initiate transform matrixes 
 	double dir = -90 * PI / 180;
 

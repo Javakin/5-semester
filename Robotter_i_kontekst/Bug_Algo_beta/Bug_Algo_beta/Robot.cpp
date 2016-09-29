@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "Image.h"
 #include "Transform.h"
+#include <cmath>
 
 
 Robot::Robot()
@@ -34,6 +35,22 @@ Robot::Robot(rw::sensor::Image * aMap)
 }
 
 
+double Robot::getOrientation(Transform aMatrix)
+{
+	// calculate startpoint
+	Point start_point(0, 0);
+	start_point = aMatrix.mult(start_point);
+
+	// calculate endpoint
+	Point end_point(0,0);
+	Transform unit_motion(1, 0, 0);
+	end_point = aMatrix.mult(unit_motion).mult(end_point);
+
+	// return result
+	return std::atan2(	end_point(1)-start_point(1), 
+						end_point(0)-start_point(0));
+}
+
 Robot::~Robot()
 {
 	
@@ -42,20 +59,17 @@ Robot::~Robot()
 
 void Robot::goTo(Transform motion)
 {
-	// update possition transformation
-	location_trans.mult(motion);
+	new_trans = motion;
 
 	// set target
 	target_point = motion.mult(current_point);
 	
 
-	// move robit to target
-	move(target_point(0)-current_point(0), target_point(1)-current_point(1), 0); // calculate the target
+	// move robut to target
+	move(target_point(0)-current_point(0), target_point(1)-current_point(1), getOrientation(location_trans.mult(new_trans)));
 		
-
-
-	// Target has been reatched - calculate
-	std::cout << "Goal has been reatched" << std::endl;
+	// update possition transformation
+	location_trans = location_trans.mult(new_trans);
 }
 
 void Robot::moveahead(double enxafstand, double enyafstand)
@@ -128,19 +142,10 @@ void Robot::printtrajectory()
 
 void Robot::move(double enx, double eny, double enrot)
 {
-	double save_orientation = orientation;
-	std::cout << atan(eny / enx) * 180 / 3.14159265358979323846;
-	double temp_Orientation = atan(eny / enx) * 180 / 3.14159265358979323846;
-	if (enx == 0)
-		temp_Orientation = 90;
-	if (eny == 0)
-		temp_Orientation = 0;
-	if (enx < 0 && eny > 0)
-		temp_Orientation = 90 + atan(eny / -enx) * 180 / 3.14159265358979323846;
-	if (enx < 0 && eny < 0)
-		temp_Orientation = 180 + atan(-eny / -enx) * 180 / 3.14159265358979323846;
-	if (eny < 0 && enx > 0)
-		temp_Orientation = 270 + atan(-eny / enx) * 180 / 3.14159265358979323846;
+
+	double save_orientation = getOrientation();
+
+	double temp_Orientation = std::atan2(eny, enx);
 
 	std::cout << "Current orientation is: " << orientation << " temp orientation is: " << temp_Orientation << std::endl;
 
