@@ -16,7 +16,7 @@ public:
 	Robot(rw::sensor::Image* aMap);
 
 	// Construct a robot at the position x,y and with the facing theta
-	Robot(rw::sensor::Image* aMap, double x, double y, double theta);
+	//Robot(rw::sensor::Image* aMap, double x, double y, double theta);
 
 
 	// Move robot to new position
@@ -52,7 +52,7 @@ private:
 	Point current_point;	// holds the current possition of the robot
 	Point target_point;		// holds the destination of the robot
 
-	Transform trans;		// holds the position and orientation of the robot
+	Transform location_trans;		// holds the position and orientation of the robot
 
 	rw::sensor::Image* map;
 };

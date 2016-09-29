@@ -6,6 +6,8 @@
 
 class Transform {
 public:
+	Transform();
+
 	Transform(double x, double y, double theta);
 
 	~Transform();

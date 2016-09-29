@@ -1,6 +1,22 @@
 #include "Transform.h"
 
 
+Transform::Transform()
+{
+	// define an empty transformation matrix
+	_mat = new double*[3];
+	_mat[0] = new double[3];
+	_mat[1] = new double[3];
+	_mat[2] = new double[3];
+
+	// fill it with zeros
+	for (size_t i = 0; i < 3; i++) {
+		for (size_t j = 0; j < 3; j++) {
+			_mat[i][j] = 0;
+		}
+	}
+}
+
 Transform::Transform(double x, double y, double theta)
 {
 	_mat = new double*[3];

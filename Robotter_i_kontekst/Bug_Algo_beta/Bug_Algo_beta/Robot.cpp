@@ -9,10 +9,15 @@
 
 Robot::Robot()
 {
+	std::cout << "called robot default constructor" << std::endl;
 	Point p(0,0);
 	current_point = p;
 	delta_point = p;
 	target_point = p;
+
+	Transform t(0, 0, 0);
+	location_trans = t;
+
 	map = NULL;
 }
 
@@ -24,7 +29,7 @@ Robot::Robot(rw::sensor::Image * aMap)
 	target_point = p;
 
 	Transform t(0, 0, 0);
-	trans = t;
+	location_trans = t;
 	map = aMap;
 }
 
