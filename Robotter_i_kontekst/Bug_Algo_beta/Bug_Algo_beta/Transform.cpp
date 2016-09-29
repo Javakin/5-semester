@@ -38,6 +38,20 @@ Point Transform::mult(const Point & p)
 	return res;
 }
 
+Transform Transform::mult(const Transform & T)
+{
+
+	Transform res(0, 0, 0);
+	
+	for (size_t i = 0; i < 2; i++) {
+		for (size_t j = 0; j < 3; j++) {
+			//res(i) += _mat[i][j] * p(j);
+		}
+	}
+	return res;
+
+}
+
 double & Transform::operator()(size_t i, size_t j)
 {
 	return _mat[i][j];

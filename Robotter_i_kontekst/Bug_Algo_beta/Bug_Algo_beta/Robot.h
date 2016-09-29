@@ -39,22 +39,11 @@ public:
 
 private:
 
-	/*double x = 0;
-	double y = 0;
-	double tempx = 0;
-	double tempy = 0;*/
+	
 	double orientation = 0;
 	double hyp = 0;
-	//double deltax = 0;
-	//double deltay = 0;
 	int counter = 0;
 
-
-	// Print out the movement from the input transformation
-	//void displayPoint(Point position);
-
-	// Trace the movment of the robot on the map(image)
-	//void traceRoute(Transform motion);
 
 	// Calcualte the requierd work space
 	void calcualteWorkSpace(Transform motion);

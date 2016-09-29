@@ -11,6 +11,8 @@ public:
 	~Transform();
 
 	Point mult(const Point& p);
+
+	Transform mult(const Transform & T);
 		
 	double& operator()(size_t i, size_t j);
 

@@ -39,37 +39,24 @@ Robot::~Robot()
 
 void Robot::goTo(Transform motion)
 {
+	// update possition transformation
+
+
 	// set target
 	target_point = motion.mult(current_point);
+	
 
 	// move robit to target
-	move(10, 20, 0);
-		// print motoin
+	move(target_point(0)-current_point(0), target_point(1)-current_point(1), 0); // calculate the target
+		
 
 
 	// Target has been reatched - calculate
-	std::cout << "done" << std::endl;
+	std::cout << "Goal has been reatched" << std::endl;
 }
 
 void Robot::moveahead(double enxafstand, double enyafstand)
 {
-
-	/*tempx = x;
-	tempy = y;
-	x += enxafstand;
-	y += enyafstand;
-	hyp = sqrt(enxafstand*enxafstand + enyafstand*enyafstand);
-	deltax = enxafstand / hyp;
-	deltay = enyafstand / hyp;
-	std::cout << "Lenght is " << hyp << std::endl;
-	std::cout << "DeltaX is  " << deltax << std::endl;
-
-	printtrajectory();*/
-
-	//Point p(0, 0);
-	
-	//target_point = p;
-
 	target_point(0) += current_point(0);
 	target_point(1) += current_point(1);
 
@@ -83,8 +70,6 @@ void Robot::moveahead(double enxafstand, double enyafstand)
 	std::cout << "DeltaX is  " << delta_point(0) << std::endl;
 
 	printtrajectory();
-
-
 }
 
 
@@ -188,7 +173,6 @@ void Robot::move(double enx, double eny, double enrot)
 	//std::cout << "Step 2 | " << x << " | " << y << " | " << sec << " | " << std::endl;
 	//std::cout << "Step 3 | " << x << " | " << y << " | " << sec << " | " << std::endl; 
 //}*/
-
 
 
 void Robot::calcualteWorkSpace(Transform motion)
