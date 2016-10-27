@@ -30,13 +30,21 @@ public:
 
 	const int& findMin() const;
 	const int& findMax() const;
+
+	//int value(const int& x) const;
+
 	bool contains(const int& x) const;
 	bool isEmpty() const;
+
+	void value() const;
+
 	void printTree() const;
 	void makeEmpty();
 	void insert(const int& x);
 	void insert(int&& x);
 	void remove(const int& x);
+
+	//int height();
 
 private:
 
@@ -52,8 +60,14 @@ private:
 	void balance(AvlNode * & t);
 	AvlNode* findMin(AvlNode *t) const;
 	AvlNode* findMax(AvlNode *t) const;
+	
+	//int value(const int& x, AvlNode *t) const;
+	
 	bool contains(const int& x, AvlNode *t) const;
 	void makeEmpty(AvlNode * & t);
+
+	void value(AvlNode *t) const;
+
 	void printTree(AvlNode *t) const;
 	AvlNode* clone(AvlNode *t) const;
 	int height(AvlNode *t) const;

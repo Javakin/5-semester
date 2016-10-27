@@ -17,7 +17,7 @@ AvlTree::~AvlTree()
 	makeEmpty();
 }
 
-const int & AvlTree::findMin() const
+const int& AvlTree::findMin() const
 {
 	if (isEmpty())
 		return -1;
@@ -31,6 +31,14 @@ const int& AvlTree::findMax() const
 	return findMax(root)->element;
 }
 
+/*
+int AvlTree::value(const int & x) const
+{
+	return value(x, root);
+	return 0;
+}
+*/
+
 bool AvlTree::contains(const int& x) const
 {
 	return contains(x, root);
@@ -39,6 +47,14 @@ bool AvlTree::contains(const int& x) const
 bool AvlTree::isEmpty() const
 {
 	return root == nullptr;
+}
+
+void AvlTree::value() const
+{
+	if (isEmpty())
+		cout << "Empty tree" << endl;
+	else
+		printTree(root);
 }
 
 void AvlTree::printTree() const
@@ -154,6 +170,21 @@ AvlNode * AvlTree::findMax(AvlNode *t) const
 	return t;
 }
 
+/*
+int AvlTree::value(const int & x, AvlNode * t) const
+{
+	if (t == nullptr)
+		return 100;
+	else if (x < t->element)
+		return contains(x, t->left);
+	else if (t->element < x)
+		return contains(x, t->right);
+	else
+		return 200;
+}
+*/
+
+
 bool AvlTree::contains(const int& x, AvlNode *t) const
 {
 	if (t == nullptr)
@@ -175,6 +206,16 @@ void AvlTree::makeEmpty(AvlNode * & t)
 		delete t;
 	}
 	t = nullptr;
+}
+
+void AvlTree::value(AvlNode * t) const
+{
+	if (t != nullptr)
+	{
+		printTree(t->left);
+		cout << t->element << endl;
+		printTree(t->right);
+	}
 }
 
 void AvlTree::printTree(AvlNode *t) const
