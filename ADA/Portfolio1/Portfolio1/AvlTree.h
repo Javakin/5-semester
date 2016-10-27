@@ -36,7 +36,7 @@ public:
 	bool contains(const int& x) const;
 	bool isEmpty() const;
 
-	void value() const;
+	void value(const int& x) const;
 
 	void printTree() const;
 	void makeEmpty();
@@ -66,7 +66,7 @@ private:
 	bool contains(const int& x, AvlNode *t) const;
 	void makeEmpty(AvlNode * & t);
 
-	void value(AvlNode *t) const;
+	void value(const int& x, AvlNode *t) const;
 
 	void printTree(AvlNode *t) const;
 	AvlNode* clone(AvlNode *t) const;

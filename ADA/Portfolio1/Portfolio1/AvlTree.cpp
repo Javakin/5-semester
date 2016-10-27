@@ -49,12 +49,9 @@ bool AvlTree::isEmpty() const
 	return root == nullptr;
 }
 
-void AvlTree::value() const
+void AvlTree::value(const int& x) const
 {
-	if (isEmpty())
-		cout << "Empty tree" << endl;
-	else
-		printTree(root);
+	return value(x, root);
 }
 
 void AvlTree::printTree() const
@@ -208,15 +205,45 @@ void AvlTree::makeEmpty(AvlNode * & t)
 	t = nullptr;
 }
 
-void AvlTree::value(AvlNode * t) const
-{
+void AvlTree::value(const int & x, AvlNode * t) const
+{	
+	if (t == nullptr)
+	{
+		cout << "This line is empty" << endl;
+		value(x, t->right);
+	}
+	else
+		cout << "This line is not empty" << endl;
+	{
+		//value(x, t->right);
+		//while (t != nullptr)
+		//{
+			cout << t->element << " ";
+			if (t == root)
+				cout << " <-- root node";
+			cout << endl;
+			//t->right;
+		//}
+		cout << endl;
+	}
+	cout << "This is the height: " << t->height << endl;
 	if (t != nullptr)
 	{
-		printTree(t->left);
-		cout << t->element << endl;
-		printTree(t->right);
+	//value(x, t->right);
+	cout << "Thies are the elements to the right: " << t->element << endl;
 	}
+	/*if (t == nullptr)
+
+		return false;
+	else if (x < t->element)
+		return value(x, t->left);
+	else if (t->element < x)
+		return value(x, t->right);
+	else
+		return true;*/
 }
+
+
 
 void AvlTree::printTree(AvlNode *t) const
 {

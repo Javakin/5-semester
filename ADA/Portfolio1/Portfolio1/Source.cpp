@@ -9,19 +9,32 @@ int main()
 {
 	AvlTree test;
 	
+
+
 	///*
 	test.insert(11);
-	test.insert(1);
+	test.insert(0);
 	test.insert(2);
 	test.insert(4);
-	test.insert(7);
+	test.insert(100);
+	test.insert(20);
+	test.insert(70);
+	test.insert(74);
+	test.insert(1);
+	test.insert(33);
+	test.insert(31);
+	test.insert(32);
+	test.insert(30);
+	test.insert(35);
+	test.insert(36);
+	test.insert(37);
 	//test.insert(7,2);
 	//*/
 	
 	//std::cout << test[1];
 
 	//std::cout << "height: " << test.height() << std::endl;
-
+	/*
 	std::cout << "Contains 0: " << test.contains(0) << std::endl;
 	std::cout << "Contains 1: " << test.contains(1) << std::endl;
 	std::cout << "Contains 2: " << test.contains(2) << std::endl;
@@ -49,10 +62,10 @@ int main()
 	test.printTree();
 
 	//test.height();
+	*/
 
-
-	test.value();
-
+	test.value(0);
+	test.printTree();
 /*	std::cout << "test 1: " << test.value() << std::endl;
 	std::cout << "test 2: " << test.value(2) << std::endl;
 	std::cout << "test 3: " << test.value(3) << std::endl;
