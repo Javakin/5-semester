@@ -9,9 +9,6 @@ int main()
 {
 	AvlTree test;
 	
-
-
-	///*
 	test.insert(11);
 	test.insert(0);
 	test.insert(2);
@@ -28,8 +25,7 @@ int main()
 	test.insert(35);
 	test.insert(36);
 	test.insert(37);
-	//test.insert(7,2);
-	//*/
+	
 	
 	//std::cout << test[1];
 
@@ -74,5 +70,6 @@ int main()
 */
 	//std::cout << "Height: " << test.height();
 
+	system("pause");
 	return 0;
 }
