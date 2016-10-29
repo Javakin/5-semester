@@ -54,6 +54,12 @@ public:
 
 private:
 
+	// solution for portfolio 1
+	void printPreOrder(AvlNode *t);
+	void printInOrder(AvlNode *t);
+	void printPostOrder(AvlNode *t);
+	void printLevelOrder(AvlNode *t);
+
 	AvlNode *root;
 
 	void insert(const int& x, AvlNode * & t);

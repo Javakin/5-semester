@@ -82,6 +82,11 @@ void AvlTree::remove(const int& x)
 	remove(x, root);
 }
 
+void AvlTree::printPreOrder()
+{
+		printPreOrder(root);
+}
+
 void AvlTree::insert(const int& x, AvlNode * & t)
 {
 	if (t == nullptr)
@@ -303,4 +308,14 @@ void AvlTree::doubleWithRightChild(AvlNode * & k1)
 {
 	rotateWithLeftChild(k1->right);
 	rotateWithRightChild(k1);
+}
+
+void AvlTree::printPreOrder(AvlNode * t)
+{
+	if (t != nullptr)
+	{
+		cout << t->element << endl;
+		printPreOrder(t->left);
+		printPreOrder(t->right);
+	}
 }
