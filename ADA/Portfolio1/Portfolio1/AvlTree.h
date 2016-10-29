@@ -46,6 +46,12 @@ public:
 
 	//int height();
 
+	// solution for protfolio 1
+	void printPreOrder();
+	void printInOrder();
+	void printPostOrder();
+	void printLevelOrder();
+
 private:
 
 	AvlNode *root;
