@@ -43,8 +43,9 @@ int main()
 	test.printPostOrder();
 
 	cout << endl << endl << "print level-order" << endl;
-	//test.printLevelOrder();
+	test.printLevelOrder();
 
+	cout << endl << endl;
 
 	// pause program for debugging
 	system("pause");

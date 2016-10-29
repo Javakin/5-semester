@@ -97,6 +97,11 @@ void AvlTree::printPostOrder()
 	printPostOrder(root);
 }
 
+void AvlTree::printLevelOrder()
+{
+	printLevelOrder(root, 0);
+}
+
 void AvlTree::insert(const int& x, AvlNode * & t)
 {
 	if (t == nullptr)
@@ -350,4 +355,31 @@ void AvlTree::printPostOrder(AvlNode * t)
 		printPostOrder(t->right);
 		cout << t->element << ", ";
 	}
+}
+
+void AvlTree::printLevelOrder(AvlNode * t, int targetLevel)
+{
+	// recursive function - repeat for every level in the tree
+
+	// base case
+	if (root->height < targetLevel)
+		return;
+
+	printLevel(t, targetLevel, 0);
+	printLevelOrder(t, targetLevel + 1);
+}
+
+void AvlTree::printLevel(AvlNode * t, int targetLevel, int currentLevel)
+{
+	// recursice function - list all numbers in the trees targetLevel 
+	if (t == nullptr)
+		return;
+
+	if (currentLevel != targetLevel)
+	{
+		printLevel(t->left, targetLevel, currentLevel + 1);
+		printLevel(t->right, targetLevel, currentLevel + 1);
+	}
+	if (currentLevel == targetLevel)
+		cout << t->element << ", ";
 }

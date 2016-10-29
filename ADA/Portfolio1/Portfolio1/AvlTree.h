@@ -58,7 +58,8 @@ private:
 	void printPreOrder(AvlNode *t);
 	void printInOrder(AvlNode *t);
 	void printPostOrder(AvlNode *t);
-	void printLevelOrder(AvlNode *t);
+	void printLevelOrder(AvlNode *t, int targetLevel);
+	void printLevel(AvlNode *t, int targetLevel, int currentLevel);
 
 	AvlNode *root;
 
