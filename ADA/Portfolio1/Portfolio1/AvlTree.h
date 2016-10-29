@@ -80,7 +80,7 @@ private:
 
 	void value(const int& x, AvlNode *t) const;
 
-	void printTree(AvlNode *t) const;
+	void printTree(AvlNode *t, int debth) const;
 	AvlNode* clone(AvlNode *t) const;
 	int height(AvlNode *t) const;
 	int max(int lhs, int rhs) const;

@@ -59,7 +59,7 @@ void AvlTree::printTree() const
 	if (isEmpty())
 		cout << "Empty tree" << endl;
 	else
-		printTree(root);
+		printTree(root, 0);
 }
 
 void AvlTree::makeEmpty()
@@ -196,7 +196,6 @@ int AvlTree::value(const int & x, AvlNode * t) const
 }
 */
 
-
 bool AvlTree::contains(const int& x, AvlNode *t) const
 {
 	if (t == nullptr)
@@ -258,15 +257,18 @@ void AvlTree::value(const int & x, AvlNode * t) const
 		return true;*/
 }
 
-
-
-void AvlTree::printTree(AvlNode *t) const
+void AvlTree::printTree(AvlNode *t, int debth) const
 {
 	if (t != nullptr)
 	{
-		printTree(t->left);
+		printTree(t->left, debth + 1);
+
+		// display with tap
+		for (int i = 0; i < debth; i++)
+			cout << "\t|";
 		cout << t->element << endl;
-		printTree(t->right);
+		
+		printTree(t->right, debth + 1);
 	}
 }
 
@@ -324,7 +326,7 @@ void AvlTree::printPreOrder(AvlNode * t)
 {
 	if (t != nullptr)
 	{
-		cout << t->element << endl;
+		cout << t->element << ", ";
 		printPreOrder(t->left);
 		printPreOrder(t->right);
 	}
@@ -335,16 +337,17 @@ void AvlTree::printInOrder(AvlNode * t)
 	if (t != nullptr)
 	{
 		printInOrder(t->left);
-		cout << t->element << endl;
+		cout << t->element << ", ";
 		printInOrder(t->right);
 	}
 }
+
 void AvlTree::printPostOrder(AvlNode * t)
 {
 	if (t != nullptr)
 	{
 		printPostOrder(t->left);
 		printPostOrder(t->right);
-		cout << t->element << endl;
+		cout << t->element << ", ";
 	}
 }

@@ -7,8 +7,12 @@
 
 int main()
 {
+	// setup
 	AvlTree test;
 	
+	for (int i = 0; i < 32; i++)
+		test.insert(i);
+	/*
 	test.insert(11);
 	test.insert(0);
 	test.insert(2);
@@ -25,51 +29,24 @@ int main()
 	test.insert(35);
 	test.insert(36);
 	test.insert(37);
-	
-	
-	//std::cout << test[1];
-
-	//std::cout << "height: " << test.height() << std::endl;
-	/*
-	std::cout << "Contains 0: " << test.contains(0) << std::endl;
-	std::cout << "Contains 1: " << test.contains(1) << std::endl;
-	std::cout << "Contains 2: " << test.contains(2) << std::endl;
-	std::cout << "Contains 3: " << test.contains(3) << std::endl;
-	std::cout << "Contains 4: " << test.contains(4) << std::endl;
-	std::cout << "Contains 7: " << test.contains(7) << std::endl;
-	std::cout << "Contains 11: " << test.contains(11) << std::endl;
-
-	std::cout << test.findMax() << std::endl;
-	std::cout << test.findMin() << std::endl;
-
-	std::cout << std::endl << std::endl;
-
-	std::cout << "Remove thing on node 1: " << std::endl;
-	test.remove(1);
-
-	std::cout << "Contains 0: " << test.contains(0) << std::endl;
-	std::cout << "Contains 1: " << test.contains(1) << std::endl;
-	std::cout << "Contains 2: " << test.contains(2) << std::endl;
-	std::cout << "Contains 3: " << test.contains(3) << std::endl;
-	std::cout << "Contains 4: " << test.contains(4) << std::endl;
-	std::cout << "Contains 7: " << test.contains(7) << std::endl;
-	std::cout << "Contains 11: " << test.contains(11) << std::endl;
-
-	test.printTree();
-
-	//test.height();
 	*/
-
-	test.value(0);
 	test.printTree();
-/*	std::cout << "test 1: " << test.value() << std::endl;
-	std::cout << "test 2: " << test.value(2) << std::endl;
-	std::cout << "test 3: " << test.value(3) << std::endl;
-	std::cout << "test 4: " << test.value(4) << std::endl;
-	std::cout << "test 5: " << test.value(5) << std::endl;
-*/
-	//std::cout << "Height: " << test.height();
 
+	// display output for the four print functions
+	cout << endl << endl << "print pre-order" << endl;
+	test.printPreOrder();
+
+	cout << endl << endl << "print in-order" << endl;
+	test.printInOrder();
+
+	cout << endl << endl << "print post-order" << endl;
+	test.printPostOrder();
+
+	cout << endl << endl << "print level-order" << endl;
+	//test.printLevelOrder();
+
+
+	// pause program for debugging
 	system("pause");
 	return 0;
 }
