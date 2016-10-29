@@ -87,6 +87,16 @@ void AvlTree::printPreOrder()
 		printPreOrder(root);
 }
 
+void AvlTree::printInOrder()
+{
+	printInOrder(root);
+}
+
+void AvlTree::printPostOrder()
+{
+	printPostOrder(root);
+}
+
 void AvlTree::insert(const int& x, AvlNode * & t)
 {
 	if (t == nullptr)
@@ -317,5 +327,24 @@ void AvlTree::printPreOrder(AvlNode * t)
 		cout << t->element << endl;
 		printPreOrder(t->left);
 		printPreOrder(t->right);
+	}
+}
+
+void AvlTree::printInOrder(AvlNode * t)
+{
+	if (t != nullptr)
+	{
+		printInOrder(t->left);
+		cout << t->element << endl;
+		printInOrder(t->right);
+	}
+}
+void AvlTree::printPostOrder(AvlNode * t)
+{
+	if (t != nullptr)
+	{
+		printPostOrder(t->left);
+		printPostOrder(t->right);
+		cout << t->element << endl;
 	}
 }
