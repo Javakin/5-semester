@@ -17,11 +17,20 @@ int main()
 
 	int bins[11] = {0,0,0,0,0,0,0,0,0,0,0};
 
+	
 	std::cout << bins[1] << std::endl;
+	int i, j;
+	srand((unsigned)time(NULL));
+	
+	for (int i = 0; i < 10; i++)
+	{
+		j = rand() % 12;
+		std::cout << j << std::endl;
+	}
+	
+	bins.insert(2)
 
-	srand(time(NULL));
-	int x = rand() % 10;
-	std::cout << x << std::endl;
+
 
 
 
