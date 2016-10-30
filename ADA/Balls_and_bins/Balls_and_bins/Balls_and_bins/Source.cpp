@@ -2,16 +2,21 @@
 
 #include "Balls_and_bins.h"
 
-#include <math.h>
+//#include <math.h>
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
+//#include <stdlib.h>
+//#include <time.h>
 
 int main()
 {
-	
+	Balls_and_bins def;
 
-	std::cout << "log(log(100007)) = " << log(log(100007)) << std::endl;
+	Balls_and_bins bal(1000000);
+
+	def.print_balls_and_bins();
+	bal.print_balls_and_bins();
+
+	/*std::cout << "log(log(100007)) = " << log(log(100007)) << std::endl;
 
 	std::cout << "log(100007) = " << log(100007) << std::endl;
 
@@ -27,13 +32,13 @@ int main()
 		j = rand() % 12;
 		std::cout << j << std::endl;
 	}
+	*/
 	
-	bins.insert(2)
 
 
 
 
-
+	system("pause");
 	return 0;
 
 }
