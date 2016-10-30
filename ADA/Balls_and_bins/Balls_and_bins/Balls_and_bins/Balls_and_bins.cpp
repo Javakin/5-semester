@@ -19,6 +19,13 @@ Balls_and_bins::Balls_and_bins(int bins)
 	
 }
 
+//void Balls_and_bins::Balls_and_bins(int bins, int balls)
+//{
+//	int binss = bins;
+//	//std::cout << binss << std::endl;
+//	return binss;
+//}
+
 
 void Balls_and_bins::print_balls_and_bins()
 {
@@ -44,4 +51,42 @@ void Balls_and_bins::print_balls_and_bins()
 
 Balls_and_bins::~Balls_and_bins()
 {
+}
+
+int Balls_and_bins::random_number()
+{
+	//int i, j;
+	int j;
+	srand((unsigned)time(NULL));
+
+	for (int i = 0; i < 10; i++)
+	{
+		j = rand() % y;
+		std::cout << "Detter er de random verdier " << j << std::endl;
+	}
+	//j = rand() % y;
+	return j;
+}
+
+int Balls_and_bins::bins()
+{
+	std::cin >> y;
+	//std::vector<int> bins_vector(y);
+	//std::cout << bins_vector.size() << std::endl;
+	bins_vector.resize(y,0);
+	x = bins_vector.size();
+	//std::cout << "Dette er verdien po plads 2 i vectoren " << bins_vector.at(2) << std::endl;
+	return x;
+}
+
+int Balls_and_bins::insert_ball()
+{
+	std::cout << "Test af 'insert_ball()' " << bins_vector.at(3) << std::endl;
+	
+	bins_vector[3] = 5;
+
+	std::cout << bins_vector[3] << std::endl;
+
+
+	return 0;
 }
