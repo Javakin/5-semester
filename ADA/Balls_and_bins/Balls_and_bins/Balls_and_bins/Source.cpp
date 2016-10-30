@@ -9,11 +9,11 @@
 //#include <ostream>
 
 int main()
-{
+{/*
 	Balls_and_bins def;
 
 	Balls_and_bins bal(1000000);
-
+	*/
 	
 
 	//std::cout << "log(log(100007)) = " << log(log(100007)) << std::endl;

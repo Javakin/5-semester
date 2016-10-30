@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <vector>
+#include <algorithm>
 
 class Balls_and_bins
 {
@@ -24,7 +25,12 @@ public:
 private:
 	int x;
 
-	int y;
+	int y; // Number of bins
+
+	int b; // Number of balls
+
+
 	std::vector<int> bins_vector;
+	std::vector<int> ball_pos_vector;
 
 };
