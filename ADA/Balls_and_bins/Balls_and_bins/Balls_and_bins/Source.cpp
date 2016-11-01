@@ -9,27 +9,18 @@
 //#include <ostream>
 
 int main()
-{/*
-	Balls_and_bins def;
-
-	Balls_and_bins bal(1000000);
-	*/
-	
-
-	//std::cout << "log(log(100007)) = " << log(log(100007)) << std::endl;
-
-	//std::cout << "log(100007) = " << log(100007) << std::endl;
-
-	//int bins[11] = {0,0,0,0,0,0,0,0,0,0,0};
-
+{
 	Balls_and_bins test;
+	test.bins();
+	test.random_number();
+	test.insert_ball();
+	//test.power_of_two_choices();
+	//std::cout << "Dette er storrelsen po bins vectoren: " << test.bins() << std::endl;
+	//std::cout << "Radom_number_test: " << test.random_number() << std::endl;
 
-	std::cout << "Dette er storrelsen po bins vectoren: " << test.bins() << std::endl;
-	std::cout << "Radom_number_test: " << test.random_number() << std::endl;
+	////std::cout << "TEST " << "" << std::endl;
 
-	//std::cout << "TEST " << "" << std::endl;
-
-	std::cout << test.insert_ball();
+	//std::cout << test.insert_ball();
 
 	system("pause");
 	return 0;

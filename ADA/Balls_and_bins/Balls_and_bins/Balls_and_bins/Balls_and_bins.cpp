@@ -57,7 +57,6 @@ int Balls_and_bins::random_number()
 {
 	std::cout << "Insert number of balls" << std::endl;
 	std::cin >> x;
-	//int i, j;
 	int j;
 	srand((unsigned)time(NULL));
 
@@ -65,11 +64,7 @@ int Balls_and_bins::random_number()
 	{
 		j = rand() % y;
 		ball_pos_vector.push_back(j);
-		//std::cout << "Detter er de random verdier " << j << std::endl;
 	}
-	//j = rand() % y;
-	//std::cout << "test 1: " << j << std::endl;
-	//std::cout << "test 2: " << rand() % y << std::endl;
 	return j;
 }
 
@@ -78,71 +73,85 @@ int Balls_and_bins::bins()
 	std::cout << "Insert number of bins" << std::endl;
 	std::cin >> y;
 
-	/*
-	//std::vector<int> bins_vector(y);
-	//std::cout << bins_vector.size() << std::endl;
-	*/
+	two_choices.resize(y, 0);
 	bins_vector.resize(y,0);
 	x = bins_vector.size();
-	//std::cout << "Dette er verdien po plads 2 i vectoren " << bins_vector.at(2) << std::endl;
 	return x;
 }
 
 int Balls_and_bins::insert_ball()
 {
-	std::cout << "Test af 'insert_ball()' " << bins_vector.at(3) << std::endl;
-	for (unsigned int i = 0; i < bins_vector.size(); i++)
-	{
-		//std::cout << "Random number in insert ball: " << random_number() << std::endl;
-		//std::cout << "Value of ball_pos_vector on pos " << i << ": " << ball_pos_vector[i] << std::endl;
-		//std::cout << "Value of bins_vector on pos " << i << ": " << bins_vector[i] << std::endl;
-	}
 
 	for (unsigned int i = 0; i < ball_pos_vector.size(); ++i)
 	{
 		bins_vector[ball_pos_vector[i]]++;
-		//std::cout << "Number of balls in each bin " << i << ": " << bins_vector[i] << std::endl;
-		//std::cout << ball_pos_vector[i] << std::endl;
 	}
 
-
-	//bins_vector[3] = 5;
-	/*for (int i = 0; i < ; i++)
-	{
-
-	}*/
-	std::vector<int>::iterator Iter;
+	// Bruges til debugging
+	std::vector <int>::iterator Iter;
+	std::cout << "Content of bins_vector: ";
 	for (Iter = bins_vector.begin(); Iter != bins_vector.end(); Iter++)
 		std::cout << *Iter << " ";
-	//std::cout << std::endl;
-	//int result = std::count(bins_vector.begin(), bins_vector.end(), 2);
-	//std::cout << "Number of 2 in the vector is: " << result << std::endl;
-	for (unsigned int i = 0; i < bins_vector.size(); i++)
+	std::cout << std::endl;
+
+	for (unsigned int i = 0; i < ball_pos_vector.size(); i++)
 	{
 		int result = std::count(bins_vector.begin(), bins_vector.end(), i);
-		std::cout << "Number of balls in bin "<< i << " is: " << result << std::endl;
+		if (0 < result)
+		{
+			std::cout << "There are " << result << " bins with " << i <<" balls in" << std::endl;
+		}
+	}
+	return 0;
+}
 
-		/*int result = std::count(bins_vector.begin(), bins_vector.end(), 2);
-		std::cout << "Number of 2 in the vector"*/
-
-		//int mycount = std::count(bins_vector.begin(), bins_vector.end(), i);
-		//std::cout << "i bin " << i << " er der " << mycount << " bolte" << std::endl;
+int Balls_and_bins::power_of_two_choices()
+{
+	for (unsigned int i = 0; i < ball_pos_vector.size(); i++)
+	{
+			if (two_choices[ball_pos_vector[i]] < two_choices[ball_pos_vector[i]] < two_choices[ball_pos_vector[i]+1])
+			{
+				std::cout << "test";
+			}
 		
-		//std::cout << "0 appears " << mycount << " times.\n";
+			/*if (i <two_choices[i] two_choices[ball_pos_vector[i]] < two_choices[ball_pos_vector[i]+1])
+			{
+				10;
+			}*/
+	}
 
-		
-	}/*
-	int mycount1 = std::count(bins_vector.begin(), bins_vector.end(), 1);
-	std::cout << "i bin " << "1" << " er der " << mycount1 << " bolte" << std::endl;
-	int mycount2 = std::count(bins_vector.begin(), bins_vector.end(), 1);
-	std::cout << "i bin " << "2" << " er der " << mycount2 << " bolte" << std::endl;
-	int mycount3 = std::count(bins_vector.begin(), bins_vector.end(), 1);
-	std::cout << "i bin " << "3" << " er der " << mycount3 << " bolte" << std::endl;*/
-	//std::cout << std::count(bins_vector, bins_vector + 10, 2);
-	//std::cout << "Number of balls in each bin " << i << ": " << bins_vector[i] << std::endl;
+	/*for (unsigned int i = 0; i < ball_pos_vector.size(); i++)
+	{
+		if (i < ball_pos_vector.size()-1 && i > 1)
+		{
+			if (two_choices[ball_pos_vector[i]-1] < two_choices[ball_pos_vector[i]])
+			{
+				two_choices[ball_pos_vector[i]-1]++;
+			}
+			else
+			{
+				two_choices[ball_pos_vector[i]]++;
+			}
+		}
+	}*/
 
-	std::cout << "Verdi af 3 position i vector: " << bins_vector[3] << std::endl;
+/*
+	// Bruges til debugging
+	std::vector <int>::iterator Iter2;
+	std::cout << "Content of two_choices: ";
+	for (Iter2 = two_choices.begin(); Iter2 != two_choices.end(); Iter2++)
+		std::cout << *Iter2 << " ";
+	std::cout << std::endl;
+*/
 
-
+/*	for (unsigned int i = 0; i < ball_pos_vector.size(); i++)
+	{
+		int result2 = std::count(two_choices.begin(), two_choices.end(), i);
+		if (0 < result2)
+		{
+			std::cout << "There are " << result2 << " bins with balls " << i << " in" << std::endl;
+		}
+	}
+*/
 	return 0;
 }

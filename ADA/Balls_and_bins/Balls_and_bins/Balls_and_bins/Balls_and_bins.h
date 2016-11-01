@@ -22,15 +22,15 @@ public:
 
 	int insert_ball();
 
+	int power_of_two_choices();
+
 private:
-	int x;
-
+	int x; // Number of balls
 	int y; // Number of bins
-
-	int b; // Number of balls
-
-
+	
 	std::vector<int> bins_vector;
 	std::vector<int> ball_pos_vector;
+	std::vector<int> two_choices;
+	//std::vector<int> ball_in_bins;
 
 };
