@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Mapping.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="PPMLoader.cpp" />
     <ClCompile Include="readpgmtest.cpp" />
@@ -156,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="Image.h" />
     <ClInclude Include="macros.h" />
+    <ClInclude Include="Mapping.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PPMLoader.h" />
     <ClInclude Include="Robot.h" />
