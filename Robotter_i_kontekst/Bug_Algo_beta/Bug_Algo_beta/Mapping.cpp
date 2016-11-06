@@ -42,21 +42,21 @@ void Mapping::Brushfire()
 			if (brushfireMap->getPixelValuei(x, y, channel) == 0)
 			{
 				cout << "new object detected\n";
-				borderlines.push_back(BrushfireExhaustive(x, y, 125));
+				borderlines.push_back(brushfireExhaustive(x, y, 125));
 			}
 		}
 	}
 	// debugging collor edges
-	for (vector<vector<int> > edge : borderlines)
+	/*for (vector<vector<int> > edge : borderlines)
 	{
 		for (vector<int> point : edge)
 		{
 			brushfireMap->setPixel8U(point[0], point[1], 60);
 		}
-	}
+	}*/
 
-	// begin brushfiring: todo
-
+	// begin brushfiring
+	//brushfireSingleStep();
 
 }
 
@@ -69,7 +69,7 @@ Mapping::~Mapping()
 {
 }
 
-vector<vector<int> > Mapping::BrushfireExhaustive(int xPos, int yPos, int colour)
+vector<vector<int> > Mapping::brushfireExhaustive(int xPos, int yPos, int colour)
 {
 	// setup
 	int relIderat[4][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1, 0 } };
@@ -109,6 +109,46 @@ vector<vector<int> > Mapping::BrushfireExhaustive(int xPos, int yPos, int colour
 					vector<int> pointHolder = { current_point[0] + relIderat[i][0], current_point[1] + relIderat[i][1] };
 					brushfireMap->setPixel8U(pointHolder[0], pointHolder[1], colour);
 					pointStack.push_back(pointHolder);
+				}
+			}
+		}
+	}
+
+	return borderLinePoints;
+}
+
+vector<vector<int>> Mapping::brushfireSingleStep(vector<vector<int>> anEdge)
+{
+	// setup
+	int relIderat[4][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1, 0 } };
+	int channel = 0;				// allways 0 on grayscale image
+	int colour = brushfireMap->getPixelValuei(anEdge[0][0], anEdge[0][1], channel);
+	vector<int> current_point;
+	vector<vector<int> > borderLinePoints;
+
+
+	// do exaustive brushfire
+	while (anEdge.size() != 0)
+	{
+		// pop new pixel
+		current_point = anEdge.back();
+		anEdge.pop_back();
+
+		//check for childes
+		for (int i = 0; i < 4; i++)
+		{
+			if (validPoint(current_point[0] + relIderat[i][0], current_point[1] + relIderat[i][1]))
+			{
+				int pixVal = brushfireMap->getPixelValuei(current_point[0] + relIderat[i][0], current_point[1] + relIderat[i][1], channel);
+
+				// pixel is a new white pixel
+				if (pixVal == 255)
+				{
+					// colour point and add to the borderLineStack
+					vector<int> pointHolder = { current_point[0] + relIderat[i][0], current_point[1] + relIderat[i][1] };
+					brushfireMap->setPixel8U(pointHolder[0], pointHolder[1], colour);
+					//pointStack.push_back(pointHolder);
+					borderLinePoints.push_back(current_point);
 				}
 			}
 		}

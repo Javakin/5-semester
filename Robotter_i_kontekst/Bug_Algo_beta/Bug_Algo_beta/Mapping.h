@@ -23,7 +23,8 @@ public:
 
 private:
 	
-	vector< vector< int > > BrushfireExhaustive(int xPos, int yPos, int colour);
+	vector< vector< int > > brushfireExhaustive(int xPos, int yPos, int colour);
+	vector< vector< int > > brushfireSingleStep(vector< vector< int > > anEdge);
 	bool validPoint(int xPos, int yPos);
 
 	rw::sensor::Image* map;
