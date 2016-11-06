@@ -31,7 +31,7 @@ void Mapping::Brushfire()
 	vector< vector< vector<int> > > borderlines;
 	int channel = 0; // allways 0 on grayscale image
 
-
+	
 	// identifying all objects 
 	cout << "identifying all objects..." << endl;
 	for (int x = 0; x < brushfireMap->getWidth(); x++)
@@ -46,8 +46,17 @@ void Mapping::Brushfire()
 			}
 		}
 	}
+	// debugging collor edges
+	for (vector<vector<int> > edge : borderlines)
+	{
+		for (vector<int> point : edge)
+		{
+			brushfireMap->setPixel8U(point[0], point[1], 60);
+		}
+	}
 
 	// begin brushfiring: todo
+
 
 }
 
@@ -63,10 +72,8 @@ Mapping::~Mapping()
 vector<vector<int> > Mapping::BrushfireExhaustive(int xPos, int yPos, int colour)
 {
 	// setup
-	int relIderat[4][2] = { { 1,1 },{ -1,1 },{ -1,-1 },{ 1,-1 } };
+	int relIderat[4][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1, 0 } };
 	int channel = 0;				// allways 0 on grayscale image
-	
-
 	vector<int> current_point = {xPos, yPos};
 	vector<vector<int> > pointStack = { current_point };
 	vector<vector<int> > borderLinePoints;
@@ -103,7 +110,6 @@ vector<vector<int> > Mapping::BrushfireExhaustive(int xPos, int yPos, int colour
 					brushfireMap->setPixel8U(pointHolder[0], pointHolder[1], colour);
 					pointStack.push_back(pointHolder);
 				}
-
 			}
 		}
 	}
@@ -116,13 +122,13 @@ bool Mapping::validPoint(int xPos, int yPos)
 	//out of bounce check xPos
 	if (xPos < 0 || xPos >= brushfireMap->getWidth())
 	{
-		cout << "error: wrong xpos on the map\n";
+		//cout << "error: wrong xpos on the map\n";
 		return false;
 	} 
 	// oute of bounce check yPos
 	if (yPos < 0 || yPos >= brushfireMap->getHeight())
 	{
-		cout << "error: wrong ypos on the map\n";
+		//cout << "error: wrong ypos on the map\n";
 		return false;
 	}
 
