@@ -54,10 +54,25 @@ void Mapping::Brushfire()
 			brushfireMap->setPixel8U(point[0], point[1], 60);
 		}
 	}*/
-
+	
 	// begin brushfiring
-	//brushfireSingleStep();
+	int semEmpty = 1;
+	while (semEmpty != 0)
+	{
+		semEmpty = 0;
+		for (unsigned int i = borderlines.size(); i > 0; i--)
+		{
+			// for each object brushfire one step
+			borderlines[i - 1] = brushfireSingleStep(borderlines[i - 1]);
 
+			// vector still full?
+			if (borderlines[i - 1].size() != 0)
+				semEmpty = 1;
+		}
+		
+		cout << "brushed one step\n";
+		
+	}
 }
 
 Image* Mapping::getBrushfireMap()
@@ -119,6 +134,10 @@ vector<vector<int> > Mapping::brushfireExhaustive(int xPos, int yPos, int colour
 
 vector<vector<int>> Mapping::brushfireSingleStep(vector<vector<int>> anEdge)
 {
+	// precondition
+	if (anEdge.size() == 0)
+		return vector<vector<int> >();
+
 	// setup
 	int relIderat[4][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1, 0 } };
 	int channel = 0;				// allways 0 on grayscale image
@@ -147,8 +166,7 @@ vector<vector<int>> Mapping::brushfireSingleStep(vector<vector<int>> anEdge)
 					// colour point and add to the borderLineStack
 					vector<int> pointHolder = { current_point[0] + relIderat[i][0], current_point[1] + relIderat[i][1] };
 					brushfireMap->setPixel8U(pointHolder[0], pointHolder[1], colour);
-					//pointStack.push_back(pointHolder);
-					borderLinePoints.push_back(current_point);
+					borderLinePoints.push_back(pointHolder);
 				}
 			}
 		}
