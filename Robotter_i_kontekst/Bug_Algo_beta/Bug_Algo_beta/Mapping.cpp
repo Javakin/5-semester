@@ -102,6 +102,9 @@ Image * Mapping::getBrushfireMapWObj()
 
 Mapping::~Mapping()
 {
+	delete map;
+	delete brushfireMap;
+	delete brushfireMapWObj;
 }
 
 vector<vector<int> > Mapping::brushfireExhaustive(int xPos, int yPos, int colour)
