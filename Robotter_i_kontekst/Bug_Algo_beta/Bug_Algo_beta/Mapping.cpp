@@ -13,12 +13,14 @@ Mapping::Mapping()
 {
 	map = nullptr;
 	brushfireMap = nullptr;
+	brushfireMapWObj = nullptr;
 }
 
 Mapping::Mapping(Image* amap)
 {
-	map = amap;
+	map = amap->copyFlip(0, 0);
 	brushfireMap = nullptr;
+	brushfireMapWObj = nullptr;
 }
 
 void Mapping::Brushfire()
@@ -27,9 +29,10 @@ void Mapping::Brushfire()
 		return;
 
 	// setup
-	brushfireMap = map;
+	brushfireMap = map->copyFlip(0, 0);
 	vector< vector< vector<int> > > borderlines;
 	int channel = 0; // allways 0 on grayscale image
+	int objectColour = 50;
 
 	
 	// identifying all objects 
@@ -42,10 +45,12 @@ void Mapping::Brushfire()
 			if (brushfireMap->getPixelValuei(x, y, channel) == 0)
 			{
 				cout << "new object detected\n";
-				borderlines.push_back(brushfireExhaustive(x, y, 125));
+				borderlines.push_back(brushfireExhaustive(x, y, objectColour));
+				objectColour += 20; /* to do: lav en ordenlig funktion */
 			}
 		}
 	}
+	
 	// debugging collor edges
 	/*for (vector<vector<int> > edge : borderlines)
 	{
@@ -68,16 +73,31 @@ void Mapping::Brushfire()
 			// vector still full?
 			if (borderlines[i - 1].size() != 0)
 				semEmpty = 1;
+		}		
+	}
+
+	// update brushfireMapWObj
+	brushfireMapWObj = brushfireMap->copyFlip(0, 0);
+	for (int x = 0; x < brushfireMap->getWidth(); x++)
+	{
+		for (int y = 0; y < brushfireMap->getHeight(); y++)
+		{
+			if (map->getPixelValuei(x, y, channel) == 0)
+			{
+				brushfireMapWObj->setPixel8U(x, y, 0);
+			}
 		}
-		
-		cout << "brushed one step\n";
-		
 	}
 }
 
 Image* Mapping::getBrushfireMap()
 {
 	return brushfireMap;
+}
+
+Image * Mapping::getBrushfireMapWObj()
+{
+	return brushfireMapWObj;
 }
 
 Mapping::~Mapping()

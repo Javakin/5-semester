@@ -14,6 +14,9 @@ using namespace std;
 
 
 int main(int argc, char** argv) {
+	// for detection of memory leaks 
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	std::string filename(argv[1]);
 	std::cout << filename << std::endl;
 
@@ -25,10 +28,19 @@ int main(int argc, char** argv) {
 	//Robot wall_e(img);
 	//Transform H4(200, 500, 3);
 	
+	Mapping fireObj(img);
+	fireObj.Brushfire();
+
+	std::cout << "saving image brushfire..." << std::endl;
+	fireObj.getBrushfireMap()->saveAsPGM("brushfire.pgm");
+	fireObj.getBrushfireMapWObj()->saveAsPGM("brushfireWObj.pgm");
+	img->saveAsPGM("original.pgm");
+	
+
 
 	// printing image
-	std::cout << "saving image..." << std::endl;
-	img->saveAsPGM("testout.pgm");
+	//std::cout << "saving image..." << std::endl;
+	//img->saveAsPGM("testout.pgm");
 	
 	// cleanup
 	delete img;

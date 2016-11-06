@@ -17,6 +17,7 @@ public:
 	void Brushfire();	
 
 	Image* getBrushfireMap();
+	Image* getBrushfireMapWObj();
 	
 
 	~Mapping();
@@ -29,6 +30,7 @@ private:
 
 	rw::sensor::Image* map;
 	rw::sensor::Image* brushfireMap;
+	rw::sensor::Image* brushfireMapWObj;
 
 };
 
