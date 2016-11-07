@@ -44,49 +44,94 @@ int main(int argc, char** argv) {
 			int val = img->getPixelValuei(x, y, channel);
 			
 			testvec[x][y] = val;
-			cout << " Testvec val at " << x << ", " << y << ": " <<testvec[x][y];
+			//cout << " Testvec val at " << x << ", " << y << ": " <<testvec[x][y] << endl;
 
-			if (x < img->getWidth() && x > 0 && y < img->getHeight() && y > 0)
+			if (x < img->getWidth()-1 && x > 1 && y < img->getHeight()-1 && y > 1)
 			{
-				if (testvec[x - 1][y] != testvec[x][y])
+				/*if (testvec[x - 1][y] == testvec[x][y] && testvec[x][y] != 255)
 				{
 					testvec[x][y] = 255;
 				}
-				else if (testvec[x - 1][y - 1] != testvec[x][y])
+				else if (testvec[x - 1][y - 1] == testvec[x][y] && testvec[x][y] != 255)
 				{
 					testvec[x][y] = 255;
 				}
-				else if (testvec[x - 1][y + 1] != testvec[x][y])
+				else if (testvec[x - 1][y + 1] == testvec[x][y] && testvec[x][y] != 255)
 				{
 					testvec[x][y] = 255;
 				}
-				else if (testvec[x + 1][y] != testvec[x][y])
+				else if (testvec[x + 1][y] == testvec[x][y] && testvec[x][y] != 255)
 				{
 					testvec[x][y] = 255;
 				}
-				else if (testvec[x + 1][y - 1] != testvec[x][y])
+				else if (testvec[x + 1][y - 1] == testvec[x][y] && testvec[x][y] != 255)
 				{
 					testvec[x][y] = 255;
 				}
-				else if (testvec[x + 1][y + 1] != testvec[x][y])
+				else if (testvec[x + 1][y + 1] == testvec[x][y] && testvec[x][y] != 255)
 				{
 					testvec[x][y] = 255;
 				}
-				else if (testvec[x][y - 1] != testvec[x][y])
+				else if (testvec[x][y - 1] == testvec[x][y] && testvec[x][y] != 255)
 				{
 					testvec[x][y] = 255;
 				}
-				else if (testvec[x][y + 1] != testvec[x][y])
+				else if (testvec[x][y + 1] == testvec[x][y] && testvec[x][y] != 255)
+				{
+					testvec[x][y] = 255;
+				}*/
+
+				/*if (testvec[x - 1][y] != testvec[x][y] && testvec[x][y] != 255)
 				{
 					testvec[x][y] = 255;
 				}
+				else if (testvec[x - 1][y - 1] != testvec[x][y] && testvec[x][y] != 255)
+				{
+					testvec[x][y] = 255;
+				}
+				else if (testvec[x - 1][y + 1] != testvec[x][y] && testvec[x][y] != 255)
+				{
+					testvec[x][y] = 255;
+				}
+				else if (testvec[x + 1][y] != testvec[x][y] && testvec[x][y] != 255)
+				{
+					testvec[x][y] = 255;
+				}
+				else if (testvec[x + 1][y - 1] != testvec[x][y] && testvec[x][y] != 255)
+				{
+					testvec[x][y] = 255;
+				}
+				else if (testvec[x + 1][y + 1] != testvec[x][y] && testvec[x][y] != 255)
+				{
+					testvec[x][y] = 255;
+				}
+				else if (testvec[x][y - 1] != testvec[x][y] && testvec[x][y] != 255)
+				{
+					testvec[x][y] = 255;
+				}
+				else if (testvec[x][y + 1] != testvec[x][y] && testvec[x][y] != 255)
+				{
+					testvec[x][y] = 255;
+				}*/
 				
+				if (testvec[x][y] != testvec[x - 1 ][y] && testvec[x][y] != testvec[x + 1 ][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254)
+				{
+					testvec[x][y] = 254;
+				}
+				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254)
+				{
+					testvec[x][y] = 254;
+				}
 			}
-			/*
-			if (val <= 127) {
-				img->setPixel8U(x, y, 255);
+				/*if (testvec[x][y] == 255)
+				{
+					cout << " Testvec pos with val 255: " << x << ", " << y << endl;
+				}*/
+			
+			if (testvec[x][y] == 254) {
+				img->setPixel8U(x, y, 100);
 			}
-			else if (val > 127) {
+			/*else if (val < 127) {
 				img->setPixel8U(x, y, 0);
 			}*/
 		}
