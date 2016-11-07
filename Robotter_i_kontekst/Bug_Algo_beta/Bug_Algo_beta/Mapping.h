@@ -8,8 +8,10 @@ class Mapping
 public:
 	Mapping();
 
-	~Mapping();
+	void diagram();
 
+	~Mapping();
+	int test();
 private:
 	rw::sensor::Image* map;
 	
