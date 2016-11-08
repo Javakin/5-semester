@@ -14,7 +14,7 @@ int main()
 	test.bins();
 	test.random_number();
 	test.insert_ball();
-	//test.power_of_two_choices();
+	test.power_of_two_choices();
 	//std::cout << "Dette er storrelsen po bins vectoren: " << test.bins() << std::endl;
 	//std::cout << "Radom_number_test: " << test.random_number() << std::endl;
 
