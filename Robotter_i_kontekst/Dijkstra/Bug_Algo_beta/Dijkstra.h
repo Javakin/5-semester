@@ -10,14 +10,11 @@ using namespace std;
 
 class Dijkstra
 {
-
 	struct node {
 		int distance;
 		int x;
 		int y;
-		node *left;
-		node *right;
-		node *front;
+		node* parent;
 	};
 
 public:
@@ -28,8 +25,10 @@ public:
 private:
 	rw::sensor::Image* map;
 		int _picHeight, _picWidth, _goalX = 190, _goalY = 190, _startX = 10, _startY = 10;
-		
-		vector<node> points;
-		void algorithm(node aNode);
+		bool checkForDuplicate(int x, int y);
+		vector<node> _points;
+		queue<node> _circleQueue;
+		int bent = 0;
+		bool isEquals;
 };
 
