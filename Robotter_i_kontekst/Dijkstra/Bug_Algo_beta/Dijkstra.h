@@ -6,8 +6,6 @@
 
 using namespace std;
 
-
-
 class Dijkstra
 {
 	struct node {
@@ -17,18 +15,26 @@ class Dijkstra
 		node* parent;
 	};
 
+	struct points
+	{
+		bool visited;
+	};
+
 public:
 	Dijkstra();
 	Dijkstra(rw::sensor::Image* aMap);
 	void algorithm();
+	rw::sensor::Image* getMap();
 	~Dijkstra();
 private:
 	rw::sensor::Image* map;
 		int _picHeight, _picWidth, _goalX = 190, _goalY = 190, _startX = 10, _startY = 10;
-		bool checkForDuplicate(int x, int y);
-		vector<node> _points;
+		vector<node> vectorWithPoints;
 		queue<node> _circleQueue;
-		int bent = 0;
-		bool isEquals;
+		void arrangelists();
+		void findRoute();
+
+		vector <vector<points>> xValues;
+		vector <points> yValues;
 };
 

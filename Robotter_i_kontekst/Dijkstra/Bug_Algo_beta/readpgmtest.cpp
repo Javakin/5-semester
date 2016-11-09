@@ -22,7 +22,8 @@ int main(int argc, char** argv) {
 
 	// printing image
 	std::cout << "saving image..." << std::endl;
-	img->saveAsPGM("testout.pgm");
+	pathPlanning.getMap()->saveAsPGM("ShortestRoute.pgm");
+	//img->saveAsPGM("testout.pgm");
 
 	// cleanup
 	delete img;
