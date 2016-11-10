@@ -31,8 +31,14 @@ public:
 
 	Image* getBrushfireMap();
 	Image* getBrushfireMapWObj();
+
 	Image* getBrushfireMapInc();
 	Image* getPathMap();
+
+	Image* getVoronoiMap();
+
+	void Voronoi();
+
 
 	vector<point> pointToParth(point aPoint);
 	
@@ -44,12 +50,15 @@ private:
 	vector<point> brushfireSingleStep(vector<point> anEdge);
 	void brushfireInc();
 	bool validPoint(int xPos, int yPos);
+	//vector<vector<int>> testvec(rows, vector<int>(cols, val));
 
 	rw::sensor::Image* map;
 	rw::sensor::Image* brushfireMap;
 	rw::sensor::Image* brushfireMapWObj;
 	rw::sensor::Image* brushfireMapInc;
 	rw::sensor::Image* pathMap;
+	rw::sensor::Image* voronoiMap;
+
 
 };
 

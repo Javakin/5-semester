@@ -14,8 +14,12 @@ Mapping::Mapping()
 	map = nullptr;
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
+
 	brushfireMapInc = nullptr;
 	pathMap = nullptr;
+
+	voronoiMap = nullptr;
+
 }
 
 Mapping::Mapping(Image* amap)
@@ -23,8 +27,12 @@ Mapping::Mapping(Image* amap)
 	map = amap->copyFlip(0, 0);
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
+
 	brushfireMapInc = nullptr;
 	pathMap = nullptr;
+
+	voronoiMap = nullptr;
+
 }
 
 void Mapping::brushfire()
@@ -130,6 +138,7 @@ Image * Mapping::getBrushfireMapWObj()
 	return brushfireMapWObj;
 }
 
+
 Image * Mapping::getBrushfireMapInc()
 {
 	return brushfireMapInc;
@@ -180,13 +189,118 @@ vector<point> Mapping::pointToParth(point aPoint)
 	return pointPath;
 }
 
+
+Image * Mapping::getVoronoiMap()
+{
+	return voronoiMap;
+}
+
+void Mapping::Voronoi()
+{
+	if (map == nullptr)
+		return;
+	// Get the map
+	voronoiMap = map->copyFlip(0, 0);
+
+	int rows = voronoiMap->getHeight();
+	int cols = voronoiMap->getWidth();
+	int val = 0;
+	int x = 0;
+	int y = 0;
+
+	vector<vector<int>> testvec(rows, vector<int>(cols, val));
+	int channel = 0; // allways 0 on grayscale image
+
+
+	// Iterate through the the picture
+	for (unsigned int x = 0; x < voronoiMap->getWidth(); ++x) {
+		for (unsigned int y = 0; y < voronoiMap->getHeight(); ++y) {
+			int val = voronoiMap->getPixelValuei(x, y, channel);
+
+			testvec[x][y] = val; // Put the value of the pixel into the vector
+		
+			if (x < voronoiMap->getWidth() - 1 && x > 1 && y < voronoiMap->getHeight() - 1 && y > 1)
+			{
+				if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y]/* && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254*/)
+				{
+					testvec[x][y] = 254;
+				}
+				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1]/* && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254*/)
+				{
+					testvec[x][y] = 254;
+				}
+			}
+		}
+	}
+								 
+								 // Check the values of the sourounding positions. If the positions to the side or top is the colored value "254" then don't change the value else do.
+	//		if (x < voronoiMap->getWidth() - 1 && x > 1 && y < voronoiMap->getHeight() - 1 && y > 1)
+	//		{
+	//			if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254)
+	//			{
+	//				testvec[x][y] = 254;
+	//			}
+	//			else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254)
+	//			{
+	//				testvec[x][y] = 254;
+	//			}
+	//		}
+	//	}
+	//}
+	// Color all the pixels on the position that have the value 254
+	for (unsigned int x = 0; x < voronoiMap->getWidth(); ++x) {
+		for (unsigned int y = 0; y < voronoiMap->getHeight(); ++y) {
+			if (testvec[x][y] == 254) {
+				voronoiMap->setPixel8U(x, y, 0);
+			}
+		}
+	}
+
+	// Take the position of all the pixels with the color code and put them into a vector of pairs
+	// Setup the containers
+	pair<int, int> apair;
+	vector<pair<int, int> > v_temp;
+	vector< vector<pair<int, int> > > pair2dvector;
+
+	// Put the pairs into the vector
+	for (int i = 0; i < voronoiMap->getWidth(); i++) {
+		for (int j = 0; j < voronoiMap->getWidth(); j++) {
+			if (testvec[i][j] == 254)
+			{
+				apair.first = i;
+				apair.second = j;
+				v_temp.push_back(apair);
+			}
+		}
+		pair2dvector.push_back(v_temp);
+		v_temp.clear();
+	}
+
+	// Iterate through the vector and print the pairs out
+	for (vector< vector<pair<int, int> > >::iterator it = pair2dvector.begin(); it != pair2dvector.end(); ++it) {
+		v_temp = *it;
+		for (vector<pair<int, int> >::iterator it2 = v_temp.begin(); it2 != v_temp.end(); ++it2) {
+			apair = *it2;
+			cout << "(" << apair.first << "," << apair.second << ") ; ";
+		}
+		cout << '\n';
+	}
+		std::cout << "saving image Voronoi map" << std::endl;
+		// save image
+		voronoiMap->saveAsPGM("testout.pgm");
+}
+
 Mapping::~Mapping()
 {
 	delete map;
 	delete brushfireMap;
 	delete brushfireMapWObj;
+
 	delete brushfireMapInc;
 	delete pathMap;
+
+	delete voronoiMap;
+
 }
 
 vector<point> Mapping::brushfireExhaustive(int xPos, int yPos, int colour)
