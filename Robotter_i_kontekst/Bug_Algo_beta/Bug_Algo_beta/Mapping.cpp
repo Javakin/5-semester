@@ -110,6 +110,34 @@ Image * Mapping::getBrushfireMapInc()
 	return brushfireMapInc;
 }
 
+vector<int, int> Mapping::pointToParth(vector<int, int> point, vector<int, int> parth)
+{
+	// given a point find path to the voronoid diagram
+	if (brushfireMapInc == nullptr)
+		return vector<int, int>();
+
+	// setup
+	int relIderat[4][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1, 0 } };
+	vector<int, int> pointPath(point);
+	vector<int, int> currentPoint(point);
+	//pointPath.push_back(std::make_pair(0,0));
+
+	// find the next point
+	for (int i = 0; i < 4; i++)
+	{
+		int currVal = brushfireMapInc->getPixelValuei(currentPoint[0][0], currentPoint[0][1], 0);
+		int newVal = brushfireMapInc->getPixelValuei(currentPoint[0][0] + relIderat[i][0], currentPoint[0][1] + relIderat[i][1], 0);
+
+		if ( > )
+		{
+
+		}
+	}
+	
+	// add the next point
+	
+}
+
 Mapping::~Mapping()
 {
 	delete map;
@@ -211,6 +239,7 @@ vector<vector<int>> Mapping::brushfireSingleStep(vector<vector<int>> anEdge)
 
 void Mapping::brushfireInc()
 {
+	
 	brushfireMapInc = map->copyFlip(0, 0);
 
 	int relIderat[4][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1, 0 } };

@@ -18,7 +18,9 @@ public:
 
 	Image* getBrushfireMap();
 	Image* getBrushfireMapWObj();
-	Image * Mapping::getBrushfireMapInc();
+	Image* getBrushfireMapInc();
+
+	vector<int, int> pointToParth(vector<int, int> point, vector<int, int> parth);
 	
 
 	~Mapping();
