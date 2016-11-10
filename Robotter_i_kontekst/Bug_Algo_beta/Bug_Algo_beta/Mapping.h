@@ -39,7 +39,7 @@ public:
 
 	void Voronoi();
 	
-	vector< point > pointToParth(point aPoint, vector<point> parth);
+	vector<point> pointToParth(point aPoint);
 
 	
 	~Mapping();
