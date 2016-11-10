@@ -111,7 +111,7 @@ void Mapping::Voronoi()
 {
 	if (map == nullptr)
 		return;
-
+	// Get the map
 	voronoiMap = map->copyFlip(0, 0);
 
 	int rows = voronoiMap->getHeight();
@@ -130,21 +130,36 @@ void Mapping::Voronoi()
 			int val = voronoiMap->getPixelValuei(x, y, channel);
 
 			testvec[x][y] = val; // Put the value of the pixel into the vector
-
+		
 			if (x < voronoiMap->getWidth() - 1 && x > 1 && y < voronoiMap->getHeight() - 1 && y > 1)
 			{
-				if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254)
+				if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y]/* && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254*/)
 				{
 					testvec[x][y] = 254;
 				}
-				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254)
+				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1]/* && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254*/)
 				{
 					testvec[x][y] = 254;
 				}
 			}
 		}
 	}
-
+								 
+								 // Check the values of the sourounding positions. If the positions to the side or top is the colored value "254" then don't change the value else do.
+	//		if (x < voronoiMap->getWidth() - 1 && x > 1 && y < voronoiMap->getHeight() - 1 && y > 1)
+	//		{
+	//			if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254)
+	//			{
+	//				testvec[x][y] = 254;
+	//			}
+	//			else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254)
+	//			{
+	//				testvec[x][y] = 254;
+	//			}
+	//		}
+	//	}
+	//}
+	// Color all the pixels on the position that have the value 254
 	for (unsigned int x = 0; x < voronoiMap->getWidth(); ++x) {
 		for (unsigned int y = 0; y < voronoiMap->getHeight(); ++y) {
 			if (testvec[x][y] == 254) {
@@ -152,21 +167,14 @@ void Mapping::Voronoi()
 			}
 		}
 	}
-	//pair<int, int> apair;
-	//vector<pair<int, int> > testPairVector;
-	//for (unsigned int i = 0; i < 5; i++) {
-	//	for (unsigned int j = 0; j < 10; j++) {
-	//		apair.first = i;
-	//		apair.second = j;
-	//		testPairVector.push_back(apair);
-	//	}
-	//}
-	//cout << "Test of vector of pairs " << "First part: " << apair.first << " Second part: " << apair.second << endl;
 
+	// Take the position of all the pixels with the color code and put them into a vector of pairs
+	// Setup the containers
 	pair<int, int> apair;
 	vector<pair<int, int> > v_temp;
 	vector< vector<pair<int, int> > > pair2dvector;
 
+	// Put the pairs into the vector
 	for (int i = 0; i < voronoiMap->getWidth(); i++) {
 		for (int j = 0; j < voronoiMap->getWidth(); j++) {
 			if (testvec[i][j] == 254)
@@ -180,6 +188,7 @@ void Mapping::Voronoi()
 		v_temp.clear();
 	}
 
+	// Iterate through the vector and print the pairs out
 	for (vector< vector<pair<int, int> > >::iterator it = pair2dvector.begin(); it != pair2dvector.end(); ++it) {
 		v_temp = *it;
 		for (vector<pair<int, int> >::iterator it2 = v_temp.begin(); it2 != v_temp.end(); ++it2) {
@@ -188,48 +197,9 @@ void Mapping::Voronoi()
 		}
 		cout << '\n';
 	}
-
-	//pair<int, int> apair;
-	//vector<pair<int, int> > v_temp;
-	//vector< vector<pair<int, int> > > pair2dvector;
-
-	//for (int i = 0; i < 10; i++) {
-	//	for (int j = 0; j < 10; j++) {
-	//		apair.first = i;
-	//		apair.second = j;
-	//		v_temp.push_back(apair);
-	//	}
-	//	pair2dvector.push_back(v_temp);
-	//	v_temp.clear();
-	//}
-
-	//for (vector< vector<pair<int, int> > >::iterator it = pair2dvector.begin(); it != pair2dvector.end(); ++it) {
-	//	v_temp = *it;
-	//	for (vector<pair<int, int> >::iterator it2 = v_temp.begin(); it2 != v_temp.end(); ++it2) {
-	//		apair = *it2;
-	//		cout << "(" << apair.first << "," << apair.second << ") ; ";
-	//	}
-	//	cout << '\n';
-	//}
-
-	//pair<int, int> apair;
-	//vector<pair<int, int> > v_temp;
-	//for (int i = 0; i < 10; i++) {
-	//	for (int j = 0; j < 10; j++) {
-	//		apair.first = i;
-	//		apair.second = j;
-	//		v_temp.push_back(apair);
-	//	}
-	//	for (vector<pair<int, int> >::iterator it2 = v_temp.begin(); it2 != v_temp.end(); ++it2)
-	//	{
-	//	}
-	//}
-
-
 		std::cout << "saving image Voronoi map" << std::endl;
 		// save image
 		voronoiMap->saveAsPGM("testout.pgm");
-	
 }
 Mapping::~Mapping()
 {
