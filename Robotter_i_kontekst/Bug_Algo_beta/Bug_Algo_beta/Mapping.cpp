@@ -184,7 +184,7 @@ vector<point> Mapping::pointToParth(point aPoint)
 		}
 	}
 	
-	// add the next point
+	// add the next point*/
 
 	return pointPath;
 }
