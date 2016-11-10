@@ -38,10 +38,7 @@ public:
 	Image* getVoronoiMap();
 
 	void Voronoi();
-	vector<int, int> pointToParth(vector<int, int> point, vector<int, int> parth);
-
-
-	vector<point> pointToParth(point aPoint);
+	vector< pair<int, int> > pointToParth(vector<pair<int, int> > point, vector<pair<int, int> > parth);
 	
 	~Mapping();
 
