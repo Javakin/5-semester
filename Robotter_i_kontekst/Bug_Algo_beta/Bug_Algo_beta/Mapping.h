@@ -31,13 +31,10 @@ public:
 
 	Image* getBrushfireMap();
 	Image* getBrushfireMapWObj();
-
 	Image* getBrushfireMapInc();
 	Image* getPathMap();
 
 	Image* getVoronoiMap();
-
-	Image * Mapping::getBrushfireMapInc();
 
 	void Voronoi();
 	
@@ -50,6 +47,8 @@ private:
 	
 	vector<point> brushfireExhaustive(int xPos, int yPos, int colour);
 	vector<point> brushfireSingleStep(vector<point> anEdge);
+	vector<pair<int, int> > points;
+
 	void brushfireInc();
 	bool validPoint(int xPos, int yPos);
 	//vector<vector<int>> testvec(rows, vector<int>(cols, val));

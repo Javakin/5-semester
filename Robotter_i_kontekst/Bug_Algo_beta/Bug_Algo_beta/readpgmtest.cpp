@@ -27,24 +27,23 @@ int main(int argc, char** argv) {
 	// initiate
 	//Robot wall_e(img);
 	//Transform H4(200, 500, 3);
-	
-	Mapping fireObj(img);
-	fireObj.Brushfire();
+	point p1 = { 10,10 };
+	point p2 = { 190,190 };
 
-	std::cout << "saving image brushfire..." << std::endl;
+	Mapping fireObj(img);
+	fireObj.brushfire();
+	fireObj.Voronoi();
+	fireObj.dijkstra(p1, p2);
+
+
 	fireObj.getBrushfireMap()->saveAsPGM("brushfire.pgm");
 	fireObj.getBrushfireMapWObj()->saveAsPGM("brushfireWObj.pgm");
 	fireObj.getBrushfireMapInc()->saveAsPGM("brushfireInc.pgm");
-	img->saveAsPGM("original.pgm");
+	fireObj.getPathMap()->saveAsPGM("pathMap.pgm");
 
-	Mapping voronoiObj(img);
-	voronoiObj.Voronoi();
-	
+	img->saveAsPGM("original.pgm");	
 
 
-	// printing image
-	//std::cout << "saving image..." << std::endl;
-	//img->saveAsPGM("testout.pgm");
 	
 	// cleanup
 	delete img;
