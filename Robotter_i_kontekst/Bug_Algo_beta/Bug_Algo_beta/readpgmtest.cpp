@@ -40,6 +40,7 @@ int main(int argc, char** argv) {
 	fireObj.getBrushfireMapWObj()->saveAsPGM("brushfireWObj.pgm");
 	fireObj.getBrushfireMapInc()->saveAsPGM("brushfireInc.pgm");
 	fireObj.getPathMap()->saveAsPGM("pathMap.pgm");
+	fireObj.getVoronoiMap()->saveAsPGM("voronoidPoints.pgm");
 
 	img->saveAsPGM("original.pgm");	
 

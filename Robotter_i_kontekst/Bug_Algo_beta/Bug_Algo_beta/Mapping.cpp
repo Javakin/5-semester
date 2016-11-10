@@ -14,12 +14,9 @@ Mapping::Mapping()
 	map = nullptr;
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
-
 	brushfireMapInc = nullptr;
 	pathMap = nullptr;
-
 	voronoiMap = nullptr;
-
 }
 
 Mapping::Mapping(Image* amap)
@@ -133,18 +130,17 @@ Image* Mapping::getBrushfireMap()
 	return brushfireMap;
 }
 
-Image * Mapping::getBrushfireMapWObj()
+Image* Mapping::getBrushfireMapWObj()
 {
 	return brushfireMapWObj;
 }
 
-
-Image * Mapping::getBrushfireMapInc()
+Image* Mapping::getBrushfireMapInc()
 {
 	return brushfireMapInc;
 }
 
-Image * Mapping::getPathMap()
+Image* Mapping::getPathMap()
 {
 	return pathMap;
 }
@@ -189,8 +185,7 @@ vector<point> Mapping::pointToParth(point aPoint)
 	return pointPath;
 }
 
-
-Image * Mapping::getVoronoiMap()
+Image* Mapping::getVoronoiMap()
 {
 	return voronoiMap;
 }
@@ -205,8 +200,7 @@ void Mapping::Voronoi()
 	int rows = voronoiMap->getHeight();
 	int cols = voronoiMap->getWidth();
 	int val = 0;
-	int x = 0;
-	int y = 0;
+
 
 	vector<vector<int>> testvec(rows, vector<int>(cols, val));
 	int channel = 0; // allways 0 on grayscale image
@@ -243,30 +237,32 @@ void Mapping::Voronoi()
 
 	// Take the position of all the pixels with the color code and put them into a vector of pairs
 	// Setup the containers
-	pair<int, int> apair;
-	vector<pair<int, int> > points;
+	point apair;
+	//vector<pair<int, int> > points;
 
 	// Put the pairs into the vector
 	for (int i = 0; i < voronoiMap->getWidth(); i++) {
 		for (int j = 0; j < voronoiMap->getWidth(); j++) {
 			if (testvec[i][j] == 254)
 			{
-				apair.first = i;
-				apair.second = j;
-				points.push_back(apair);
+				
+				apair.xVal = i;
+				apair.yVal = j;
+				diagramPoints.push_back(apair);
 			}
 		}
 	}
 
-	for (vector<pair<int, int> >::iterator it2 = points.begin(); it2 != points.end(); ++it2) {
+	//for debugging
+	/*for (vector<point>::iterator it2 = diagramPoints.begin(); it2 != diagramPoints.end(); ++it2) {
 		apair = *it2;
-		cout << "(" << apair.first << "," << apair.second << ") ; ";
+		cout << "(" << apair.xVal << "," << apair.yVal << ") ; ";
 	}
-	cout << '\n';
+	cout << '\n';*/
 
-	std::cout << "saving image Voronoi map" << std::endl;
+	//std::cout << "saving image Voronoi map" << std::endl;
 	// save image
-	voronoiMap->saveAsPGM("testout.pgm");
+	//voronoiMap->saveAsPGM("testout.pgm");
 }
 
 Mapping::~Mapping()
@@ -425,5 +421,3 @@ bool Mapping::validPoint(int xPos, int yPos)
 	// nothing is wrong return true
 	return true;
 }
-
-

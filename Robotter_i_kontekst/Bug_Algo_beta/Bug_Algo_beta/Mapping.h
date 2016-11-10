@@ -47,7 +47,7 @@ private:
 	
 	vector<point> brushfireExhaustive(int xPos, int yPos, int colour);
 	vector<point> brushfireSingleStep(vector<point> anEdge);
-	vector<pair<int, int> > points;
+	vector<point> diagramPoints;
 
 	void brushfireInc();
 	bool validPoint(int xPos, int yPos);
