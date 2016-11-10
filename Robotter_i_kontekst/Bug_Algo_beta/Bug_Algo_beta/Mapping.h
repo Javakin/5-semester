@@ -26,20 +26,22 @@ public:
 	Mapping();
 	Mapping(Image* amap);
 
-	void Brushfire();	
+	void brushfire();	
+	void dijkstra(point startPoint, point stopPoint);
 
 	Image* getBrushfireMap();
 	Image* getBrushfireMapWObj();
 	Image* getBrushfireMapInc();
+	Image* getPathMap();
 
-	vector< point > pointToParth(point aPoint, vector<point> parth);
+	vector<point> pointToParth(point aPoint);
 	
 	~Mapping();
 
 private:
 	
-	vector< point > brushfireExhaustive(int xPos, int yPos, int colour);
-	vector< point > brushfireSingleStep(vector<point> anEdge);
+	vector<point> brushfireExhaustive(int xPos, int yPos, int colour);
+	vector<point> brushfireSingleStep(vector<point> anEdge);
 	void brushfireInc();
 	bool validPoint(int xPos, int yPos);
 
@@ -47,6 +49,7 @@ private:
 	rw::sensor::Image* brushfireMap;
 	rw::sensor::Image* brushfireMapWObj;
 	rw::sensor::Image* brushfireMapInc;
+	rw::sensor::Image* pathMap;
 
 };
 

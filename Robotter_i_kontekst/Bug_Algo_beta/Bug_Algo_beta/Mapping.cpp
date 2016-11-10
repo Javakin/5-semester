@@ -15,6 +15,7 @@ Mapping::Mapping()
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
 	brushfireMapInc = nullptr;
+	pathMap = nullptr;
 }
 
 Mapping::Mapping(Image* amap)
@@ -23,9 +24,10 @@ Mapping::Mapping(Image* amap)
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
 	brushfireMapInc = nullptr;
+	pathMap = nullptr;
 }
 
-void Mapping::Brushfire()
+void Mapping::brushfire()
 {
 	if (map == nullptr)
 		return;
@@ -34,7 +36,6 @@ void Mapping::Brushfire()
 	brushfireMap = map->copyFlip(0, 0);
 	vector< vector< point > > borderlines;
 	int objectColour = 50;
-
 	
 	// identifying all objects 
 	cout << "identifying all objects..." << endl;
@@ -61,10 +62,8 @@ void Mapping::Brushfire()
 		}
 	}*/
 	
-	// generate inc map
-	brushfireInc();
 
-	// begin brushfiring
+	// generate brushfireMap
 	int semEmpty = 1;
 	while (semEmpty != 0)
 	{
@@ -79,8 +78,11 @@ void Mapping::Brushfire()
 				semEmpty = 1;
 		}		
 	}
-	
-	// update brushfireMapWObj
+
+	// generate brushfireMapInc
+	brushfireInc();
+
+	// generate brushfireMapWObj
 	brushfireMapWObj = brushfireMap->copyFlip(0, 0);
 	for (int x = 0; x < brushfireMap->getWidth(); x++)
 	{
@@ -92,6 +94,30 @@ void Mapping::Brushfire()
 			}
 		}
 	}
+}
+
+void Mapping::dijkstra(point startPoint, point stopPoint)
+{
+	// setup
+	pathMap = map->copyFlip(0, 0);
+
+	vector<point> voronoidPoints;
+	vector<point> graph(voronoidPoints);
+
+
+	vector<point> a(pointToParth(startPoint));
+	vector<point> b(pointToParth(stopPoint));
+
+	for (point p : a)
+	{
+		pathMap->setPixel8U(p.xVal, p.yVal, 60);
+	}
+
+	for (point p : b)
+	{
+		pathMap->setPixel8U(p.xVal, p.yVal, 60);
+	}
+		
 }
 
 Image* Mapping::getBrushfireMap()
@@ -109,39 +135,50 @@ Image * Mapping::getBrushfireMapInc()
 	return brushfireMapInc;
 }
 
+Image * Mapping::getPathMap()
+{
+	return pathMap;
+}
 
-vector<point> Mapping::pointToParth(point apoint, vector<point> parth)
+vector<point> Mapping::pointToParth(point aPoint)
 {
 	// given a point find path to the voronoid diagram
 	if (brushfireMapInc == nullptr)
 		return vector<point>();
 	
 	// setup
-	int relIderat[4][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1, 0 } };
+	int relIderat[8][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1,1}, {-1,-1}};
+	int semNewPoint = 1;
 	vector<point> pointPath;
-	vector<point> currentPoint(point);
-
-	/*
+	point currentPoint = aPoint;
+	
+	
+	
 	// find the next point
-	for (int i = 0; i < 4; i++)
+	while (semNewPoint != 0)
 	{
-		int currVal = brushfireMapInc->getPixelValuei(currentPoint[0], currentPoint[0][1], 0);
-		int newVal = brushfireMapInc->getPixelValuei(currentPoint[0][0] + relIderat[i][0], currentPoint[0][1] + relIderat[i][1], 0);
-
-		if (newVal < currVal)
+		semNewPoint = 0;
+		for (int i = 0; i < 8; i++)
 		{
-			// add new point
-			pointPath.push_back(currentPoint[0]);
-			currentPoint[0] = std::make_pair(currentPoint[0][0] + relIderat[i][0], currentPoint[0][1] + relIderat[i][1]);
-			i = 10;		// break for loop
+			int currVal = brushfireMapInc->getPixelValuei(currentPoint.xVal, currentPoint.yVal, 0);
+			int newVal = brushfireMapInc->getPixelValuei(currentPoint.xVal + relIderat[i][0], currentPoint.yVal + relIderat[i][1], 0);
+
+			if (newVal > currVal)
+			{
+				// add new point
+				pointPath.push_back(currentPoint);
+				currentPoint.xVal += relIderat[i][0];
+				currentPoint.yVal += relIderat[i][1];
+				semNewPoint++;
+				i = 10;		// break for loop
+			}
 		}
 	}
 	
-	// add the next point*/
+	// add the next point
 
 	return pointPath;
 }
-
 
 Mapping::~Mapping()
 {
@@ -149,6 +186,7 @@ Mapping::~Mapping()
 	delete brushfireMap;
 	delete brushfireMapWObj;
 	delete brushfireMapInc;
+	delete pathMap;
 }
 
 vector<point> Mapping::brushfireExhaustive(int xPos, int yPos, int colour)
