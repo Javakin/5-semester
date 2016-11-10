@@ -8,6 +8,18 @@
 using namespace std;
 using namespace rw::sensor;
 
+struct point {
+	int xVal;
+	int yVal;
+};
+
+struct edge {
+	int xVal1;
+	int yVal1;
+	int xVal2;
+	int yVal2;
+};
+
 class Mapping
 {
 public:
@@ -20,14 +32,14 @@ public:
 	Image* getBrushfireMapWObj();
 	Image* getBrushfireMapInc();
 
-	vector< pair<int, int> > pointToParth(vector<pair<int, int> > point, vector<pair<int, int> > parth);
+	vector< point > pointToParth(point aPoint, vector<point> parth);
 	
 	~Mapping();
 
 private:
 	
-	vector< vector< int > > brushfireExhaustive(int xPos, int yPos, int colour);
-	vector< vector< int > > brushfireSingleStep(vector< vector< int > > anEdge);
+	vector< point > brushfireExhaustive(int xPos, int yPos, int colour);
+	vector< point > brushfireSingleStep(vector<point> anEdge);
 	void brushfireInc();
 	bool validPoint(int xPos, int yPos);
 
