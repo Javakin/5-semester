@@ -20,9 +20,8 @@ public:
 	Image* getBrushfireMapWObj();
 	Image* getBrushfireMapInc();
 
-	vector<int, int> pointToParth(vector<int, int> point, vector<int, int> parth);
+	vector< pair<int, int> > pointToParth(vector<pair<int, int> > point, vector<pair<int, int> > parth);
 	
-
 	~Mapping();
 
 private:

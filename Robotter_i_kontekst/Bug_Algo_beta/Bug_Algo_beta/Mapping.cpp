@@ -110,12 +110,13 @@ Image * Mapping::getBrushfireMapInc()
 	return brushfireMapInc;
 }
 
-vector<int, int> Mapping::pointToParth(vector<int, int> point, vector<int, int> parth)
+
+vector< pair <int, int> > Mapping::pointToParth(vector<pair<int, int> > point, vector<pair<int, int> > parth)
 {
 	// given a point find path to the voronoid diagram
 	if (brushfireMapInc == nullptr)
-		return vector<int, int>();
-
+		return vector<pair<int, int> >();
+	
 	// setup
 	int relIderat[4][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1, 0 } };
 	vector<int, int> pointPath(point);
@@ -135,8 +136,10 @@ vector<int, int> Mapping::pointToParth(vector<int, int> point, vector<int, int> 
 	}
 	
 	// add the next point
-	
+
+	return vector<pair<int, int> >();
 }
+
 
 Mapping::~Mapping()
 {
