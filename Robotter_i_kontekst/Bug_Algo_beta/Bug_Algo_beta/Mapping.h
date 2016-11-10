@@ -11,7 +11,9 @@ using namespace rw::sensor;
 struct point {
 	int xVal;
 	int yVal;
+	int weight;
 };
+
 
 struct edge {
 	int xVal1;

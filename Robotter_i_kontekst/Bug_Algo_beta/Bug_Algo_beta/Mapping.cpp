@@ -104,24 +104,30 @@ void Mapping::brushfire()
 void Mapping::dijkstra(point startPoint, point stopPoint)
 {
 	// setup
+	if (map == nullptr)
+	{
+		cout << "map is nullpointer\n";
+		return;
+	}
+
+	// setup
 	pathMap = map->copyFlip(0, 0);
+	vector<point> fullPointGragh(diagramPoints);
+	vector<edge> dijkstraPath;
+	vector<point> livingPoints = { startPoint };
+	point currentPoint;
 
-	vector<point> voronoidPoints;
-	vector<point> graph(voronoidPoints);
+	vector<point> temp1(pointToParth(startPoint));
+	vector<point> temp2(pointToParth(stopPoint));
+	
 
-
-	vector<point> a(pointToParth(startPoint));
-	vector<point> b(pointToParth(stopPoint));
-
-	for (point p : a)
-	{
-		pathMap->setPixel8U(p.xVal, p.yVal, 60);
-	}
-
-	for (point p : b)
-	{
-		pathMap->setPixel8U(p.xVal, p.yVal, 60);
-	}
+	// merge vectors
+	for (point p : temp1)
+		fullPointGragh.push_back(p);
+	for (point p : temp2)
+		fullPointGragh.push_back(p);
+	
+	// find the lowest value in the vector
 		
 }
 
