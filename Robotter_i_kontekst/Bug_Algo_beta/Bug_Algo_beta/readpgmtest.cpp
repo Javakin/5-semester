@@ -35,6 +35,9 @@ int main(int argc, char** argv) {
 	fireObj.getBrushfireMap()->saveAsPGM("brushfire.pgm");
 	fireObj.getBrushfireMapWObj()->saveAsPGM("brushfireWObj.pgm");
 	img->saveAsPGM("original.pgm");
+
+	Mapping voronoiObj(img);
+	voronoiObj.Voronoi();
 	
 
 
