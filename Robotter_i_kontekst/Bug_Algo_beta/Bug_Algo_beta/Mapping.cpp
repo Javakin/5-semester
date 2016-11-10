@@ -14,6 +14,7 @@ Mapping::Mapping()
 	map = nullptr;
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
+	brushfireMapInc = nullptr;
 }
 
 Mapping::Mapping(Image* amap)
@@ -21,6 +22,7 @@ Mapping::Mapping(Image* amap)
 	map = amap->copyFlip(0, 0);
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
+	brushfireMapInc = nullptr;
 }
 
 void Mapping::Brushfire()
@@ -60,6 +62,9 @@ void Mapping::Brushfire()
 		}
 	}*/
 	
+	// generate inc map
+	brushfireInc();
+
 	// begin brushfiring
 	int semEmpty = 1;
 	while (semEmpty != 0)
@@ -100,11 +105,17 @@ Image * Mapping::getBrushfireMapWObj()
 	return brushfireMapWObj;
 }
 
+Image * Mapping::getBrushfireMapInc()
+{
+	return brushfireMapInc;
+}
+
 Mapping::~Mapping()
 {
 	delete map;
 	delete brushfireMap;
 	delete brushfireMapWObj;
+	delete brushfireMapInc;
 }
 
 vector<vector<int> > Mapping::brushfireExhaustive(int xPos, int yPos, int colour)
@@ -196,6 +207,41 @@ vector<vector<int>> Mapping::brushfireSingleStep(vector<vector<int>> anEdge)
 	}
 
 	return borderLinePoints;
+}
+
+void Mapping::brushfireInc()
+{
+	brushfireMapInc = map->copyFlip(0, 0);
+
+	int relIderat[4][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1, 0 } };
+	int semWhite = 0;
+
+	for (int collor = 1; collor < 255; collor++)
+	{
+		semWhite = 0;
+		for (int x = 0; x < brushfireMap->getWidth(); x++)
+		{
+			for (int y = 0; y < brushfireMap->getHeight(); y++)
+			{
+				// for every pixel check for a black pixel and run prushfireexhaustive for a collor
+				if (brushfireMapInc->getPixelValuei(x, y, 0) == 255)
+				{
+					semWhite = 1;
+					for (int i = 0; i < 4; i++)
+					{
+						if (brushfireMapInc->getPixelValuei(x + relIderat[i][0], y + relIderat[i][1], 0) == collor - 1)
+						{
+							brushfireMapInc->setPixel8U(x, y, collor);
+						}
+					}
+				}
+			}
+		}
+		if (semWhite == 0)
+		{
+			break;
+		}
+	}
 }
 
 bool Mapping::validPoint(int xPos, int yPos)

@@ -34,6 +34,7 @@ int main(int argc, char** argv) {
 	std::cout << "saving image brushfire..." << std::endl;
 	fireObj.getBrushfireMap()->saveAsPGM("brushfire.pgm");
 	fireObj.getBrushfireMapWObj()->saveAsPGM("brushfireWObj.pgm");
+	fireObj.getBrushfireMapInc()->saveAsPGM("brushfireInc.pgm");
 	img->saveAsPGM("original.pgm");
 	
 
