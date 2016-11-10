@@ -218,35 +218,20 @@ void Mapping::Voronoi()
 			int val = voronoiMap->getPixelValuei(x, y, channel);
 
 			testvec[x][y] = val; // Put the value of the pixel into the vector
-		
+			// Check the surrounding points value. If they have the color value code "254" the do nothing else change current points value to the color code "254"
 			if (x < voronoiMap->getWidth() - 1 && x > 1 && y < voronoiMap->getHeight() - 1 && y > 1)
 			{
-				if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y]/* && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254*/)
+				if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254)
 				{
 					testvec[x][y] = 254;
 				}
-				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1]/* && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254*/)
+				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254)
 				{
 					testvec[x][y] = 254;
 				}
 			}
 		}
 	}
-								 
-								 // Check the values of the sourounding positions. If the positions to the side or top is the colored value "254" then don't change the value else do.
-	//		if (x < voronoiMap->getWidth() - 1 && x > 1 && y < voronoiMap->getHeight() - 1 && y > 1)
-	//		{
-	//			if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254)
-	//			{
-	//				testvec[x][y] = 254;
-	//			}
-	//			else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254)
-	//			{
-	//				testvec[x][y] = 254;
-	//			}
-	//		}
-	//	}
-	//}
 	// Color all the pixels on the position that have the value 254
 	for (unsigned int x = 0; x < voronoiMap->getWidth(); ++x) {
 		for (unsigned int y = 0; y < voronoiMap->getHeight(); ++y) {
@@ -285,9 +270,9 @@ void Mapping::Voronoi()
 		}
 		cout << '\n';
 	}
-		std::cout << "saving image Voronoi map" << std::endl;
-		// save image
-		voronoiMap->saveAsPGM("testout.pgm");
+	std::cout << "saving image Voronoi map" << std::endl;
+	// save image
+	voronoiMap->saveAsPGM("testout.pgm");
 }
 
 Mapping::~Mapping()
