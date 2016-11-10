@@ -163,15 +163,18 @@ void Mapping::Voronoi()
 	//}
 	//cout << "Test of vector of pairs " << "First part: " << apair.first << " Second part: " << apair.second << endl;
 
-	/*pair<int, int> apair;
+	pair<int, int> apair;
 	vector<pair<int, int> > v_temp;
 	vector< vector<pair<int, int> > > pair2dvector;
 
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
-			apair.first = i;
-			apair.second = j;
-			v_temp.push_back(apair);
+	for (int i = 0; i < voronoiMap->getWidth(); i++) {
+		for (int j = 0; j < voronoiMap->getWidth(); j++) {
+			if (testvec[i][j] == 254)
+			{
+				apair.first = i;
+				apair.second = j;
+				v_temp.push_back(apair);
+			}
 		}
 		pair2dvector.push_back(v_temp);
 		v_temp.clear();
@@ -184,22 +187,49 @@ void Mapping::Voronoi()
 			cout << "(" << apair.first << "," << apair.second << ") ; ";
 		}
 		cout << '\n';
-	}*/
+	}
 
-	pair<int, int> apair;
-	vector<pair<int, int> > v_temp;
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
-			apair.first = i;
-			apair.second = j;
-			v_temp.push_back(apair);
-		}
-		for (vector<pair<int, int> >::iterator it2 = v_temp.begin(); it2 != v_temp.end(); ++it2)
+	//pair<int, int> apair;
+	//vector<pair<int, int> > v_temp;
+	//vector< vector<pair<int, int> > > pair2dvector;
+
+	//for (int i = 0; i < 10; i++) {
+	//	for (int j = 0; j < 10; j++) {
+	//		apair.first = i;
+	//		apair.second = j;
+	//		v_temp.push_back(apair);
+	//	}
+	//	pair2dvector.push_back(v_temp);
+	//	v_temp.clear();
+	//}
+
+	//for (vector< vector<pair<int, int> > >::iterator it = pair2dvector.begin(); it != pair2dvector.end(); ++it) {
+	//	v_temp = *it;
+	//	for (vector<pair<int, int> >::iterator it2 = v_temp.begin(); it2 != v_temp.end(); ++it2) {
+	//		apair = *it2;
+	//		cout << "(" << apair.first << "," << apair.second << ") ; ";
+	//	}
+	//	cout << '\n';
+	//}
+
+	//pair<int, int> apair;
+	//vector<pair<int, int> > v_temp;
+	//for (int i = 0; i < 10; i++) {
+	//	for (int j = 0; j < 10; j++) {
+	//		apair.first = i;
+	//		apair.second = j;
+	//		v_temp.push_back(apair);
+	//	}
+	//	for (vector<pair<int, int> >::iterator it2 = v_temp.begin(); it2 != v_temp.end(); ++it2)
+	//	{
+	//	}
+	//}
 
 
-	std::cout << "saving image Voronoi map" << std::endl;
-	// save image
-	voronoiMap->saveAsPGM("testout.pgm");
+		std::cout << "saving image Voronoi map" << std::endl;
+		// save image
+		voronoiMap->saveAsPGM("testout.pgm");
+	
 }
 Mapping::~Mapping()
 {
