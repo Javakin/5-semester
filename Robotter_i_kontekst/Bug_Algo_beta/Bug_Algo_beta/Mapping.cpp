@@ -15,6 +15,7 @@ Mapping::Mapping()
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
 	brushfireMapInc = nullptr;
+	voronoiMap = nullptr;
 }
 
 Mapping::Mapping(Image* amap)
@@ -23,6 +24,7 @@ Mapping::Mapping(Image* amap)
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
 	brushfireMapInc = nullptr;
+	voronoiMap = nullptr;
 }
 
 void Mapping::Brushfire()
@@ -110,12 +112,18 @@ Image * Mapping::getBrushfireMapInc()
 	return brushfireMapInc;
 }
 
+Image * Mapping::getVoronoiMap()
+{
+	return voronoiMap;
+}
+
 Mapping::~Mapping()
 {
 	delete map;
 	delete brushfireMap;
 	delete brushfireMapWObj;
 	delete brushfireMapInc;
+	delete voronoiMap;
 }
 
 vector<vector<int> > Mapping::brushfireExhaustive(int xPos, int yPos, int colour)
