@@ -37,15 +37,17 @@ int main(int argc, char** argv) {
 	fireObj.getBrushfireMapInc()->saveAsPGM("brushfireInc.pgm");
 	img->saveAsPGM("original.pgm");
 	
-
-
+	std::cout << "saving image dijkstra.." << std::endl;
+	Mapping routeplanning(img);
+	routeplanning.dijkstra();
+	routeplanning.getDijkstraMap()->saveAsPGM("dijkstraMap.pgm");
 	// printing image
 	//std::cout << "saving image..." << std::endl;
 	//img->saveAsPGM("testout.pgm");
 	
 	// cleanup
 	delete img;
-	system("pause");
+	//system("pause");
 	
 	return 0;
 }

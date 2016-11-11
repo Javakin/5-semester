@@ -4,11 +4,8 @@
 #include <vector>
 #include <string>
 #include <deque>
-
 using namespace std;
 using namespace rw::sensor;
-
-
 Mapping::Mapping()
 {
 	map = nullptr;
@@ -16,15 +13,14 @@ Mapping::Mapping()
 	brushfireMapWObj = nullptr;
 	brushfireMapInc = nullptr;
 }
-
 Mapping::Mapping(Image* amap)
 {
 	map = amap->copyFlip(0, 0);
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
 	brushfireMapInc = nullptr;
+	dijkstraMap = nullptr;
 }
-
 void Mapping::Brushfire()
 {
 	if (map == nullptr)
@@ -94,30 +90,148 @@ void Mapping::Brushfire()
 		}
 	}
 }
+void Mapping::dijkstra()
+{
+	if (map == nullptr)
+		return;
+	
+	//Initialize variables//
+	vector<pair<int, int>> voronoidNodes;
+	pair <int, int> _start,_goal;
+	_start.first = 10; _start.second = 10;
+	_goal.first = 190; _goal.second = 190;
+
+
+	voronoidNodes.emplace_back(11, 10);
+	voronoidNodes.emplace_back(12, 10);
+	voronoidNodes.emplace_back(12, 11);
+	voronoidNodes.emplace_back(12, 12);
+	voronoidNodes.emplace_back(13, 13);
+	voronoidNodes.emplace_back(50, 65);
+	voronoidNodes.emplace_back(50, 66);
+	voronoidNodes.emplace_back(50, 67);
+
+
+	dijkstra(voronoidNodes,_start,_goal);
+}
+vector<pair<int, int>> Mapping::dijkstra(vector<pair<int, int>> nodes, pair<int, int> start, pair<int, int> goal)
+{
+	dijkstraMap = map->copyFlip(0, 0);
+	typedef struct node {
+		inline node() {}
+		inline node(bool vis, pair<int, int> cord) : visited(vis), coords(cord) {}
+		bool visited;
+		pair<int, int> coords;
+	};
+
+	vector<node> unsorted_vector;
+	vector<pair<int, int>> vPair;
+	queue <pair<int, int>> circleQueue;
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		unsorted_vector.emplace_back(false, nodes[i]);
+	}
+	circleQueue.push(make_pair(10, 10));
+	vPair.emplace_back(make_pair(10, 10));
+	int relIderat[8][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1,0 },{ 1,1 },{ -1,-1 },{ -1,1 },{ 1,-1 } };
+
+	while (circleQueue.empty() == false)
+	{
+		for (int i = 0; i < unsorted_vector.size(); i++)
+		{
+			for (int j = 0; j < 8; j++)
+			{
+				if (unsorted_vector[i].coords.first == circleQueue.front().first + relIderat[j][0] && unsorted_vector[i].coords.second == circleQueue.front().second + relIderat[j][1] && unsorted_vector[i].visited == false)
+				{
+					circleQueue.push(unsorted_vector[i].coords);
+					vPair.emplace_back(unsorted_vector[i].coords);
+					unsorted_vector[i].visited = true;
+				}
+			}
+		}
+		cout << circleQueue.front().first << circleQueue.front().second << endl;
+		circleQueue.pop();
+	}
+
+
+//	//Initialize Map//
+//	dijkstraMap = map->copyFlip(0, 0);
+//
+//	vector <node>route;
+//
+//	route.emplace_back(0, false, make_pair(10, 10), nullptr);
+//	route.emplace_back(0, false, make_pair(10, 10), &route[0]);
+//	cout << route[1].parent->visited << endl;
+//	
+//	//Initialize variables//
+//	vector<pair<int, int>> vPairs;
+//
+//	//queue<pair<int, int>> circleQueue;
+//
+//	//int relIderat[8][2] = { { 0,1 },{ 0,-1 },{ 1,0 },{ -1,0 },{ 1,1 },{ -1,-1 },{ -1,1 },{ 1,-1 } };
+//
+//	//vector<int> crossroads;
+//
+//	//crossroads.resize(nodes.size());
+//
+//	////Init start point//
+//	//route.emplace_back(0,true,start,make_pair(0,0));
+//	//vPairs.emplace_back(start);
+//	//circleQueue.push(start);
+//	////Find the shortest route//
+//	//while (circleQueue.empty() == false)
+//	//{
+//	//	for (int i = 0; i < nodes.size() - 1; i++)
+//	//	{
+//	//		for (int j = 0; j < 8; j++)
+//	//		{
+//	//			if (nodes[i].first == circleQueue.front().first + relIderat[j][0] && nodes[i].second == circleQueue.front().second + relIderat[j][1])
+//	//			{
+//	//				//routes.emplace_back(nodes[i])
+//	//				crossroads[i]++;
+//	//				if (crossroads[i] > 1)
+//	//				{
+//
+//	//				}
+//	//				else
+//	//				{
+//	//					routes.push_back(nodes[i]);
+//	//					circleQueue.push(nodes[i]);
+//	//				}
+//	//			}
+//	//		}
+//	//	}
+//	//	circleQueue.pop;
+//	//}
+//
+//
+	return vPair;
+}
 
 Image* Mapping::getBrushfireMap()
 {
 	return brushfireMap;
 }
-
 Image * Mapping::getBrushfireMapWObj()
 {
 	return brushfireMapWObj;
 }
-
+Image * Mapping::getDijkstraMap()
+{
+	return dijkstraMap;
+}
 Image * Mapping::getBrushfireMapInc()
 {
 	return brushfireMapInc;
 }
-
 Mapping::~Mapping()
 {
 	delete map;
 	delete brushfireMap;
 	delete brushfireMapWObj;
 	delete brushfireMapInc;
+	delete dijkstraMap;
 }
-
 vector<vector<int> > Mapping::brushfireExhaustive(int xPos, int yPos, int colour)
 {
 	// setup
@@ -165,7 +279,6 @@ vector<vector<int> > Mapping::brushfireExhaustive(int xPos, int yPos, int colour
 
 	return borderLinePoints;
 }
-
 vector<vector<int>> Mapping::brushfireSingleStep(vector<vector<int>> anEdge)
 {
 	// precondition
@@ -208,7 +321,6 @@ vector<vector<int>> Mapping::brushfireSingleStep(vector<vector<int>> anEdge)
 
 	return borderLinePoints;
 }
-
 void Mapping::brushfireInc()
 {
 	brushfireMapInc = map->copyFlip(0, 0);
@@ -243,7 +355,6 @@ void Mapping::brushfireInc()
 		}
 	}
 }
-
 bool Mapping::validPoint(int xPos, int yPos)
 {
 	//out of bounce check xPos
