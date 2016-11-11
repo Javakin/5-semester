@@ -132,10 +132,6 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 	for (point p : temp2)
 		fullPointGraph.push_back(p);
 	
-	for (point p : fullPointGraph)
-	{
-		pathMap->setPixel8U(p.xVal, p.yVal, 60);
-	}
 
 	// remove starting point from list
 	if (!pointRemove(startPoint, fullPointGraph))
@@ -177,11 +173,31 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 		}		
 	}
 
+
 	// extract the shortest path
-	//while ()
-	//{
+	currentPoint = stopPoint;
+	vector<point> shortestPath = {stopPoint};
+
+	while ((currentPoint.xVal != startPoint.xVal) && (currentPoint.yVal != startPoint.yVal))
+	{
 		//dijkstraPath
-	//}
+		for (edge e : dijkstraPath)
+		{
+			//find the edge ending with the current point
+			if ((e.xVal2 == currentPoint.xVal) && (e.yVal2 == currentPoint.yVal))
+			{
+				//I found it append the point to path
+				currentPoint.xVal = e.xVal1;
+				currentPoint.yVal = e.yVal1;
+				shortestPath.push_back(currentPoint);
+			}
+		}
+	}
+
+	for (point p : shortestPath)
+	{
+		pathMap->setPixel8U(p.xVal, p.yVal, 60);
+	}
 
 	cout << "done and ready to paint\n";	
 }
@@ -429,16 +445,19 @@ vector<point> Mapping::brushfireSingleStep(vector<point> anEdge)
 
 bool Mapping::pointRemove(point aPoint, vector<point>& pointList)
 {
+	bool semRem = 0;
 	for (unsigned int i = 0; i < pointList.size(); i++)
 	{
 		if ((aPoint.xVal == pointList[i].xVal) && (aPoint.yVal == pointList[i].yVal))
 		{
 			pointList.erase(pointList.begin() + i);
-			return true;
+			semRem = 1;
 		}
 	}
+	if (semRem == 1)
+		pointRemove(aPoint, pointList);
 
-	return false;
+	return semRem;
 }
 
 void Mapping::brushfireInc()
