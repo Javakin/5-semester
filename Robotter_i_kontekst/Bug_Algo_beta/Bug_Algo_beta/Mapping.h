@@ -11,7 +11,7 @@ using namespace rw::sensor;
 struct point {
 	int xVal;
 	int yVal;
-	int weight;
+	//int weight;
 };
 
 
@@ -50,6 +50,7 @@ private:
 	vector<point> brushfireExhaustive(int xPos, int yPos, int colour);
 	vector<point> brushfireSingleStep(vector<point> anEdge);
 	vector<point> diagramPoints;
+	bool pointRemove(point aPoint, vector<point> & pointList);
 
 	void brushfireInc();
 	bool validPoint(int xPos, int yPos);

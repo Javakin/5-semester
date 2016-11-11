@@ -110,25 +110,42 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 		return;
 	}
 
+
 	// setup
 	pathMap = map->copyFlip(0, 0);
-	vector<point> fullPointGragh(diagramPoints);
+	vector<point> fullPointGraph(diagramPoints);
 	vector<edge> dijkstraPath;
-	vector<point> livingPoints = { startPoint };
-	point currentPoint;
-
+	point currentPoint = startPoint;
+	
+	deque<point> livingPoints = { currentPoint };
+	
 	vector<point> temp1(pointToParth(startPoint));
 	vector<point> temp2(pointToParth(stopPoint));
 	
 
 	// merge vectors
 	for (point p : temp1)
-		fullPointGragh.push_back(p);
+		fullPointGraph.push_back(p);
 	for (point p : temp2)
-		fullPointGragh.push_back(p);
+		fullPointGraph.push_back(p);
 	
-	// find the lowest value in the vector
-		
+	// 
+	if (!pointRemove(startPoint, fullPointGraph))
+	{
+		cout << "startpoint was not in list\n";
+		return;
+	}
+
+	// begin dijgstra algorithm
+	while(fullPointGraph.size() != 0)
+	{
+		// phase 1 finde and pop the smalest living point
+
+		// phase 2 search the fullPointGraph for points neightbours
+		// for every point found add edge to dijkstraPath and add newpoint to the land of the liiving
+		// if new point is the goal, add edge and break
+	}
+	
 }
 
 Image* Mapping::getBrushfireMap()
@@ -371,6 +388,20 @@ vector<point> Mapping::brushfireSingleStep(vector<point> anEdge)
 	}
 
 	return borderLinePoints;
+}
+
+bool Mapping::pointRemove(point aPoint, vector<point>& pointList)
+{
+	for (unsigned int i = 0; i < pointList.size(); i++)
+	{
+		if ((aPoint.xVal == pointList[i].xVal) && (aPoint.yVal == pointList[i].yVal))
+		{
+			pointList.erase(pointList.begin() + i);
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void Mapping::brushfireInc()
