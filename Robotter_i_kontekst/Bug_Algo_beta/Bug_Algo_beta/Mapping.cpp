@@ -116,7 +116,10 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 	vector<point> fullPointGraph(diagramPoints);
 	vector<edge> dijkstraPath;
 	point currentPoint = startPoint;
-	
+	point tempPoint;
+	edge currentEdge;
+
+	int relIderat[8][2] = { { 0, 1 },{ 0, -1 },{ 1, 0 },{ -1, 0 },{ 1, 1 },{ 1, -1 },{ -1,1 },{ -1,-1 } };
 	deque<point> livingPoints = { currentPoint };
 	
 	vector<point> temp1(pointToParth(startPoint));
@@ -129,7 +132,12 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 	for (point p : temp2)
 		fullPointGraph.push_back(p);
 	
-	// 
+	for (point p : fullPointGraph)
+	{
+		pathMap->setPixel8U(p.xVal, p.yVal, 60);
+	}
+
+	// remove starting point from list
 	if (!pointRemove(startPoint, fullPointGraph))
 	{
 		cout << "startpoint was not in list\n";
@@ -137,15 +145,45 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 	}
 
 	// begin dijgstra algorithm
-	while(fullPointGraph.size() != 0)
+	while(livingPoints.size() != 0)
 	{
 		// phase 1 finde and pop the smalest living point
+		currentPoint = livingPoints.front();
+		livingPoints.pop_front();
 
 		// phase 2 search the fullPointGraph for points neightbours
-		// for every point found add edge to dijkstraPath and add newpoint to the land of the liiving
-		// if new point is the goal, add edge and break
+		for (unsigned int i = 0; i < 8; i++)
+		{
+			tempPoint.xVal = currentPoint.xVal + relIderat[i][0];
+			tempPoint.yVal = currentPoint.yVal + relIderat[i][1];
+
+			if (pointRemove(tempPoint, fullPointGraph))
+			{
+				// for every point found add edge to dijkstraPath and add newpoint to the land of the living
+				currentEdge.xVal1 = currentPoint.xVal;
+				currentEdge.yVal1 = currentPoint.yVal;
+				currentEdge.xVal2 = tempPoint.xVal;
+				currentEdge.yVal2 = tempPoint.yVal;
+				dijkstraPath.push_back(currentEdge);
+				livingPoints.push_back(tempPoint);
+
+				// if new point is the goal, add edge and break
+				if ((tempPoint.xVal == stopPoint.xVal) && (tempPoint.yVal == stopPoint.yVal))
+				{
+					cout << "goal detected process terminates\n";
+					break;
+				}
+			}
+		}		
 	}
-	
+
+	// extract the shortest path
+	//while ()
+	//{
+		//dijkstraPath
+	//}
+
+	cout << "done and ready to paint\n";	
 }
 
 Image* Mapping::getBrushfireMap()
@@ -177,9 +215,8 @@ vector<point> Mapping::pointToParth(point aPoint)
 	// setup
 	int relIderat[8][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1,1}, {-1,-1}};
 	int semNewPoint = 1;
-	vector<point> pointPath;
+	vector<point> pointPath = { aPoint };
 	point currentPoint = aPoint;
-	
 	
 	
 	// find the next point
@@ -194,9 +231,9 @@ vector<point> Mapping::pointToParth(point aPoint)
 			if (newVal > currVal)
 			{
 				// add new point
-				pointPath.push_back(currentPoint);
 				currentPoint.xVal += relIderat[i][0];
 				currentPoint.yVal += relIderat[i][1];
+				pointPath.push_back(currentPoint);
 				semNewPoint++;
 				i = 10;		// break for loop
 			}
