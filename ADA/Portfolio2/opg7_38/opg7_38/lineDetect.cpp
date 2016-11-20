@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "lineDetect.h"
-#include "structs.cpp"
+#include "structs.h"
 #include <vector>
 #include <iostream>
 #include "AvlTree.h"

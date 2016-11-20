@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
-#include "structs.cpp"
+#include "structs.h"
 #include "lineDetect.h"
 
 

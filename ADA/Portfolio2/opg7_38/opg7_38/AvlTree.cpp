@@ -1,6 +1,8 @@
 #include "stdafx.h"
 
 #include "AvlTree.h"
+#include <vector>
+#include "structs.h"
 
 AvlTree::AvlTree() : root{ nullptr }
 { }
@@ -75,7 +77,7 @@ void AvlTree::insert(const int& x)
 	insert(x, root);
 }
 
-void AvlTree::insert(int&& x)
+void AvlTree::insert(edge&& x)
 {
 	insert(std::move(x), root);
 }
@@ -105,7 +107,7 @@ void AvlTree::printLevelOrder()
 	printLevelOrder(root, 0);
 }
 
-void AvlTree::insert(const int& x, AvlNode * & t)
+void AvlTree::insert(const edge& x, AvlNode * & t)
 {
 	if (t == nullptr)
 		t = new AvlNode{ x, nullptr, nullptr };
@@ -117,7 +119,7 @@ void AvlTree::insert(const int& x, AvlNode * & t)
 	balance(t);
 }
 
-void AvlTree::insert(int && x, AvlNode * & t)
+void AvlTree::insert(edge && x, AvlNode * & t)
 {
 	if (t == nullptr)
 		t = new AvlNode{ std::move(x), nullptr, nullptr };

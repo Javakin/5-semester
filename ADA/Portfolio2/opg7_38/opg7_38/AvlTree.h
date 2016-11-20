@@ -2,19 +2,23 @@
 #define AVL_TREE_H
 #include <algorithm>
 #include <iostream> 
+#include "structs.h"
+
 using namespace std;
 
 class AvlNode
 {
 public:
-	AvlNode(int ele, AvlNode *lt, AvlNode *rt, int h = 0)
-		: element{ ele }, left{ lt }, right{ rt }, height{ h } { }
+	AvlNode(double ele, AvlNode *lt, AvlNode *rt, AvlTree *avlTr, std::vector<edge> aVec, int h = 0)
+		: element{ ele }, left{ lt }, right{ rt }, height{ h }, debthTree{ avlTr }, points{ aVec } { }
 
 	~AvlNode() {}
 
-	int element;
+	double element;
 	AvlNode   *left;
 	AvlNode   *right;
+	AvlTree   *debthTree;
+	std::vector<edge> points;
 	int       height;
 };
 
@@ -30,8 +34,6 @@ public:
 	const int& findMin() const;
 	const int& findMax() const;
 
-	//int value(const int& x) const;
-
 	bool contains(const int& x) const;
 	bool isEmpty() const;
 
@@ -40,10 +42,8 @@ public:
 	void printTree() const;
 	void makeEmpty();
 	void insert(const int& x);
-	void insert(int&& x);
+	void insert(edge&& x);
 	void remove(const int& x);
-
-	//int height();
 
 	// solution for protfolio 1
 	void printPreOrder();
@@ -62,8 +62,8 @@ private:
 
 	AvlNode *root;
 
-	void insert(const int& x, AvlNode * & t);
-	void insert(int&& x, AvlNode * & t);
+	void insert(const edge& x, AvlNode * & t);
+	void insert(edge&& x, AvlNode * & t);
 	void remove(const int& x, AvlNode * & t);
 
 	static const int ALLOWED_IMBALANCE = 1;
