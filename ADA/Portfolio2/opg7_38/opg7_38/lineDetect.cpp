@@ -38,7 +38,12 @@ std::vector<edge> lineDetect::getLines(std::vector<point> aPointList)
 	}
 
 	// sort the list of lines via a-value and b-value	O(N^2*log(N))
-	// todo add avl tree class
+	AvlTree edgeTree;
+	for (edge anEdge : pLines)
+	{
+		edgeTree.insert(anEdge);
+	}
+
 	std::cout << std::endl;
 
 
