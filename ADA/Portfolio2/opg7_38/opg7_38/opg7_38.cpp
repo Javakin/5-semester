@@ -12,6 +12,9 @@
 
 int main()
 {
+	// for detection of memory leaks 
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	// make a list of randum points
 	std::vector<point> points;
 	std::random_device rd;							// obtain a random number from hardware

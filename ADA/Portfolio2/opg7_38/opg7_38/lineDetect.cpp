@@ -3,6 +3,7 @@
 #include "structs.cpp"
 #include <vector>
 #include <iostream>
+#include "AvlTree.h"
 
 
 lineDetect::lineDetect()
@@ -38,10 +39,13 @@ std::vector<edge> lineDetect::getLines(std::vector<point> aPointList)
 
 	// sort the list of lines via a-value and b-value	O(N^2*log(N))
 	// todo add avl tree class
+	std::cout << std::endl;
+
+
 
 	// iterate through the entire tree of trees to 
 	// finde lines containing 4 or more points			O(N^2)
-	std::cout << std::endl;
+	
 
 	// function done return resoult
 	return std::vector<edge>();
