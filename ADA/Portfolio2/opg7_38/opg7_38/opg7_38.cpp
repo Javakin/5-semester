@@ -8,7 +8,6 @@
 #include "structs.h"
 #include "lineDetect.h"
 
-#include "Sort.h"
 
 using namespace std;
 
@@ -26,29 +25,12 @@ int main()
 	for (int i = 0; i < 10; ++i)
 		points.push_back(point{ distr(eng), distr(eng) });
 
-
-	// testing the sort class
-	vector<int> test;
-	for (int i = 0; i < 8; ++i)
-		test.push_back(distr(eng));
-
-	cout << "Original:\n";
-	for (int i : test)
-		cout << i << endl;
-
-	Sort aSort;
-	aSort.vMergSort(test);
-
-	cout << "Sorted:\n";
-	for (int i : test)
-		cout << i << endl;
-
-	/*// finde all lines with more then 4 points
+	// finde all lines with more then 4 points
 	
 	vector<edge> solution;
 	lineDetect opg7_38;
 
-	solution = opg7_38.getLines(points);*/
+	solution = opg7_38.getLines(points);
 
 	// program terminates
 	system("pause");

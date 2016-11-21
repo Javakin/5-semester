@@ -14,6 +14,8 @@
 using namespace std;
 
 // application specific code
+#include "structs.h"
+
 
 
 class Sort
@@ -27,6 +29,7 @@ public:
 	
 
 	// application specific code
+	void vMergSort(std::vector<edge> & vUnsortedList);
 
 private: 
 	// general code 
@@ -34,6 +37,8 @@ private:
 	void vMerg(std::vector<int> & vUnsortedList, std::vector<int> & vWorkList, unsigned int uiBegin, unsigned int uiMiddle, unsigned int uiEnd);
 
 	// application specific code
+	void vSplitMergSort(std::vector<edge> & vUnsortedList, std::vector<edge> & vWorkList, unsigned int uiBegin, unsigned int uiEnd);
+	void vMerg(std::vector<edge> & vUnsortedList, std::vector<edge> & vWorkList, unsigned int uiBegin, unsigned int uiMiddle, unsigned int uiEnd);
 
 };
 
