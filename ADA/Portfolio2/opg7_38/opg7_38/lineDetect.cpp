@@ -40,8 +40,6 @@ std::vector<edge> lineDetect::getLines(std::vector<point> aPointList)
 		// sort the list relative to the value of the angle						O(Nlog(N))
 		anObj.vMergSort(linePoints);
 
-		
-
 		// iterate through the list, and find points with the same angle		O(N)
 		edge oldEdge;
 		for (edge e : linePoints)
@@ -50,13 +48,7 @@ std::vector<edge> lineDetect::getLines(std::vector<point> aPointList)
 		}
 			
 
-		
-		
-		/*for (unsigned int j = 0; j < i; j++)
-		{
-			
-			
-		}*/
+	
 	}
 
 	// remove any doblicates in the list
