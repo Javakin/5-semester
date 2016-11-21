@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "structs.cpp"
+#include "structs.h"
 
 class lineDetect
 {

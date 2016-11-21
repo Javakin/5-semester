@@ -27,10 +27,10 @@
     <ClInclude Include="lineDetect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AvlTree.h">
+    <ClInclude Include="structs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="structs.h">
+    <ClInclude Include="Sort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,7 +44,7 @@
     <ClCompile Include="lineDetect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AvlTree.cpp">
+    <ClCompile Include="Sort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

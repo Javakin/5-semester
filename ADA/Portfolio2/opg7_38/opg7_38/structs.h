@@ -11,6 +11,5 @@ struct point
 struct edge
 {
 	std::vector<point> Lpoints;
-	double aVal;
-	double bVal;
+	double angle;
 };
