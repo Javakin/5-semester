@@ -29,12 +29,17 @@ int main()
 
 	// testing the sort class
 	vector<int> test;
-	for (int i = 0; i < 11; ++i)
+	for (int i = 0; i < 8; ++i)
 		test.push_back(distr(eng));
 
-	Sort aSort;
-	aSort.mergSort(test);
+	cout << "Original:\n";
+	for (int i : test)
+		cout << i << endl;
 
+	Sort aSort;
+	aSort.vMergSort(test);
+
+	cout << "Sorted:\n";
 	for (int i : test)
 		cout << i << endl;
 
