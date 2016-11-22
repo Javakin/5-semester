@@ -37,37 +37,44 @@ std::vector<edge> lineDetect::getLines(std::vector<point> aPointList)
 			// check if new edge is part of a line
 			if (linePoints[j - 1].angle == linePoints[j].angle)
 				eLineCandidate.Lpoints.push_back(linePoints[j].Lpoints[1]);
-			
-
-			// check for full line 
-			if (((linePoints[j - 1].angle != linePoints[j].angle) || (j == linePoints.size() - 1)) && (eLineCandidate.Lpoints.size() > 3))
+			else
 			{
-				vDetectedLines.push_back(eLineCandidate);
+				if (eLineCandidate.Lpoints.size() > 3)
+				{
+					vDetectedLines.push_back(eLineCandidate);
+				}
 				eLineCandidate = linePoints[j];
 			}
 		}	
+		if (eLineCandidate.Lpoints.size() > 3)
+			vDetectedLines.push_back(eLineCandidate);
 	}
 
-	// remove doubles			
+	// remove doublicets														O(N^2)		
 	std::vector<edge> temp = { vDetectedLines };
 	vDetectedLines.clear();
 
 	for (edge current : temp)
 	{
+		// setup
 		point p0 = current.Lpoints[0];
 		point p1 = current.Lpoints[1];
 		int semP0 = 0;
-		int semP1 = 1;
+		int semP1 = 0;
 		
+		// is the edge alredy in the list?
 		for (edge existing : vDetectedLines)
 		{
-			for (point p : existing.Lpoints)
+			if (existing.angle == current.angle)
 			{
-				if ((p.xVal == p0.xVal) && (p.yVal == p0.yVal))
-					semP0 = 1;
-				
-				if ((p.xVal == p1.xVal) && (p.yVal == p1.yVal))
-					semP1 = 1;
+				for (point p : existing.Lpoints)
+				{
+					if ((p.xVal == p0.xVal) && (p.yVal == p0.yVal))
+						semP0 = 1;
+
+					if ((p.xVal == p1.xVal) && (p.yVal == p1.yVal))
+						semP1 = 1;
+				}
 			}
 		}
 		if (!semP0 && !semP1)
