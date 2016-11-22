@@ -22,22 +22,23 @@ using namespace rw::sensor;
 
 int main()
 {
+	// for detection of memory leaks 
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+
 	// loading image to debug
 	cout << "Loading image \n";
 	string filename = "PointMap.pgm";
 	Image* img = PPMLoader::load(filename);
-
-
-	// for detection of memory leaks 
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	
 
 	// make a list of randum points
-	vector<point> points = { point{1,1}, point{ 2,2 },point{ 3,3 },point{ 4,4 },point{ 0,17 } };
+	vector<point> points = { };
 	random_device rd;							// obtain a random number from hardware
 	mt19937 eng(rd());							// seed the generator
-	uniform_int_distribution<> distr(0, 18);	// define the range
+	uniform_int_distribution<> distr(0, 180);	// define the range
 
-	for (int i = 0; i < 0; ++i)
+	for (int i = 0; i < 200; ++i)
 		points.push_back(point{ distr(eng), distr(eng) });
 
 	// finde all lines with more then 4 points
@@ -46,19 +47,24 @@ int main()
 
 	solution = opg7_38.getLines(points);
 
-	// plor solution
+	// plot solution
 	for (edge anEdge : solution)
 	{
+		double a = ((double)anEdge.Lpoints[0].yVal - (double)anEdge.Lpoints[1].yVal) / ((double)anEdge.Lpoints[0].xVal - (double)anEdge.Lpoints[1].xVal);
+		double b = (double)anEdge.Lpoints[0].yVal - a*(double)anEdge.Lpoints[0].xVal;
+
 		// print the edge
 		for (unsigned int x = 0; x < img->getWidth(); x++)
 		{
-
+			int y = a*x + b;
+			if( y < 200 && 0 <= y)
+				img->setPixel8U(x, y, 0);
 		}
 
 		// print all the points 
 		for (point aPoint : anEdge.Lpoints)
 		{
-			img->setPixel8U(aPoint.xVal,     aPoint.yVal, 0    );
+			//img->setPixel8U(aPoint.xVal,     aPoint.yVal, 125    );
 			//img->setPixel8U(aPoint.xVal + 1, aPoint.yVal + 1, 0);
 			//img->setPixel8U(aPoint.xVal + 1, aPoint.yVal - 1, 0);
 			//img->setPixel8U(aPoint.xVal - 1, aPoint.yVal + 1, 0);
@@ -68,6 +74,7 @@ int main()
 
 	// program terminates
 	img->saveAsPGM("outPut.pgm");
+	delete img;
 	//system("pause");
     return 0;
 }
