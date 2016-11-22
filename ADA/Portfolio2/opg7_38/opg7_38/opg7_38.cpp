@@ -50,25 +50,39 @@ int main()
 	// plot solution
 	for (edge anEdge : solution)
 	{
-		double a = ((double)anEdge.Lpoints[0].yVal - (double)anEdge.Lpoints[1].yVal) / ((double)anEdge.Lpoints[0].xVal - (double)anEdge.Lpoints[1].xVal);
-		double b = (double)anEdge.Lpoints[0].yVal - a*(double)anEdge.Lpoints[0].xVal;
-
 		// print the edge
-		for (unsigned int x = 0; x < img->getWidth(); x++)
+		double x = anEdge.Lpoints[0].xVal;
+		double y = anEdge.Lpoints[0].yVal;
+
+		while (y < 200 && 0 <= y && x < 200 && x >= 0)
 		{
-			int y = a*x + b;
-			if( y < 200 && 0 <= y)
-				img->setPixel8U(x, y, 0);
+			// inc part
+			x += cos(anEdge.angle);
+			y += sin(anEdge.angle);
+
+			img->setPixel8U(x, y, 0);
+		}
+		// print the edge
+		x = anEdge.Lpoints[0].xVal;
+		y = anEdge.Lpoints[0].yVal;
+
+		while (y < 200 && 0 <= y && x < 200 && x >= 0)
+		{
+			// inc part
+			x -= cos(anEdge.angle);
+			y -= sin(anEdge.angle);
+
+			img->setPixel8U(x, y, 0);
 		}
 
 		// print all the points 
 		for (point aPoint : anEdge.Lpoints)
 		{
-			//img->setPixel8U(aPoint.xVal,     aPoint.yVal, 125    );
-			//img->setPixel8U(aPoint.xVal + 1, aPoint.yVal + 1, 0);
-			//img->setPixel8U(aPoint.xVal + 1, aPoint.yVal - 1, 0);
-			//img->setPixel8U(aPoint.xVal - 1, aPoint.yVal + 1, 0);
-			//img->setPixel8U(aPoint.xVal - 1, aPoint.yVal - 1, 0);
+			img->setPixel8U(aPoint.xVal,     aPoint.yVal, 125    );
+			img->setPixel8U(aPoint.xVal + 1, aPoint.yVal + 1, 0);
+			img->setPixel8U(aPoint.xVal + 1, aPoint.yVal - 1, 0);
+			img->setPixel8U(aPoint.xVal - 1, aPoint.yVal + 1, 0);
+			img->setPixel8U(aPoint.xVal - 1, aPoint.yVal - 1, 0);
 		}
 	}
 
