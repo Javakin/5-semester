@@ -4,8 +4,13 @@
 #include <vector>
 #include <iostream>
 #include "Sort.h"
+#include "Image.h"
+#include "PPMLoader.h"
+#include <string>
 
 using namespace std;
+using namespace rw::loaders;
+using namespace rw::sensor;
 
 lineDetect::lineDetect()
 {
@@ -104,6 +109,56 @@ void lineDetect::findAngles(unsigned int i, point targetPoint, std::vector<edge>
 			aVect.push_back(edge{ std::vector<point>{aPointList[i], aPointList[j]}, theta });
 		}
 	}
+}
+
+void lineDetect::printLines(std::vector<edge>& aVect)
+{
+	// loading image to debug
+	cout << "Loading image \n";
+	string filename = "PointMap.pgm";
+	Image* img = PPMLoader::load(filename);
+
+	// plot solution
+	for (edge anEdge : aVect)
+	{
+		// print the edge
+		double x = anEdge.Lpoints[0].xVal;
+		double y = anEdge.Lpoints[0].yVal;
+
+		while (y < 200 && 0 <= y && x < 200 && x >= 0)
+		{
+			// inc part
+			x += cos(anEdge.angle);
+			y += sin(anEdge.angle);
+			if (y < 200 && 0 <= y && x < 200 && x >= 0)
+				img->setPixel8U((int)x, (int)y, 0);
+		}
+		// print the edge
+		x = anEdge.Lpoints[0].xVal;
+		y = anEdge.Lpoints[0].yVal;
+
+		while (y < 200 && 0 <= y && x < 200 && x >= 0)
+		{
+			// inc part
+			x -= cos(anEdge.angle);
+			y -= sin(anEdge.angle);
+			if (y < 200 && 0 <= y && x < 200 && x >= 0)
+				img->setPixel8U((int)x, (int)y, 0);
+		}
+
+		// print all the points 
+		for (point aPoint : anEdge.Lpoints)
+		{
+			img->setPixel8U(aPoint.xVal, aPoint.yVal, 125);
+			img->setPixel8U(aPoint.xVal + 1, aPoint.yVal + 1, 0);
+			img->setPixel8U(aPoint.xVal + 1, aPoint.yVal - 1, 0);
+			img->setPixel8U(aPoint.xVal - 1, aPoint.yVal + 1, 0);
+			img->setPixel8U(aPoint.xVal - 1, aPoint.yVal - 1, 0);
+		}
+	}
+
+	img->saveAsPGM("outPut.pgm");
+	delete img;
 }
 
 

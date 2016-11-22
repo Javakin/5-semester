@@ -9,7 +9,7 @@ public:
 	
 	std::vector<edge> getLines(std::vector<point> aPointList);
 	void findAngles(unsigned int i, point targetPoint, std::vector<edge> & aVect, std::vector<point> & aPointList);
-
+	void printLines(std::vector<edge> & aVect);
 	~lineDetect();
 
 private:
