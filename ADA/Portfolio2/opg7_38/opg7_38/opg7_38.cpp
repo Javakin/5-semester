@@ -32,12 +32,13 @@ int main()
 	Image* img = PPMLoader::load(filename);
 	
 
-	// make a list of randum points
-	vector<point> points = { };
+	// make a list of randum 
+	vector<point> points;
 	random_device rd;							// obtain a random number from hardware
 	mt19937 eng(rd());							// seed the generator
 	uniform_int_distribution<> distr(0, 180);	// define the range
 
+	
 	for (int i = 0; i < 200; ++i)
 		points.push_back(point{ distr(eng), distr(eng) });
 
@@ -46,7 +47,7 @@ int main()
 	lineDetect opg7_38;
 
 	solution = opg7_38.getLines(points);
-
+	
 	// plot solution
 	for (edge anEdge : solution)
 	{
@@ -59,8 +60,8 @@ int main()
 			// inc part
 			x += cos(anEdge.angle);
 			y += sin(anEdge.angle);
-
-			img->setPixel8U(x, y, 0);
+			if (y < 200 && 0 <= y && x < 200 && x >= 0)
+				img->setPixel8U((int)x, (int)y, 0);
 		}
 		// print the edge
 		x = anEdge.Lpoints[0].xVal;
@@ -71,8 +72,8 @@ int main()
 			// inc part
 			x -= cos(anEdge.angle);
 			y -= sin(anEdge.angle);
-
-			img->setPixel8U(x, y, 0);
+			if (y < 200 && 0 <= y && x < 200 && x >= 0)
+				img->setPixel8U((int)x, (int)y, 0);
 		}
 
 		// print all the points 
@@ -85,11 +86,12 @@ int main()
 			img->setPixel8U(aPoint.xVal - 1, aPoint.yVal - 1, 0);
 		}
 	}
-
+	
 	// program terminates
 	img->saveAsPGM("outPut.pgm");
 	delete img;
 	//system("pause");
+
     return 0;
 }
 
