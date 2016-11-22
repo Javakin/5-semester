@@ -7,6 +7,7 @@
 #include <random>
 #include "structs.h"
 #include "lineDetect.h"
+#include "Sort.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -38,8 +39,25 @@ int main()
 	solution = opg7_38.getLines(points);
 	
 	opg7_38.printLines(solution);
+	/*vector<int> test;
+	uniform_int_distribution<> testrange(0, 10);
 	
 	
+	for (int i = 0; i < 100; i++)
+	{
+		test.push_back(testrange);
+	}*/
+
+	Sort nSquardobj;
+	nSquardobj.nSquared();
+
+	Sort truefalseobj;
+	truefalseobj.truefalse();
+
+	Sort meagesortobj;
+	meagesortobj.Mergesort();
+
+
 	// program terminates
 	
 	//system("pause");
