@@ -20,87 +20,68 @@ void Sort::vMergSort(std::vector<int>& vUnsortedList)
 	vSplitMergSort(vWorkList, vUnsortedList, 0, vUnsortedList.size());
 }
 
-void Sort::nSquared()
+bool Sort::findInt(std::vector<int> vSortedList, int aVal)
+{
+	unsigned int a = 0;							// a is inclusive
+	unsigned int b = vSortedList.size();		// b is exclusive
+	unsigned int mid = 0;							// mid is exclusive 
+
+	while (b - a > 1)
+	{
+		// calculate midpoint
+		mid = (a + b) / 2;
+
+		// is the goal reached?
+		if (vSortedList[mid] == aVal)
+			return 1;
+
+		// if no now what?
+		(vSortedList[mid] > aVal) ? b = mid : a = mid;
+	}
+
+	return 0;
+}
+
+bool Sort::nSquared(std::vector<int> vUnsortedList, int k)
 {
 	int q = 0;
-	int k = 10;
-	for (int i = 0; i < test.size(); i++)
+	for (int i = 0; i < vUnsortedList.size(); i++)			// O(N)
 	{
-		for (int b = 0; b < test.size(); b++)
+		for (int b = 0; b < vUnsortedList.size(); b++)		// O(N)
 		{
-			if (i == b) continue;
-
-			if (test.at(i) + test.at(b) == k)
+			if (vUnsortedList.at(i) + vUnsortedList.at(b) == k)
 			{	
 				q = 1;
 				// For debugging
 				//std::cout << "Element " << i + 1 << " is: " << test.at(i) << " and element " << b + 1 << " is: " << test.at(b) << ". Together they give: " << test.at(i) + test.at(b) << std::endl;
 			}
-
 		}
 	}
-	if (q == 1)
-	{
-		std::cout << "There are two or more elements that when summed gives " << k << std::endl;
-	}
+	
+	(q) ? 
+		std::cout << "There are two or more elements that when summed gives " << k << std::endl :
+		std::cout << "There are no elements that when summed gives " << k << std::endl;
+	
+	return (bool)q;
 }
 
-void Sort::Mergesort()
+bool Sort::nLogN(std::vector<int> vUnsortedList, int k)
 {
-	/*std::vector<int> b;
-	vMergSort(test);*/
+	// sort list											// O(Nlog(N))
+	vMergSort(vUnsortedList);		
 
-	//std::cout << vMergSort(test).at(1)
-
-	int target = 10;
-	int startint = 2;
-	int targetint = target - startint;
-	int h = 1;
-
-	if (test.at(h) != targetint && h < test.size())
+	for (int i = 0; i < vUnsortedList.size(); i++)			// O(N)
 	{
-		h++;
-	}
-	if (test.at(h) == targetint)
-	{
-		std::cout << "There are a combination of tow numbers that gives" << target;
+		// calculate value to find
+		int targetint = k - vUnsortedList[i];
+
+		// search for the value
+		if (findInt(vUnsortedList, targetint))
+			return 1;
 	}
 
-	std::cout << "debrug";
-	/*while (test.at(h) != targetint && h < test.size())
-	{
-		h++;
-	}*/
-
-
+	return 0;
 }
-
-//void Sort::Mergesort()
-//{
-//
-//}
-//
-//void Sort::truefalse()
-//{
-//	//std::string a = "false";
-//	//int spot = 0;
-//	//std::string tempstring;
-//
-//	//for (int i = 0; i < stringvector.size(); i++)
-//	//{
-//	//	if (stringvector.at(i).compare(a) == 0)
-//	//	{
-//	//		tempstring = stringvector.at(spot);
-//	//		stringvector.at(spot) = "false";
-//	//		stringvector.at(i) = tempstring;
-//	//		spot++;
-//	//	}
-//	//}
-//	//for (int i = 0; i < stringvector.size(); i++)
-//	//{
-//	//	std::cout << stringvector.at(i);
-//	//}
-//}
 
 void Sort::vSplitMergSort(std::vector<int>& vSource, std::vector<int>& vResoult, unsigned int uiBegin, unsigned int uiEnd)
 {
@@ -157,6 +138,7 @@ void Sort::vMerg(std::vector<int>& vSource, std::vector<int>& vResoult, unsigned
 
 void Sort::truefalse()
 {
+	/*
 	std::string a = "false";
 	int spot = 0;
 	std::string tempstring;
@@ -174,7 +156,7 @@ void Sort::truefalse()
 	for (int i = 0; i < stringvector.size(); i++)
 	{
 		std::cout << stringvector.at(i) << " ";
-	}
+	}*/
 }
 
 // application specific code

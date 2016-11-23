@@ -8,6 +8,7 @@
 #include "structs.h"
 #include "lineDetect.h"
 #include "Sort.h"
+#include <string>
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -23,44 +24,57 @@ int main()
 	
 
 	// make a list of randum 
-	vector<point> points;
+	
 	random_device rd;							// obtain a random number from hardware
 	mt19937 eng(rd());							// seed the generator
-	uniform_int_distribution<> distr(0, 180);	// define the range
 
-	
+	uniform_int_distribution<> distr7_44(0, 1);	// define the range
+	uniform_int_distribution<> distr7_53(0, 100);	// define the range
+	uniform_int_distribution<> distr7_38(0, 180);	// define the range
+
+	std::vector<std::string> stringvector;
+	std::vector<int> iAList;
+	vector<point> points;
+
+
 	for (int i = 0; i < 200; ++i)
-		points.push_back(point{ distr(eng), distr(eng) });
+		(distr7_44(eng)) ? stringvector.push_back("true"): stringvector.push_back("false");
 
-	// finde all lines with more then 4 points
+	for (int i = 0; i < 20; ++i)
+		iAList.push_back(distr7_53(eng));
+
+	for (int i = 0; i < 200; ++i)
+		points.push_back(point{ distr7_38(eng), distr7_38(eng) });
+	
+
+	//////////////////////////////////////////////////////////////////////////////
+	// exercise 7_53
+	//////////////////////////////////////////////////////////////////////////////
+	Sort sorter;
+	sorter.nSquared(iAList, 10);
+
+	sorter.nLogN(iAList, 50);
+
+	//////////////////////////////////////////////////////////////////////////////
+	// exercise 7_44
+	//////////////////////////////////////////////////////////////////////////////
+	//Sort truefalseobj;
+	//truefalseobj.truefalse();
+
+	//////////////////////////////////////////////////////////////////////////////
+	// exercise 7_38
+	//////////////////////////////////////////////////////////////////////////////
 	vector<edge> solution;
 	lineDetect opg7_38;
 
 	solution = opg7_38.getLines(points);
 	
 	opg7_38.printLines(solution);
-	/*vector<int> test;
-	uniform_int_distribution<> testrange(0, 10);
-	
-	
-	for (int i = 0; i < 100; i++)
-	{
-		test.push_back(testrange);
-	}*/
-
-	Sort nSquardobj;
-	nSquardobj.nSquared();
-
-	Sort truefalseobj;
-	truefalseobj.truefalse();
-
-	Sort meagesortobj;
-	meagesortobj.Mergesort();
 
 
 	// program terminates
 	
-	//system("pause");
+	system("pause");
 
     return 0;
 }

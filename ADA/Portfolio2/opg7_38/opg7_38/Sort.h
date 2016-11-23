@@ -28,18 +28,19 @@ public:
 
 	void vMergSort(std::vector<int> & vUnsortedList);
 	
-	void nSquared();
-
-	void Mergesort();
-
-	void truefalse();
+	bool findInt(std::vector<int> vSortedList, int aVal);
 
 	// application specific code
 	void vMergSort(std::vector<edge> & vUnsortedList);
+	
+	bool nSquared(std::vector<int> vUnsortedList, int k);
+
+	bool nLogN(std::vector<int> vUnsortedList, int k);
+
+	void truefalse();
 
 private: 
-	std::vector<int> test = { 4, 4, 5, 8, 2, 7, 3, 6 };
-	std::vector<std::string> stringvector = { "true", "false", "false", "true", "true", "false", "false", "true", "true", "false", "false", "true" };
+	
 	// general code 
 	void vSplitMergSort(std::vector<int> & vUnsortedList, std::vector<int> & vWorkList, unsigned int uiBegin, unsigned int uiEnd);
 	void vMerg(std::vector<int> & vUnsortedList, std::vector<int> & vWorkList, unsigned int uiBegin, unsigned int uiMiddle, unsigned int uiEnd);
