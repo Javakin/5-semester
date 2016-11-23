@@ -37,7 +37,7 @@ public:
 
 	bool nLogN(std::vector<int> vUnsortedList, int k);
 
-	void truefalse();
+	void truefalse(std::vector<std::string> & vUnsortedList);
 
 private: 
 	

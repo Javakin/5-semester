@@ -136,29 +136,6 @@ void Sort::vMerg(std::vector<int>& vSource, std::vector<int>& vResoult, unsigned
 }
 
 
-void Sort::truefalse()
-{
-	/*
-	std::string a = "false";
-	int spot = 0;
-	std::string tempstring;
-
-	for (int i = 0; i < stringvector.size(); i++)
-	{
-		if (stringvector.at(i).compare(a) == 0)
-		{
-			tempstring = stringvector.at(spot);
-			stringvector.at(spot) = "false";
-			stringvector.at(i) = tempstring;
-			spot++;
-		}
-	}
-	for (int i = 0; i < stringvector.size(); i++)
-	{
-		std::cout << stringvector.at(i) << " ";
-	}*/
-}
-
 // application specific code
 void Sort::vMergSort(std::vector<edge>& vUnsortedList)
 {
@@ -218,4 +195,28 @@ void Sort::vMerg(std::vector<edge>& vSource, std::vector<edge>& vResoult, unsign
 		}
 
 	}
+}
+
+void Sort::truefalse(std::vector<std::string>  & vUnsortedList)
+{
+
+	std::string a = "false";
+	int spot = 0;
+	std::string tempstring;
+
+	for (int i = 0; i < vUnsortedList.size(); i++)
+	{
+		if (vUnsortedList.at(i).compare(a) == 0)
+		{
+			tempstring = vUnsortedList.at(spot);
+			vUnsortedList.at(spot) = "false";
+			vUnsortedList.at(i) = tempstring;
+			spot++;
+		}
+	}
+	for (int i = 0; i < vUnsortedList.size(); i++)
+	{
+		std::cout << vUnsortedList.at(i) << " ";
+	}
+	std::cout << std::endl;
 }

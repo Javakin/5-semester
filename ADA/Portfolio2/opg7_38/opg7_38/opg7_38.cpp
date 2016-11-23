@@ -9,6 +9,7 @@
 #include "lineDetect.h"
 #include "Sort.h"
 #include <string>
+#include <chrono>
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -24,7 +25,6 @@ int main()
 	
 
 	// make a list of randum 
-	
 	random_device rd;							// obtain a random number from hardware
 	mt19937 eng(rd());							// seed the generator
 
@@ -37,10 +37,10 @@ int main()
 	vector<point> points;
 
 
-	for (int i = 0; i < 200; ++i)
+	for (int i = 0; i < 50; ++i)
 		(distr7_44(eng)) ? stringvector.push_back("true"): stringvector.push_back("false");
 
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < 5000; ++i)
 		iAList.push_back(distr7_53(eng));
 
 	for (int i = 0; i < 200; ++i)
@@ -51,15 +51,24 @@ int main()
 	// exercise 7_53
 	//////////////////////////////////////////////////////////////////////////////
 	Sort sorter;
-	sorter.nSquared(iAList, 10);
+	time_t timev;
+	int oldTime = time(&timev);
 
-	sorter.nLogN(iAList, 50);
+	sorter.nSquared(iAList, 300);
+	int newTime = time(&timev);
+	cout << "n^2   runtime: " << newTime - oldTime << " s" << endl;
+	oldTime = newTime;
+
+	sorter.nLogN(iAList, 300);
+	newTime = time(&timev);
+	cout << "nLogn runtime: " << newTime - oldTime << " s"<< endl;
+
 
 	//////////////////////////////////////////////////////////////////////////////
 	// exercise 7_44
 	//////////////////////////////////////////////////////////////////////////////
-	//Sort truefalseobj;
-	//truefalseobj.truefalse();
+	Sort truefalseobj;
+	truefalseobj.truefalse(stringvector);
 
 	//////////////////////////////////////////////////////////////////////////////
 	// exercise 7_38
