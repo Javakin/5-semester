@@ -28,6 +28,7 @@ public:
 
 
 private:
-	double** _mat;
+	double _mat[3][3];
+	//double** _mat;
 
 };

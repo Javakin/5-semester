@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
 
 	// initiate
 	Robot wall_e(img);
-	Transform H4(100, 150, 3);
+	Transform H4(100, 10, 3);
 
 	wall_e.goTo(H4);
 	wall_e.getRobotPath();

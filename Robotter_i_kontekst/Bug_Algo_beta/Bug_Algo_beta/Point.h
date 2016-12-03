@@ -18,7 +18,6 @@ public:
 	~Point();
 	
 
-
 	double& operator()(size_t i);
 
 	const double& operator()(size_t i) const;
@@ -27,6 +26,6 @@ public:
 
 
 private:
-	double* _p;
+	double _p[3];
 
 };

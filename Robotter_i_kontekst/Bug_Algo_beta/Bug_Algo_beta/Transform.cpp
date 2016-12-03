@@ -3,12 +3,6 @@
 
 Transform::Transform()
 {
-	// define an empty transformation matrix
-	_mat = new double*[3];
-	_mat[0] = new double[3];
-	_mat[1] = new double[3];
-	_mat[2] = new double[3];
-
 	// fill it with zeros
 	for (size_t i = 0; i < 3; i++) {
 		for (size_t j = 0; j < 3; j++) {
@@ -19,11 +13,6 @@ Transform::Transform()
 
 Transform::Transform(double x, double y, double theta)
 {
-	_mat = new double*[3];
-	_mat[0] = new double[3];
-	_mat[1] = new double[3];
-	_mat[2] = new double[3];
-
 	_mat[0][0] = cos(theta);
 	_mat[0][1] = -sin(theta);
 	_mat[1][0] = sin(theta);
@@ -35,13 +24,8 @@ Transform::Transform(double x, double y, double theta)
 	_mat[2][2] = 1;
 }
 Transform::~Transform()
-
-	{
-		/*for (size_t i = 0; i < 3; i++) {
-			delete[] _mat[i];
-		}
-		delete[] _mat;*/
-	}
+{
+}
 
 Point Transform::mult(const Point & p)
 {
@@ -91,12 +75,6 @@ void Transform::printTransform(std::string aName)
 	std::cout << std::endl;
 }
 
-void Transform::remove()
-{
-	for (size_t i = 0; i < 3; i++) {
-	delete[] _mat[i];
-	}
-	delete[] _mat;
-}
+
 
 
