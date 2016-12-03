@@ -15,7 +15,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	// for detection of memory leaks 
-	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	std::string filename("Bane2.pgm");
 	std::cout << filename << std::endl;
