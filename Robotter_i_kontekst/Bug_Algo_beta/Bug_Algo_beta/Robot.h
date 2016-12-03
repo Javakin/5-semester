@@ -41,7 +41,8 @@ public:
 	// Calculate the required workspace
 	void calcualteWorkSpace(double enx, double eny);
 
-
+	// return the image
+	void getRobotPath();
 
 	~Robot();
 

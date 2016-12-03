@@ -15,18 +15,24 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	// for detection of memory leaks 
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	std::string filename(argv[1]);
+	std::string filename("Bane2.pgm");
 	std::cout << filename << std::endl;
 
 
 	std::cout << "loading image..." << std::endl;
 	Image* img = PPMLoader::load(filename);
+	
 
 	// initiate
-	//Robot wall_e(img);
-	//Transform H4(200, 500, 3);
+	Robot wall_e(img);
+	Transform H4(100, 150, 3);
+
+	wall_e.goTo(H4);
+	wall_e.getRobotPath();
+
+	/*
 	point p1 = { 10,10 };
 	point p2 = { 190,190 };
 
@@ -41,9 +47,10 @@ int main(int argc, char** argv) {
 	fireObj.getBrushfireMapInc()->saveAsPGM("brushfireInc.pgm");
 	fireObj.getPathMap()->saveAsPGM("pathMap.pgm");
 	fireObj.getVoronoiMap()->saveAsPGM("voronoidPoints.pgm");
+	
 
 	img->saveAsPGM("original.pgm");	
-
+	*/
 
 	
 	// cleanup

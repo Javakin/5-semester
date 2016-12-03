@@ -10,7 +10,7 @@
 #define PI				3.14159265358979323846 
 #define DELTA_PHI		0.02
 #define DELTA_DIST		0.1
-#define WEEL_DIST		40
+#define WEEL_DIST		10
 #define WEEL_RADIUS		1
 #define ROT_SPEED		1
 
@@ -38,7 +38,7 @@ Robot::Robot(rw::sensor::Image * aMap)
 
 	Transform t(0, 0, 0);
 	initial_trans = t;
-	map = aMap;
+	map = aMap->copyFlip(0,0);
 }
 
 double Robot::getOrientation(Transform aMatrix)
@@ -57,9 +57,14 @@ double Robot::getOrientation(Transform aMatrix)
 						end_point(0)-start_point(0));
 }
 
+void Robot::getRobotPath()
+{
+	map->saveAsPGM("RobotPath.pgm");
+}
+
 Robot::~Robot()
 {
-	
+	delete map;
 }
 
 
