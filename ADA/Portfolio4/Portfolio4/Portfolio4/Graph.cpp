@@ -50,7 +50,49 @@ void Graph::printGraph(string printMessage)
 
 vector<unsigned int> Graph::topologicalSort()
 {
-	return vector<unsigned int>();
+	// preconditions
+
+	// setup
+	vector<unsigned int> topSortList;
+	vector<int> topSortDependencies(graphData.size(), 0);
+	
+	// generate dependencies list
+	for (unsigned int i = 0; i < graphData.size(); i++)
+	{
+		for (unsigned int j = 0; j < graphData.size(); j++)
+		{
+			if (graphData[i][j] != 0)
+				topSortDependencies[j]++;
+		}
+	}
+
+	int topSem = 1;
+	while (topSem != 0)
+	{
+		topSem = 0;
+		// iterate through list
+		for (unsigned int i = 0; i < topSortDependencies.size(); i++)
+		{
+			// finde values = 0
+			if (topSortDependencies[i] == 0)
+			{
+				// the vertex is now at "false" state and will be ignored from here
+				topSortDependencies[i] = -1;
+				topSortList.push_back(i);
+				topSem = 1;
+				
+				// Update topSortDependencies
+				for (unsigned int j = 0; j < graphData.size(); j++)
+				{
+					if (graphData[i][j] != 0)
+						topSortDependencies[j]--;
+				}
+			}
+
+		}
+	}
+	
+	return topSortList;
 }
 
 vector<weighting> Graph::dijkstra(unsigned int startVertex)
