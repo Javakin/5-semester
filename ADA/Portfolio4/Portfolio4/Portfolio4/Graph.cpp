@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#define DEFAULT_SIZE	15
+
 using namespace std;
 
 
@@ -13,6 +15,8 @@ Graph::Graph()
 
 Graph::Graph(unsigned int numOfVerteies)
 {
+	vector<vector<unsigned int> > graph((numOfVerteies , 10) , vector<unsigned int>(numOfVerteies, 0));
+	graphData = graph;
 }
 
 bool Graph::insertEdge(unsigned int startVertex, unsigned int endVertex)
