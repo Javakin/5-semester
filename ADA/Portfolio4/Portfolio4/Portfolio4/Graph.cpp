@@ -11,13 +11,13 @@ using namespace std;
 
 Graph::Graph()
 {
-	vector<vector<unsigned int> > graph((DEFAULT_SIZE, 10), vector<unsigned int>(DEFAULT_SIZE, 0));
+	vector<vector<unsigned int> > graph((DEFAULT_SIZE), vector<unsigned int>(DEFAULT_SIZE, 0));
 	graphData = graph;
 }
 
 Graph::Graph(unsigned int numOfVerteies)
 {
-	vector<vector<unsigned int> > graph((numOfVerteies , 10) , vector<unsigned int>(numOfVerteies, 0));
+	vector<vector<unsigned int> > graph((numOfVerteies) , vector<unsigned int>(numOfVerteies, 0));
 	graphData = graph;
 }
 
