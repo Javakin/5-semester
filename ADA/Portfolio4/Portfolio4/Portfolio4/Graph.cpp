@@ -97,7 +97,60 @@ vector<unsigned int> Graph::topologicalSort()
 
 vector<weighting> Graph::dijkstra(unsigned int startVertex)
 {
-	return vector<weighting>();
+	// precondition
+	if (startVertex >= graphData.size())
+	{
+		cout << "Invalid vertex number inserted\n";
+		return vector<weighting>();
+	}
+		
+	// setup
+	weighting initWeight = {startVertex, 0, 1, 0};
+	vector<weighting> dijkstraTable(graphData.size(), weighting{0,0,0,0});
+	dijkstraTable[startVertex] = initWeight;
+
+	// perform dijsktra
+	int semDij = 1;
+	while (semDij != 0)
+	{
+		semDij = 0;
+		int minWeight = INT_MAX;
+		unsigned int nearestVertex = UINT_MAX;
+
+		// find closest vertex
+		for (unsigned int i = 0; i < dijkstraTable.size(); i++)
+		{
+			// look for living branches
+			if (dijkstraTable[i].known == 1 && dijkstraTable[i].taken == 0)
+			{				
+				// chek if better then any other 
+				if (minWeight > dijkstraTable[i].vertexWeighting)
+				{
+					semDij = 1;
+					minWeight = dijkstraTable[i].vertexWeighting;
+					nearestVertex = i;
+				}
+			}
+		}
+
+		// if new vertex exists update table
+		if (semDij != 0)
+		{
+			dijkstraTable[nearestVertex].taken = 1;
+
+			// add any newly known vertecies
+			for (unsigned int j = 0; j < graphData.size(); j++)
+			{
+				if (graphData[nearestVertex][j] != 0)
+				{
+					//TODO: found one update
+
+				}
+			}
+		}
+	}
+
+	return dijkstraTable;
 }
 
 vector<unsigned int> Graph::dijkstra(unsigned int startVertex, unsigned int endVertex)
