@@ -39,6 +39,12 @@ bool Graph::deleteEdge(unsigned int startVertex, unsigned int endVertex)
 void Graph::printGraph(string printMessage)
 {
 	cout << printMessage << ":" << endl;
+	for (vector<unsigned int> v : graphData)
+	{
+		for (unsigned int ui : v)
+			cout << ui << "  ";
+		cout << endl; 
+	}
 
 }
 
