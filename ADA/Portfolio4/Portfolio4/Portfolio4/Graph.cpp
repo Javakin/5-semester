@@ -11,6 +11,8 @@ using namespace std;
 
 Graph::Graph()
 {
+	vector<vector<unsigned int> > graph((DEFAULT_SIZE, 10), vector<unsigned int>(DEFAULT_SIZE, 0));
+	graphData = graph;
 }
 
 Graph::Graph(unsigned int numOfVerteies)
