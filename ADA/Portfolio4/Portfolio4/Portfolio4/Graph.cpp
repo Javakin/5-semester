@@ -21,18 +21,47 @@ Graph::Graph(unsigned int numOfVerteies)
 	graphData = graph;
 }
 
-bool Graph::insertEdge(unsigned int startVertex, unsigned int endVertex)
+bool Graph::insertEdge(unsigned int startVertex, unsigned int endVertex) // add edge at [startVertex][endVertex] without weighting
 {
+	if (startVertex < 0 || endVertex < 0 || startVertex > graphData.size() || endVertex > graphData.size()) // Checks if the edge is outside the matrix.
+	{
+		cout << "Can't make edge: " << startVertex << ", " << endVertex << endl;
+	}
+	else
+	{
+		graphData[startVertex - 1][endVertex - 1] = 1; // add the egde
+	}
+
 	return false;
 }
 
-bool Graph::insertEdge(unsigned int startVertex, unsigned int endVertex, unsigned int weighting)
+bool Graph::insertEdge(unsigned int startVertex, unsigned int endVertex, unsigned int weighting) // add edge at [startVertex][endVertex] with weighting
 {
+	if (startVertex < 0 || endVertex < 0 || startVertex > graphData.size() || endVertex > graphData.size()) // Checks if the edge is outside the matrix.
+	{
+		cout << "Can't make edge: " << startVertex << ", " << endVertex << endl;
+	}
+	else
+	{
+		graphData[startVertex - 1][endVertex - 1] = weighting; // add the egde
+	}
+	
+
 	return false;
 }
 
-bool Graph::deleteEdge(unsigned int startVertex, unsigned int endVertex)
+bool Graph::deleteEdge(unsigned int startVertex, unsigned int endVertex) // delete the edge at [startVertex][endVertex]
 {
+	if (startVertex < 0 || endVertex < 0 || startVertex > graphData.size() || endVertex > graphData.size()) // Checks if the edge is outside the matrix.
+	{
+		cout << "Can't delete edge: " << startVertex << ", " << endVertex << endl;
+	}
+	else
+	{
+		graphData[startVertex - 1][endVertex - 1] = 0; // delete the egde
+	}
+	
+
 	return false;
 }
 
