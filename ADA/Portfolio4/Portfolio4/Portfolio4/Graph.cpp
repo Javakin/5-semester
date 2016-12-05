@@ -106,8 +106,9 @@ vector<weighting> Graph::dijkstra(unsigned int startVertex)
 		
 	// setup
 	weighting initWeight = {startVertex, 0, 1, 0};
-	vector<weighting> dijkstraTable(graphData.size(), weighting{0,0,0,0});
+	vector<weighting> dijkstraTable(graphData.size(), weighting{0, UINT_MAX, 0, 0});
 	dijkstraTable[startVertex] = initWeight;
+
 
 	// perform dijsktra
 	int semDij = 1;
@@ -143,8 +144,13 @@ vector<weighting> Graph::dijkstra(unsigned int startVertex)
 			{
 				if (graphData[nearestVertex][j] != 0)
 				{
-					//TODO: found one update
-
+					// found one update
+					dijkstraTable[j].known = 1;
+					if (dijkstraTable[nearestVertex].vertexWeighting + graphData[nearestVertex][j] < dijkstraTable[j].vertexWeighting)
+					{
+						dijkstraTable[j].parrentVertex = nearestVertex;
+						dijkstraTable[j].vertexWeighting = dijkstraTable[nearestVertex].vertexWeighting + graphData[nearestVertex][j];
+					}
 				}
 			}
 		}

@@ -11,7 +11,7 @@ struct weighting
 {
 	unsigned int parrentVertex;
 	unsigned int vertexWeighting;
-	bool known; 
+	bool known;
 	bool taken;
 };
 
