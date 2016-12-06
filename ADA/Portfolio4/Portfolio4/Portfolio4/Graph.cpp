@@ -23,46 +23,49 @@ Graph::Graph(unsigned int numOfVerteies)
 
 bool Graph::insertEdge(unsigned int startVertex, unsigned int endVertex) // add edge at [startVertex][endVertex] without weighting
 {
-	if (startVertex < 0 || endVertex < 0 || startVertex > graphData.size() || endVertex > graphData.size()) // Checks if the edge is outside the matrix.
+	if (startVertex < 0 || endVertex < 0 || startVertex >= graphData.size() || endVertex >= graphData.size()) // Checks if the edge is outside the matrix.
 	{
 		cout << "Can't make edge: " << startVertex << ", " << endVertex << endl;
+		return false;
 	}
 	else
 	{
-		graphData[startVertex - 1][endVertex - 1] = 1; // add the egde
+		graphData[startVertex][endVertex] = 1; // add the egde
 	}
 
-	return false;
+	return true;
 }
 
 bool Graph::insertEdge(unsigned int startVertex, unsigned int endVertex, unsigned int weighting) // add edge at [startVertex][endVertex] with weighting
 {
-	if (startVertex < 0 || endVertex < 0 || startVertex > graphData.size() || endVertex > graphData.size()) // Checks if the edge is outside the matrix.
+	if (startVertex < 0 || endVertex < 0 || startVertex >= graphData.size() || endVertex >= graphData.size()) // Checks if the edge is outside the matrix.
 	{
 		cout << "Can't make edge: " << startVertex << ", " << endVertex << endl;
+		return false;
 	}
 	else
 	{
-		graphData[startVertex - 1][endVertex - 1] = weighting; // add the egde
+		graphData[startVertex][endVertex] = weighting; // add the egde
 	}
 	
 
-	return false;
+	return true;
 }
 
 bool Graph::deleteEdge(unsigned int startVertex, unsigned int endVertex) // delete the edge at [startVertex][endVertex]
 {
-	if (startVertex < 0 || endVertex < 0 || startVertex > graphData.size() || endVertex > graphData.size()) // Checks if the edge is outside the matrix.
+	if (startVertex < 0 || endVertex < 0 || startVertex >= graphData.size() || endVertex >= graphData.size()) // Checks if the edge is outside the matrix.
 	{
 		cout << "Can't delete edge: " << startVertex << ", " << endVertex << endl;
+		return false;
 	}
 	else
 	{
-		graphData[startVertex - 1][endVertex - 1] = 0; // delete the egde
+		graphData[startVertex][endVertex] = 0; // delete the egde
 	}
 	
 
-	return false;
+	return true;
 }
 
 void Graph::printGraph(string printMessage)
@@ -190,7 +193,42 @@ vector<weighting> Graph::dijkstra(unsigned int startVertex)
 
 vector<unsigned int> Graph::dijkstra(unsigned int startVertex, unsigned int endVertex)
 {
-	return vector<unsigned int>();
+	// preconditions
+	if (startVertex >= graphData.size())
+	{
+		cout << "Invalid startVertex number inserted\n";
+		return vector<unsigned int>();
+	}
+	if (endVertex >= graphData.size())
+	{
+		cout << "Invalid startVertex number inserted\n";
+		return vector<unsigned int>();
+	}
+
+
+
+	// setup
+	vector<unsigned int> path;
+	vector<weighting> pathTree = dijkstra(startVertex);
+	weighting current_Weighting = pathTree[endVertex];
+	path.push_back(endVertex);
+
+	// find the way back to the startVertex
+	while (current_Weighting.parrentVertex != startVertex)
+	{
+		path.push_back(current_Weighting.parrentVertex);
+		current_Weighting = pathTree[current_Weighting.parrentVertex];
+	}
+
+	// add the start vertex
+	path.push_back(current_Weighting.parrentVertex);
+
+	// invert vector for ease
+	vector<unsigned int> pathInv;
+	for (int i = path.size() - 1; i >= 0; i--)
+		pathInv.push_back(path[(unsigned int)i]);
+
+	return pathInv;
 }
 
 
