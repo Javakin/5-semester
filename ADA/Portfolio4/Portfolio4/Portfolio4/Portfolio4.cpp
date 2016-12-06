@@ -53,7 +53,7 @@ int main()
 	bGraph.insertEdge(2, 3, 7);
 	bGraph.insertEdge(3, 4, 5);
 	bGraph.insertEdge(4, 7, 1);
-	bGraph.insertEdge(4, 5, 10);
+	bGraph.insertEdge(4, 5, 9);
 
 	bGraph.printGraph("Printed graph 2");
 
