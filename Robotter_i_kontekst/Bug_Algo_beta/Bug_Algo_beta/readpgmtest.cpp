@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 	// for detection of memory leaks 
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	std::string filename("Bane2.pgm");
+	std::string filename("Bane3.pgm");
 	std::cout << filename << std::endl;
 
 
@@ -26,13 +26,13 @@ int main(int argc, char** argv) {
 	
 
 	// initiate
-	Robot wall_e(img);
+	/*Robot wall_e(img);
 	Transform H4(100, 10, 3);
 
 	wall_e.goTo(H4);
-	wall_e.getRobotPath();
+	wall_e.getRobotPath();*/
 
-	/*
+	
 	point p1 = { 10,10 };
 	point p2 = { 190,190 };
 
@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
 	
 
 	img->saveAsPGM("original.pgm");	
-	*/
+	
 
 	
 	// cleanup
