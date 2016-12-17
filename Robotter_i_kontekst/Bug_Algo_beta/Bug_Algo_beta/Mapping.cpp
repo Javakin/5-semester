@@ -4,10 +4,11 @@
 #include <vector>
 #include <string>
 #include <deque>
+#include "PPMLoader.h"
 
 using namespace std;
 using namespace rw::sensor;
-
+using namespace rw::loaders;
 
 Mapping::Mapping()
 {
@@ -110,11 +111,38 @@ vector<Cell> Mapping::cellDecomp()
 		return vector<Cell>();
 
 	// setup
-	cellDecMap = map->copyFlip(0, 0);
+	std::string filename("Images/Bane4.pgm");
+	std::cout << filename << std::endl;
 
-	vector<Cell> vCells; 
+	std::cout << "loading image..." << std::endl;
+	cellDecMap = PPMLoader::load(filename);
+	vector<Cell> vCells;
+	vector<unsigned int> vLines;
 
-	// cell decomposition
+	// finde the lines
+	cout << "identifying all cells..." << endl;
+	int semLine = 0;
+	for (unsigned int uiY = 0; uiY < cellDecMap->getHeight() - 1; uiY++)
+	{
+		semLine = 0;
+		for (unsigned int uiX = 0; uiX < cellDecMap->getWidth(); uiX++)
+		{
+			if (cellDecMap->getPixelValuei(uiX, uiY, 0) != cellDecMap->getPixelValuei(uiX, uiY + 1, 0) && semLine == 0)
+			{
+				semLine = 1;
+				vLines.push_back(uiY);
+			}
+		}
+	}
+
+	// finde the cells
+	for (unsigned int uiY : vLines)
+	{
+		for (unsigned int uiX = 0; uiX < cellDecMap->getWidth(); uiX++)
+		{
+			cellDecMap->setPixel8U(uiX, uiY, 125);
+		}
+	}
 
 	// terminate and return
 	 
