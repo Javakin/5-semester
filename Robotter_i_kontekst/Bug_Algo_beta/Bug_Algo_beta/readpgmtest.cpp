@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 	
 
 	// call relevant funcioctions
-	port3.coverragePlaning();
+	port3.coverragePlaning(10,10);
 
 	// dump image output
 	port3.saveAllAsPGM();

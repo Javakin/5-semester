@@ -5,6 +5,7 @@
 #include "Mapping.h"
 #include <string>
 #include "Robot.h"
+#include <utility>
 
 using namespace std;
 using namespace rw::sensor;
@@ -17,13 +18,14 @@ public:
 	~SeekAndDeliver();
 
 	void saveAllAsPGM();
-	void coverragePlaning();
+	void coverragePlaning(int aStartX, int aStartY);
 
 
 private: 
 	bool deliverCoin(unsigned int xVal, unsigned int yVal);
 	bool hasConpleted();
-
+	bool checkCoin(unsigned int x, unsigned int y);
+	void addNeighbour(int anX, int anY);
 	Image* map; 
 	Mapping* fireMap;
 };
