@@ -27,6 +27,7 @@ private:
 	unsigned int foundCoins;
 	Image* map; 
 	Image* deleveryMap;
+	Image* coverageMap;
 	Mapping* fireMap;
 	point currentLocation;
 	vector<point> searchPath;

@@ -18,6 +18,7 @@ SeekAndDeliver::SeekAndDeliver(Image* aMap, Mapping* aFireMap)
 {
 	map = aMap->copyFlip(0,0);
 	deleveryMap = aMap->copyFlip(0, 0);
+	coverageMap = aMap->copyFlip(0, 0);
 	fireMap = aFireMap;
 
 	fireMap->brushfire();
@@ -35,23 +36,18 @@ SeekAndDeliver::~SeekAndDeliver()
 {
 	delete map;
 	delete deleveryMap;
+	delete coverageMap;
 }
 
 void SeekAndDeliver::saveAllAsPGM()
 {
-	
-	// for debugging 
-	/*point start = { 10,10 };
-	point end = { 190,190 };
-	fireMap->dijkstra(start, end);
-	fireMap->getPathMap()->saveAsPGM("pathMap.pgm");*/
-
 	fireMap->getBrushfireMap()->saveAsPGM("Images/brushfire.pgm");
 	fireMap->getBrushfireMapWObj()->saveAsPGM("Images/brushfireWObj.pgm");
 	fireMap->getBrushfireMapInc()->saveAsPGM("Images/brushfireInc.pgm");
 	fireMap->getVoronoiMap()->saveAsPGM("Images/voronoidPoints.pgm");
-		
+	
 	deleveryMap->saveAsPGM("Images/deleveryMap.pgm");
+	coverageMap->saveAsPGM("Images/coverageMap.pgm");
 }
 
 void SeekAndDeliver::coverragePlaning()
