@@ -22,10 +22,7 @@ SeekAndDeliver::SeekAndDeliver(Image* aMap, Mapping* aFireMap)
 	fireMap->brushfire();
 	fireMap->Voronoi();
 
-	// go to droppoint
-	//point start = { 0,0 };
-	//point end = { 10,10 };
-	//fireMap->dijkstra(start, end);
+	
 }
 
 
@@ -36,10 +33,16 @@ SeekAndDeliver::~SeekAndDeliver()
 
 void SeekAndDeliver::saveAllAsPGM()
 {
+	
+	// for debugging 
+	/*point start = { 10,10 };
+	point end = { 190,190 };
+	fireMap->dijkstra(start, end);
+	fireMap->getPathMap()->saveAsPGM("pathMap.pgm");*/
+
 	fireMap->getBrushfireMap()->saveAsPGM("brushfire.pgm");
 	fireMap->getBrushfireMapWObj()->saveAsPGM("brushfireWObj.pgm");
 	fireMap->getBrushfireMapInc()->saveAsPGM("brushfireInc.pgm");
-	//fireMap->getPathMap()->saveAsPGM("pathMap.pgm");
 	fireMap->getVoronoiMap()->saveAsPGM("voronoidPoints.pgm");
 	map->saveAsPGM("original.pgm");	
 }

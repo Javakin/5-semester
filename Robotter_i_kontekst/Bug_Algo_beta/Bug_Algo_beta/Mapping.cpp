@@ -231,6 +231,7 @@ vector<point> Mapping::pointToParth(point aPoint)
 	if (brushfireMapInc == nullptr)
 		return vector<point>();
 	
+
 	// setup
 	int relIderat[8][2] = { {0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1,1}, {-1,-1}};
 	int semNewPoint = 1;
