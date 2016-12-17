@@ -23,8 +23,8 @@ SeekAndDeliver::SeekAndDeliver(Image* aMap, Mapping* aFireMap)
 	fireMap->Voronoi();
 
 	// go to droppoint
-	point start = { 0,0 };
-	point end = { 10,10 };
+	//point start = { 0,0 };
+	//point end = { 10,10 };
 	//fireMap->dijkstra(start, end);
 }
 
