@@ -164,6 +164,7 @@
     <ClInclude Include="readpgmtest.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="SeekAndDeliver.h" />
+    <ClInclude Include="Structs.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,6 +5,7 @@
 #include "Mapping.h"
 #include <string>
 #include "Robot.h"
+#include "Structs.h"
 
 using namespace std;
 using namespace rw::sensor;

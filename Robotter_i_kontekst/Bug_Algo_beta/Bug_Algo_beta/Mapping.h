@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Image.h"
+#include "Structs.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -8,19 +9,6 @@
 using namespace std;
 using namespace rw::sensor;
 
-struct point {
-	int xVal;
-	int yVal;
-	//int weight;
-};
-
-
-struct edge {
-	int xVal1;
-	int yVal1;
-	int xVal2;
-	int yVal2;
-};
 
 class Mapping
 {
@@ -35,7 +23,6 @@ public:
 	Image* getBrushfireMapWObj();
 	Image* getBrushfireMapInc();
 	Image* getPathMap();
-
 	Image* getVoronoiMap();
 
 	void Voronoi();

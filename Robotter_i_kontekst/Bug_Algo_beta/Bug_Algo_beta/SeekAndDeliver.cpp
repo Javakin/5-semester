@@ -4,15 +4,12 @@
 #include <iostream>
 #include "Point.h"
 #include "Robot.h"
+#include "Structs.h"
 
 #define OBJECTS_TO_COLLECT	10
 
 using namespace std;
 
-
-//SeekAndDeliver::SeekAndDeliver()
-//{
-//}
 
 SeekAndDeliver::SeekAndDeliver(Image* aMap, Mapping* aFireMap)
 {
