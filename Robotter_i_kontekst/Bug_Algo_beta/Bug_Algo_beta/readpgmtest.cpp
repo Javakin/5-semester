@@ -4,6 +4,7 @@
 #include "Robot.h"
 #include "Transform.h"
 #include "Mapping.h"
+#include "SeekAndDeliver.h"
 //#include <cmath>
 
 #define PI 3.14159265358979323846 
@@ -17,41 +18,25 @@ int main(int argc, char** argv) {
 	// for detection of memory leaks 
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	std::string filename("Bane4.pgm");
+		
+	// setup SeekAndDeliver
+	std::string filename("Bane5.pgm");
 	std::cout << filename << std::endl;
-
 
 	std::cout << "loading image..." << std::endl;
 	Image* img = PPMLoader::load(filename);
+	Mapping brusfireMapping(img);
+
+
+	SeekAndDeliver port3(img, &brusfireMapping);
 	
 
-	// initiate
-	/*Robot wall_e(img);
-	Transform H4(100, 10, 3);
+	// call relevant funcioctions
+	port3.coverragePlaning();
 
-	wall_e.goTo(H4);
-	wall_e.getRobotPath();*/
-
-	
-	point p1 = { 10,10 };
-	point p2 = { 190,190 };
-
-	Mapping fireObj(img);
-	fireObj.brushfire();
-	fireObj.Voronoi();
-	fireObj.dijkstra(p1, p2);
-
-
-	fireObj.getBrushfireMap()->saveAsPGM("brushfire.pgm");
-	fireObj.getBrushfireMapWObj()->saveAsPGM("brushfireWObj.pgm");
-	fireObj.getBrushfireMapInc()->saveAsPGM("brushfireInc.pgm");
-	fireObj.getPathMap()->saveAsPGM("pathMap.pgm");
-	fireObj.getVoronoiMap()->saveAsPGM("voronoidPoints.pgm");
-	
-
-	img->saveAsPGM("original.pgm");	
-	
-
+	// dump image output
+	port3.saveAllAsPGM();
+		
 	
 	// cleanup
 	delete img;
