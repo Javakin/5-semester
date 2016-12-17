@@ -115,7 +115,7 @@ vector<point> Mapping::dijkstra(point startPoint, point stopPoint)
 
 
 	// setup
-	pathMap = map->copyFlip(0, 0);
+	//pathMap = map->copyFlip(0, 0);
 	vector<point> fullPointGraph(diagramPoints);
 	vector<edge> dijkstraPath;
 	point currentPoint = startPoint;
