@@ -26,5 +26,8 @@ private:
 
 	Image* map; 
 	Mapping* fireMap;
+	point currentLocation;
+	vector<point> searchPath;
+	vector<point> deleveryPath;
 };
 
