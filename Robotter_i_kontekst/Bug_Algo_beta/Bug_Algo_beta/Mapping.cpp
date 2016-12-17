@@ -17,6 +17,7 @@ Mapping::Mapping()
 	brushfireMapInc = nullptr;
 	pathMap = nullptr;
 	voronoiMap = nullptr;
+	cellDecMap = nullptr;
 }
 
 Mapping::Mapping(Image* amap)
@@ -24,12 +25,10 @@ Mapping::Mapping(Image* amap)
 	map = amap->copyFlip(0, 0);
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
-
 	brushfireMapInc = nullptr;
 	pathMap = nullptr;
-
 	voronoiMap = nullptr;
-
+	cellDecMap = nullptr;
 }
 
 void Mapping::brushfire()
@@ -102,6 +101,24 @@ void Mapping::brushfire()
 			}
 		}
 	}
+}
+
+vector<Cell> Mapping::cellDecomp()
+{
+	// precondition
+	if (map == nullptr)
+		return vector<Cell>();
+
+	// setup
+	cellDecMap = map->copyFlip(0, 0);
+
+	vector<Cell> vCells; 
+
+	// cell decomposition
+
+	// terminate and return
+	 
+	return vCells;
 }
 
 vector<point> Mapping::dijkstra(point startPoint, point stopPoint)
@@ -277,6 +294,11 @@ Image* Mapping::getVoronoiMap()
 	return voronoiMap;
 }
 
+Image * Mapping::getCellDecMap()
+{
+	return cellDecMap;
+}
+
 void Mapping::Voronoi()
 {
 	// precondition
@@ -356,12 +378,11 @@ Mapping::~Mapping()
 	delete map;
 	delete brushfireMap;
 	delete brushfireMapWObj;
-
 	delete brushfireMapInc;
 	delete pathMap;
-
 	delete voronoiMap;
-
+	delete cellDecMap;
+	
 }
 
 vector<point> Mapping::brushfireExhaustive(int xPos, int yPos, int colour)

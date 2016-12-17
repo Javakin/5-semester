@@ -16,7 +16,9 @@ public:
 	Mapping();
 	Mapping(Image* amap);
 
-	void brushfire();	
+	void brushfire();
+	vector<Cell> cellDecomp();
+
 	vector<point> dijkstra(point startPoint, point stopPoint);
 
 	Image* getBrushfireMap();
@@ -24,6 +26,7 @@ public:
 	Image* getBrushfireMapInc();
 	Image* getPathMap();
 	Image* getVoronoiMap();
+	Image* getCellDecMap();
 
 	void Voronoi();
 	
@@ -37,6 +40,8 @@ private:
 	vector<point> brushfireExhaustive(int xPos, int yPos, int colour);
 	vector<point> brushfireSingleStep(vector<point> anEdge);
 	vector<point> diagramPoints;
+
+	
 	bool pointRemove(point aPoint, vector<point> & pointList);
 
 	void brushfireInc();
@@ -49,6 +54,7 @@ private:
 	rw::sensor::Image* brushfireMapInc;
 	rw::sensor::Image* pathMap;
 	rw::sensor::Image* voronoiMap;
+	rw::sensor::Image* cellDecMap;
 
 
 };
