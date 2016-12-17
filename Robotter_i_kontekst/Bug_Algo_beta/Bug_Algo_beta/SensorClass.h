@@ -6,6 +6,7 @@
 #include "Mapping.h"
 #include <string>
 #include "Robot.h"
+#include <vector>
 
 using namespace std;
 using namespace rw::sensor;
@@ -14,12 +15,16 @@ class SensorClass
 {
 public:
 	SensorClass();
-	SensorClass(Image * amap, Image * atargetmap);
+	SensorClass(Image * amap, Image * atargetmap/*, point acurrentLocation*/);
 	~SensorClass();
 
-	void sensoring();
+	void sensoring(point acurrentLocation);
 
 private:
+	struct pixel
+	{
+		unsigned int xVal, yVal, colorVal;
+	};
 
 	Image* map;
 	Image* targes;

@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 
 	SensorClass test1(img,img2);
 
-	test1.sensoring();
+	test1.sensoring({ 20,10 });
 	
 
 	// call relevant funcioctions

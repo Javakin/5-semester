@@ -12,23 +12,24 @@ SensorClass::SensorClass(Image * amap, Image * atargetmap)
 	targes = atargetmap->copyFlip(0, 0);
 	point init = { 10, 10 };
 	currentLocation = init;
-	cout << endl << "test 1" << endl;
+	//cout << endl << "test 1" << endl;
 }
 
-void SensorClass::sensoring()
+void SensorClass::sensoring(point acurrentLocation)
 {
-	struct pixel
+	currentLocation = acurrentLocation;
+	/*struct pixel
 	{
 		unsigned int xVal, yVal, colorVal;
-	};
+	};*/
 
-	pixel testpix;
+	//pixel testpix;
 
 	pixel outputPixel;
 
-	testpix.xVal = 10;
+	/*testpix.xVal = 10;
 	testpix.yVal = 20;
-	testpix.colorVal = 200;
+	testpix.colorVal = 200;*/
 
 	//cout << testpix.xVal;
 	vector<pixel> pixelVector;
@@ -144,51 +145,7 @@ void SensorClass::sensoring()
 
 		pixelVector.push_back(outputPixel);
 	}
-
-
-
-	//for (unsigned int i = 0; i < 8; i++)
-	//{
-	//	if (true)
-	//	{
-
-	//	}
-
-
-	//}
-
-
-
-
-	///*cout << endl << "test 4" << endl;
-	//cout << sensorVector[1][1];*/
-	//point apair;
-	//for (int i = 0; i < map->getWidth(); i++) {
-	//	for (int j = 0; j < map->getWidth(); j++) {
-	//		//if (sensorVector[i][j] == 254)
-	//		//{
-
-	//			apair.xVal = i;
-	//			apair.yVal = j;
-	//			test.push_back(apair);
-	//		//}
-	//	}
-	//}
-
-	/*for (size_t i = 0; i < length; i++)
-	{
-
-	}*/
-
-	/*for (vector<point>::iterator it2 = test.begin(); it2 != test.end(); ++it2) {
-	apair = *it2;
-	cout << "(" << apair.xVal << "," << apair.yVal << ") ; ";
-	}
-	cout << '\n';*/
-
-	//std::cout << "saving image Voronoi map" << std::endl;
-	// save image
-	//voronoiMap->saveAsPGM("testout.pgm");
+	//return pixelVector;
 }
 
 SensorClass::~SensorClass()
