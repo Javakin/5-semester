@@ -271,21 +271,22 @@ Image* Mapping::getVoronoiMap()
 
 void Mapping::Voronoi()
 {
+	// precondition
 	if (map == nullptr)
 		return;
-	// Get the map
+
+	// setup
 	voronoiMap = brushfireMap->copyFlip(0, 0);
 
 	int rows = voronoiMap->getHeight();
 	int cols = voronoiMap->getWidth();
 	int val = 0;
-
-
+	
 	vector<vector<int>> testvec(rows, vector<int>(cols, val));
 	int channel = 0; // allways 0 on grayscale image
 
 
-					 // Iterate through the the picture
+	// Iterate through the the picture
 	for (unsigned int x = 0; x < voronoiMap->getWidth(); ++x) {
 		for (unsigned int y = 0; y < voronoiMap->getHeight(); ++y) {
 			int val = voronoiMap->getPixelValuei(x, y, channel);
@@ -294,17 +295,18 @@ void Mapping::Voronoi()
 								 // Check the surrounding points value. If they have the color value code "254" the do nothing else change current points value to the color code "254"
 			if (x < voronoiMap->getWidth() - 1 && x > 1 && y < voronoiMap->getHeight() - 1 && y > 1)
 			{
-				if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254 && testvec[x - 1][y] != 253 && testvec[x + 1][y] != 253)
+				if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254 && testvec[x - 1][y] != 253 && testvec[x + 1][y] != 253 && testvec[x][y] != 253)
 				{
 					testvec[x][y] = 254;
 				}
-				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254 && testvec[x][y - 1] != 253 && testvec[x][y + 1] != 253)
+				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254 && testvec[x][y - 1] != 253 && testvec[x][y + 1] != 253 && testvec[x][y] != 253)
 				{
 					testvec[x][y] = 254;
 				}
 			}
 		}
 	}
+
 	// Color all the pixels on the position that have the value 254
 	for (unsigned int x = 0; x < voronoiMap->getWidth(); ++x) {
 		for (unsigned int y = 0; y < voronoiMap->getHeight(); ++y) {
@@ -315,11 +317,8 @@ void Mapping::Voronoi()
 	}
 
 	// Take the position of all the pixels with the color code and put them into a vector of pairs
-	// Setup the containers
-	point apair;
-	//vector<pair<int, int> > points;
-
 	// Put the pairs into the vector
+	point apair;
 	for (int i = 0; i < voronoiMap->getWidth(); i++) {
 		for (int j = 0; j < voronoiMap->getWidth(); j++) {
 			if (testvec[i][j] == 254)
@@ -337,11 +336,11 @@ void Mapping::Voronoi()
 		apair = *it2;
 		cout << "(" << apair.xVal << "," << apair.yVal << ") ; ";
 	}
-	cout << '\n';*/
+	cout << '\n';
 
 	//std::cout << "saving image Voronoi map" << std::endl;
 	// save image
-	//voronoiMap->saveAsPGM("testout.pgm");
+	//voronoiMap->saveAsPGM("testout.pgm");*/
 }
 
 Mapping::~Mapping()
