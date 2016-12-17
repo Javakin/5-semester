@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 
 		
 	// setup SeekAndDeliver
-	std::string filename("Bane5.pgm");
+	std::string filename("Images/Bane5.pgm");
 	std::cout << filename << std::endl;
 
 	std::cout << "loading image..." << std::endl;
@@ -33,9 +33,7 @@ int main(int argc, char** argv) {
 
 	// call relevant funcioctions
 	port3.coverragePlaning();
-	port3.deliverCoin(50,100);
-	port3.deliverCoin(190, 100);
-	port3.deliverCoin(100, 170);
+	
 
 	// dump image output
 	port3.saveAllAsPGM();
