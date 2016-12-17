@@ -5,7 +5,7 @@
 #include "Point.h"
 #include "Robot.h"
 
-
+#define OBJECTS_TO_COLLECT	10
 
 using namespace std;
 
@@ -63,6 +63,7 @@ void SeekAndDeliver::deliverCoin(unsigned int xVal, unsigned int yVal)
 	// setup
 	point objectlocation = {(int) xVal, (int) yVal };
 	point dropOffZone = {10, 10};
+	foundCoins++;
 
 	// from current to object
 	vector<point> route = fireMap->dijkstra(currentLocation, objectlocation);
@@ -89,5 +90,8 @@ void SeekAndDeliver::deliverCoin(unsigned int xVal, unsigned int yVal)
 
 bool SeekAndDeliver::hasConpleted()
 {
+	if (foundCoins >= OBJECTS_TO_COLLECT)
+		return true;
+
 	return false;
 }
