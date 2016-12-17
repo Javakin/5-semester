@@ -53,7 +53,10 @@ void Mapping::brushfire()
 			{
 				cout << "new object detected\n";
 				borderlines.push_back(brushfireExhaustive(x, y, objectColour));
-				objectColour += 20; /* to do: lav en ordenlig funktion */
+				objectColour += 20; 
+				if (objectColour == 254 || objectColour == 253 || objectColour == 255 || objectColour == 0)
+					objectColour += 20;
+				
 			}
 		}
 	}
@@ -291,11 +294,11 @@ void Mapping::Voronoi()
 								 // Check the surrounding points value. If they have the color value code "254" the do nothing else change current points value to the color code "254"
 			if (x < voronoiMap->getWidth() - 1 && x > 1 && y < voronoiMap->getHeight() - 1 && y > 1)
 			{
-				if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254)
+				if (testvec[x][y] != testvec[x - 1][y] && testvec[x][y] != testvec[x + 1][y] && testvec[x - 1][y] != 254 && testvec[x + 1][y] != 254 && testvec[x - 1][y] != 253 && testvec[x + 1][y] != 253)
 				{
 					testvec[x][y] = 254;
 				}
-				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254)
+				else if (testvec[x][y] != testvec[x][y - 1] && testvec[x][y] != testvec[x][y + 1] && testvec[x][y - 1] != 254 && testvec[x][y + 1] != 254 && testvec[x][y - 1] != 253 && testvec[x][y + 1] != 253)
 				{
 					testvec[x][y] = 254;
 				}
