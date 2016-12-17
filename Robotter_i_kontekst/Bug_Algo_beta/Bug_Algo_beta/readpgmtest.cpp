@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "Mapping.h"
 #include "SeekAndDeliver.h"
+#include "SensorClass.h"
 //#include <cmath>
 
 #define PI 3.14159265358979323846 
@@ -29,6 +30,17 @@ int main(int argc, char** argv) {
 
 
 	SeekAndDeliver port3(img, &brusfireMapping);
+	
+	// setup SensorClass
+	std::string filename2("targets.pgm");
+	std::cout << filename << std::endl;
+
+	std::cout << "loading image..." << std::endl;
+	Image* img2 = PPMLoader::load(filename2);
+
+	SensorClass test1(img,img2);
+
+	test1.sensoring();
 	
 
 	// call relevant funcioctions

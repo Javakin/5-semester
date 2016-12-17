@@ -153,6 +153,7 @@
     <ClCompile Include="readpgmtest.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="SeekAndDeliver.cpp" />
+    <ClCompile Include="SensorClass.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="readpgmtest.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="SeekAndDeliver.h" />
+    <ClInclude Include="SensorClass.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
