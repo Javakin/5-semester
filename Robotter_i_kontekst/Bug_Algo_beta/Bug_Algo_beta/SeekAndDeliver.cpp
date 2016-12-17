@@ -42,7 +42,7 @@ void SeekAndDeliver::saveAllAsPGM()
 	fireMap->getBrushfireMapWObj()->saveAsPGM("Images/brushfireWObj.pgm");
 	fireMap->getBrushfireMapInc()->saveAsPGM("Images/brushfireInc.pgm");
 	fireMap->getVoronoiMap()->saveAsPGM("Images/voronoidPoints.pgm");
-	fireMap->getCellDecMap()->saveAsPGM("Images/cellDecMap");
+	fireMap->getCellDecMap()->saveAsPGM("Images/cellDecMap.pgm");
 
 	deleveryMap->saveAsPGM("Images/deleveryMap.pgm");
 	coverageMap->saveAsPGM("Images/coverageMap.pgm");
