@@ -19,12 +19,15 @@ public:
 	~SensorClass();
 
 	void sensoring(point acurrentLocation);
-
-private:
+	
 	struct pixel
 	{
 		unsigned int xVal, yVal, colorVal;
 	};
+	vector<pixel> pixelVector;
+private:
+	pixel outputPixel;
+		
 
 	Image* map;
 	Image* targes;

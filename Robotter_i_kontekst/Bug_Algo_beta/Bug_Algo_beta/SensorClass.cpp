@@ -18,24 +18,7 @@ SensorClass::SensorClass(Image * amap, Image * atargetmap)
 void SensorClass::sensoring(point acurrentLocation)
 {
 	currentLocation = acurrentLocation;
-	/*struct pixel
-	{
-		unsigned int xVal, yVal, colorVal;
-	};*/
-
-	//pixel testpix;
-
-	pixel outputPixel;
-
-	/*testpix.xVal = 10;
-	testpix.yVal = 20;
-	testpix.colorVal = 200;*/
-
-	//cout << testpix.xVal;
-	vector<pixel> pixelVector;
-
-	//pixelVector.push_back(testpix);
-	//cout << pixelVector[1];
+		
 	// setup map
 	if (map == nullptr)
 	{
