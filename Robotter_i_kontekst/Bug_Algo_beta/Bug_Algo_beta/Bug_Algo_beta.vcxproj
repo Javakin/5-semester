@@ -162,7 +162,6 @@
     <ClInclude Include="Mapping.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PPMLoader.h" />
-    <ClInclude Include="readpgmtest.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="SeekAndDeliver.h" />
     <ClInclude Include="SensorClass.h" />
