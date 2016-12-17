@@ -136,11 +136,18 @@ vector<Cell> Mapping::cellDecomp()
 	}
 
 	// finde the cells
-	for (unsigned int uiY : vLines)
+	point p1;
+	point p2;
+	for (unsigned int uiY = 0; uiY < vLines.size(); uiY++)
 	{
-		for (unsigned int uiX = 0; uiX < cellDecMap->getWidth(); uiX++)
+		for (unsigned int uiX = 0; uiX < cellDecMap->getWidth() - 1; uiX++)
 		{
-			cellDecMap->setPixel8U(uiX, uiY, 125);
+			if (cellDecMap->getPixelValuei(uiX, vLines[uiY] + 1, 0) != cellDecMap->getPixelValuei(uiX + 1, vLines[uiY] + 1, 0) && cellDecMap->getPixelValuei(uiX, vLines[uiY] + 1, 0) == 0)
+			{
+				// found a new cell
+
+				cellDecMap->setPixel8U(uiX + 1, vLines[uiY] + 1, 125);
+			}
 		}
 	}
 
