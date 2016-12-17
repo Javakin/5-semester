@@ -36,6 +36,9 @@
     <ClCompile Include="Mapping.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SeekAndDeliver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Mapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SeekAndDeliver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
