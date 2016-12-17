@@ -21,8 +21,8 @@ SeekAndDeliver::SeekAndDeliver(Image* aMap, Mapping* aFireMap)
 
 	fireMap->brushfire();
 	fireMap->Voronoi();
-
-	
+	point init = { 10, 10 };
+	currentLocation = init;
 }
 
 
