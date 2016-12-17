@@ -33,6 +33,9 @@ int main(int argc, char** argv) {
 
 	// call relevant funcioctions
 	port3.coverragePlaning();
+	port3.deliverCoin(50,100);
+	port3.deliverCoin(190, 100);
+	port3.deliverCoin(100, 170);
 
 	// dump image output
 	port3.saveAllAsPGM();
@@ -40,7 +43,7 @@ int main(int argc, char** argv) {
 	
 	// cleanup
 	delete img;
-	system("pause");
+	//system("pause");
 	
 	return 0;
 }

@@ -18,13 +18,15 @@ public:
 
 	void saveAllAsPGM();
 	void coverragePlaning();
-
+	void deliverCoin(unsigned int xVal, unsigned int yVal);
 
 private: 
-	bool deliverCoin(unsigned int xVal, unsigned int yVal);
+	
 	bool hasConpleted();
 
+	unsigned int foundCoins;
 	Image* map; 
+	Image* deleveryMap;
 	Mapping* fireMap;
 	point currentLocation;
 	vector<point> searchPath;

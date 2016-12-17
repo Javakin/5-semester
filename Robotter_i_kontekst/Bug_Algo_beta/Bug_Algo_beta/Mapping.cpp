@@ -44,9 +44,9 @@ void Mapping::brushfire()
 	
 	// identifying all objects 
 	cout << "identifying all objects..." << endl;
-	for (int x = 0; x < brushfireMap->getWidth(); x++)
+	for (unsigned int x = 0; x < brushfireMap->getWidth(); x++)
 	{
-		for (int y = 0; y < brushfireMap->getHeight(); y++)
+		for (unsigned int y = 0; y < brushfireMap->getHeight(); y++)
 		{
 			// for every pixel check for a black pixel and run prushfireexhaustive for a collor
 			if (brushfireMap->getPixelValuei(x, y, 0) == 0)
@@ -104,13 +104,13 @@ void Mapping::brushfire()
 	}
 }
 
-void Mapping::dijkstra(point startPoint, point stopPoint)
+vector<point> Mapping::dijkstra(point startPoint, point stopPoint)
 {
 	// setup
 	if (map == nullptr)
 	{
 		cout << "map is nullpointer\n";
-		return;
+		return vector<point>();
 	}
 
 
@@ -140,11 +140,12 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 	if (!pointRemove(startPoint, fullPointGraph))
 	{
 		cout << "startpoint was not in list\n";
-		return;
+		return vector<point>();
 	}
 
 	// begin dijgstra algorithm
-	while(livingPoints.size() != 0)
+	int semDij = 1;
+	while(livingPoints.size() != 0 && semDij == 1)
 	{
 		// phase 1 finde and pop the smalest living point
 		currentPoint = livingPoints.front();
@@ -170,7 +171,7 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 				if ((tempPoint.xVal == stopPoint.xVal) && (tempPoint.yVal == stopPoint.yVal))
 				{
 					cout << "goal detected process terminates\n";
-					break;
+					semDij = 0;
 				}
 			}
 		}		
@@ -181,7 +182,7 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 	currentPoint = stopPoint;
 	vector<point> shortestPath = {stopPoint};
 
-	while ((currentPoint.xVal != startPoint.xVal) && (currentPoint.yVal != startPoint.yVal))
+	while (!((currentPoint.xVal == startPoint.xVal) && (currentPoint.yVal == startPoint.yVal)))
 	{
 		//dijkstraPath
 		for (edge e : dijkstraPath)
@@ -197,12 +198,18 @@ void Mapping::dijkstra(point startPoint, point stopPoint)
 		}
 	}
 
+	/*cout << "done and ready to paint\n";
 	for (point p : shortestPath)
 	{
 		pathMap->setPixel8U(p.xVal, p.yVal, 60);
-	}
+	}*/
 
-	cout << "done and ready to paint\n";	
+	// invert vector for ease
+	vector<point> pathInv;
+	for (int i = shortestPath.size() - 1; i >= 0; i--)
+		pathInv.push_back(shortestPath[(unsigned int)i]);
+
+	return pathInv;
 }
 
 Image* Mapping::getBrushfireMap()

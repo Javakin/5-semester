@@ -29,7 +29,7 @@ public:
 	Mapping(Image* amap);
 
 	void brushfire();	
-	void dijkstra(point startPoint, point stopPoint);
+	vector<point> dijkstra(point startPoint, point stopPoint);
 
 	Image* getBrushfireMap();
 	Image* getBrushfireMapWObj();
