@@ -17,6 +17,7 @@ SensorClass::SensorClass(Image* amap, Image* atargetmap)
 
 vector<pixel> SensorClass::sensoring(point theCurrentLocation)
 {
+	pixelVector.clear();
 	// get the dimensions of the picture
 	rows = map->getHeight();
 	cols = map->getWidth();

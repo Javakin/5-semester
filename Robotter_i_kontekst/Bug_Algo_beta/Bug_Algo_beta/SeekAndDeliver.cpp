@@ -58,6 +58,7 @@ void SeekAndDeliver::coverragePlaning()
 	point tp = { 25,15 };
 	vector<pixel> vPixels = sensor->sensoring(tp);
 
+	vPixels = sensor->sensoring(tp);
 	// coverage planning - for every cell
 	for (unsigned int i = 0; i < vCells.size(); i++)
 	{
