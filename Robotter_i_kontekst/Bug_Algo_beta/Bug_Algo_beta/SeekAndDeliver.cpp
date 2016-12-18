@@ -42,13 +42,16 @@ void SeekAndDeliver::saveAllAsPGM()
 	fireMap->getBrushfireMapWObj()->saveAsPGM("Images/brushfireWObj.pgm");
 	fireMap->getBrushfireMapInc()->saveAsPGM("Images/brushfireInc.pgm");
 	fireMap->getVoronoiMap()->saveAsPGM("Images/voronoidPoints.pgm");
-	
+	fireMap->getCellDecMap()->saveAsPGM("Images/cellDecMap.pgm");
+
 	deleveryMap->saveAsPGM("Images/deleveryMap.pgm");
 	coverageMap->saveAsPGM("Images/coverageMap.pgm");
 }
 
 void SeekAndDeliver::coverragePlaning()
 {
+	vector<Cell> vCells = fireMap->cellDecomp();
+	cout << "\nnop\n";
 }
 
 void SeekAndDeliver::deliverCoin(unsigned int xVal, unsigned int yVal)

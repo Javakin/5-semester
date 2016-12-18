@@ -4,10 +4,11 @@
 #include <vector>
 #include <string>
 #include <deque>
+#include "PPMLoader.h"
 
 using namespace std;
 using namespace rw::sensor;
-
+using namespace rw::loaders;
 
 Mapping::Mapping()
 {
@@ -17,6 +18,7 @@ Mapping::Mapping()
 	brushfireMapInc = nullptr;
 	pathMap = nullptr;
 	voronoiMap = nullptr;
+	cellDecMap = nullptr;
 }
 
 Mapping::Mapping(Image* amap)
@@ -24,12 +26,10 @@ Mapping::Mapping(Image* amap)
 	map = amap->copyFlip(0, 0);
 	brushfireMap = nullptr;
 	brushfireMapWObj = nullptr;
-
 	brushfireMapInc = nullptr;
 	pathMap = nullptr;
-
 	voronoiMap = nullptr;
-
+	cellDecMap = nullptr;
 }
 
 void Mapping::brushfire()
@@ -102,6 +102,88 @@ void Mapping::brushfire()
 			}
 		}
 	}
+}
+
+vector<Cell> Mapping::cellDecomp()
+{
+	// precondition
+	if (map == nullptr)
+		return vector<Cell>();
+
+	// setup
+	std::string filename("Images/Bane4.pgm");
+	std::cout << filename << std::endl;
+
+	std::cout << "loading image..." << std::endl;
+	cellDecMap = PPMLoader::load(filename);
+	vector<Cell> vCells;
+	vector<unsigned int> vLines;
+
+	// finde the lines
+	cout << "identifying all cells..." << endl;
+	int semLine = 0;
+	for (unsigned int uiY = 0; uiY < cellDecMap->getHeight() - 1; uiY++)
+	{
+		semLine = 0;
+		for (unsigned int uiX = 0; uiX < cellDecMap->getWidth(); uiX++)
+		{
+			if (cellDecMap->getPixelValuei(uiX, uiY, 0) != cellDecMap->getPixelValuei(uiX, uiY + 1, 0) && semLine == 0)
+			{
+				semLine = 1;
+				vLines.push_back(uiY);
+			}
+		}
+	}
+
+	// finde the cells
+	point p1;
+	point p2;
+	Cell newCell;
+	for (unsigned int uiY = 0; uiY < vLines.size(); uiY++)
+	{
+		for (unsigned int uiX = 0; uiX < cellDecMap->getWidth() - 1; uiX++)
+		{
+			if (cellDecMap->getPixelValuei(uiX, vLines[uiY] + 1, 0) != cellDecMap->getPixelValuei(uiX + 1, vLines[uiY] + 1, 0) && cellDecMap->getPixelValuei(uiX, vLines[uiY] + 1, 0) == 0)
+			{
+				// found a new cell
+				p1.xVal = uiX + 1;
+				p1.yVal = vLines[uiY] + 1;
+
+				// finde p2				cellDecMap->setPixel8U(uiX + 1, vLines[uiY] + 1, 125);
+				for (unsigned int uiXEnd = uiX + 1; uiXEnd < cellDecMap->getWidth() - 1; uiXEnd++)
+				{
+					if (cellDecMap->getPixelValuei(uiXEnd, vLines[uiY + 1], 0) != cellDecMap->getPixelValuei(uiXEnd + 1, vLines[uiY + 1], 0) && cellDecMap->getPixelValuei(uiXEnd, vLines[uiY + 1], 0) == 255)
+					{
+						p2.xVal = uiXEnd;
+						p2.yVal = vLines[uiY + 1];
+						newCell.p1 = p1;
+						newCell.p2 = p2;
+						vCells.push_back(newCell);
+						uiXEnd = UINT_MAX - 1;
+					}
+				}
+			}
+		}
+	}
+	// display cells for debugging
+	unsigned int aColor = 50;
+	for (Cell c : vCells)
+	{
+		for (unsigned int x = c.p1.xVal; x <= c.p2.xVal; x++)
+		{
+			for (unsigned int y = c.p1.yVal; y <= c.p2.yVal; y++)
+			{
+				cellDecMap->setPixel8U(x, y, aColor);
+			}
+		}
+		aColor = (aColor + 60) % 250;
+		if (aColor < 80)
+			aColor += 50;
+		
+	}
+	 
+	// terminate and return
+	return vCells;
 }
 
 vector<point> Mapping::dijkstra(point startPoint, point stopPoint)
@@ -277,6 +359,11 @@ Image* Mapping::getVoronoiMap()
 	return voronoiMap;
 }
 
+Image * Mapping::getCellDecMap()
+{
+	return cellDecMap;
+}
+
 void Mapping::Voronoi()
 {
 	// precondition
@@ -356,12 +443,11 @@ Mapping::~Mapping()
 	delete map;
 	delete brushfireMap;
 	delete brushfireMapWObj;
-
 	delete brushfireMapInc;
 	delete pathMap;
-
 	delete voronoiMap;
-
+	delete cellDecMap;
+	
 }
 
 vector<point> Mapping::brushfireExhaustive(int xPos, int yPos, int colour)
