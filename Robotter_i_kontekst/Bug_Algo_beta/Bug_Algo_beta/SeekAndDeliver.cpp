@@ -55,10 +55,8 @@ void SeekAndDeliver::coverragePlaning()
 	// setup
 	vector<Cell> vCells = fireMap->cellDecomp();
 	vector<point> route; 
-	point tp = { 25,15 };
-	vector<pixel> vPixels = sensor->sensoring(tp);
+	vector<pixel> vPixels;
 
-	vPixels = sensor->sensoring(tp);
 	// coverage planning - for every cell
 	for (unsigned int i = 0; i < vCells.size(); i++)
 	{
@@ -66,13 +64,12 @@ void SeekAndDeliver::coverragePlaning()
 		route = fireMap->dijkstra(currentLocation, vCells[i].p1);
 		for (point p : route)
 			searchPath.push_back(p);
-
 		currentLocation = vCells[i].p1;
 
 		// plan the coverage
 		unsigned int uiXVal = vCells[i].p1.xVal;
 		unsigned int uiYVal = vCells[i].p1.yVal;
-		int semYNotFound = 0;
+		int semYNotFound = 1;
 		int xIterator = 1;
 
 		while (semYNotFound)
