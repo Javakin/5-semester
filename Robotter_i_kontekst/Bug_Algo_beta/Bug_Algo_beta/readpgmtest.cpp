@@ -53,6 +53,7 @@ int main(int argc, char** argv) {
 	
 	// cleanup
 	delete img;
+	delete img2;
 	//system("pause");
 	
 	return 0;
