@@ -55,7 +55,8 @@ void SeekAndDeliver::coverragePlaning()
 	// setup
 	vector<Cell> vCells = fireMap->cellDecomp();
 	vector<point> route; 
-	vector<pixel> vPixels = sensor->sensoring({ 25,15 });
+	point tp = { 25,15 };
+	vector<pixel> vPixels = sensor->sensoring(tp);
 
 	// coverage planning - for every cell
 	for (unsigned int i = 0; i < vCells.size(); i++)

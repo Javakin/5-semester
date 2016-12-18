@@ -20,4 +20,7 @@ struct Cell
 	point p1, p2;
 };
 
-
+struct pixel
+{
+	unsigned int xVal, yVal, colorVal;
+};
