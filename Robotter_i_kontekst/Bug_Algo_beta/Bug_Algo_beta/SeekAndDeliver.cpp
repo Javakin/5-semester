@@ -5,18 +5,20 @@
 #include "Point.h"
 #include "Robot.h"
 #include "Structs.h"
+#include "SensorClass.h"
 
 #define OBJECTS_TO_COLLECT	10
 
 using namespace std;
 
 
-SeekAndDeliver::SeekAndDeliver(Image* aMap, Mapping* aFireMap)
+SeekAndDeliver::SeekAndDeliver(Image* aMap, Mapping* aFireMap, SensorClass* aSensor)
 {
 	map = aMap->copyFlip(0,0);
 	deleveryMap = aMap->copyFlip(0, 0);
 	coverageMap = aMap->copyFlip(0, 0);
 	fireMap = aFireMap;
+	sensor = aSensor;
 
 	fireMap->brushfire();
 	fireMap->Voronoi();
@@ -50,8 +52,51 @@ void SeekAndDeliver::saveAllAsPGM()
 
 void SeekAndDeliver::coverragePlaning()
 {
+	// setup
 	vector<Cell> vCells = fireMap->cellDecomp();
-	cout << "\nnop\n";
+	vector<point> route; 
+	vector<pixel> vPixels = sensor->sensoring({ 25,15 });
+
+	// coverage planning - for every cell
+	for (unsigned int i = 0; i < vCells.size(); i++)
+	{
+		// finde the starting point p1
+		route = fireMap->dijkstra(currentLocation, vCells[i].p1);
+		for (point p : route)
+			searchPath.push_back(p);
+
+		currentLocation = vCells[i].p1;
+
+		// plan the coverage
+		unsigned int uiXVal = vCells[i].p1.xVal;
+		unsigned int uiYVal = vCells[i].p1.yVal;
+		int semYNotFound = 0;
+		int xIterator = 1;
+
+		while (semYNotFound)
+		{
+			uiXVal += xIterator;
+
+			while (uiXVal > vCells[i].p1.xVal && uiXVal < vCells[i].p2.xVal)
+			{
+				// semsor mesurment
+
+				uiXVal += xIterator;
+
+				// has we reached the bottom?
+				
+				// have we found an object?
+			}
+			xIterator = -xIterator;
+		}
+
+	}
+
+	// update route and image
+	for (point p : searchPath)
+	{
+		coverageMap->setPixel8U(p.xVal, p.yVal, 60);
+	}
 }
 
 void SeekAndDeliver::deliverCoin(unsigned int xVal, unsigned int yVal)

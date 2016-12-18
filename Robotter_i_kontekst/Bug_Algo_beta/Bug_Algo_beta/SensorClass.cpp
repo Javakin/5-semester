@@ -1,29 +1,18 @@
 #include "SensorClass.h"
+#include "Image.h"
+#include "PPMLoader.h"
 
 
+using namespace rw::loaders;
+using namespace std;
 
-SensorClass::SensorClass()
-{
-}
 
-SensorClass::SensorClass(Image * amap, Image * atargetmap)
+SensorClass::SensorClass(Image* amap, Image* atargetmap)
 {
 	// make a copy of the maps
 	map = amap->copyFlip(0, 0);
 	targets = atargetmap->copyFlip(0, 0);
 	
-
-	// setup map
-	if (map == nullptr)
-	{
-		return;
-	}
-	
-	// setup targes
-	if (targets == nullptr)
-	{
-		return;
-	}
 }
 
 vector<pixel> SensorClass::sensoring(point theCurrentLocation)
@@ -43,8 +32,6 @@ vector<pixel> SensorClass::sensoring(point theCurrentLocation)
 	point tempPoint3; // used to contain the position of the pixel being scanned
 
 	vector<vector<int>> outputVector(rows, vector<int>(cols, val)); // contains the value and position of the pixels scanned with targets
-
-
 	vector<vector<int>> sensorVector(rows, vector<int>(cols, val)); // contains the value and position of the pixels scannd in the obstacle map
 	
 	int channel = 0;
@@ -101,7 +88,7 @@ vector<pixel> SensorClass::sensoring(point theCurrentLocation)
 			outputVector[tempPoint2.xVal][tempPoint2.yVal] = sensorVector[tempPoint2.xVal][tempPoint2.yVal];
 		}
 		// for debugging
-		//cout << "x" << tempPoint2.xVal << "," << "y" << tempPoint2.yVal << "= " << outputVector[tempPoint2.xVal][tempPoint2.yVal] << " " << endl;
+		cout << "x" << tempPoint2.xVal << "," << "y" << tempPoint2.yVal << "= " << outputVector[tempPoint2.xVal][tempPoint2.yVal] << " " << endl;
 
 		// put the value and position of the output vector into a pixel struct
 		outputPixel.xVal = tempPoint2.xVal;
@@ -111,6 +98,7 @@ vector<pixel> SensorClass::sensoring(point theCurrentLocation)
 		// push the pixels into the pixelVector
 		pixelVector.push_back(outputPixel);
 	}
+
 	return pixelVector;
 }
 

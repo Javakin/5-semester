@@ -6,6 +6,7 @@
 #include <string>
 #include "Robot.h"
 #include "Structs.h"
+#include "SensorClass.h"
 
 using namespace std;
 using namespace rw::sensor;
@@ -14,7 +15,7 @@ class SeekAndDeliver
 {
 public:
 	//SeekAndDeliver();
-	SeekAndDeliver(Image* amap, Mapping* aFireMap);
+	SeekAndDeliver(Image* amap, Mapping* aFireMap, SensorClass* aSensor);
 	~SeekAndDeliver();
 
 	void saveAllAsPGM();
@@ -30,6 +31,7 @@ private:
 	Image* deleveryMap;
 	Image* coverageMap;
 	Mapping* fireMap;
+	SensorClass* sensor;
 	point currentLocation;
 	vector<point> searchPath;
 	vector<point> deleveryPath;

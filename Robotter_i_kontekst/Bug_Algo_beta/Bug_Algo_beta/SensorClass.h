@@ -19,8 +19,8 @@ struct pixel
 class SensorClass
 {
 public:
-	SensorClass();
-	SensorClass(Image * amap, Image * atargetmap);
+	//SensorClass();
+	SensorClass(Image* amap, Image* atargetmap);
 	~SensorClass();
 
 	

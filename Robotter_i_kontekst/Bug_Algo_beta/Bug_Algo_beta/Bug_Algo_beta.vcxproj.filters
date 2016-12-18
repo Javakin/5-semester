@@ -68,12 +68,10 @@
     <ClInclude Include="SeekAndDeliver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="readpgmtest.h">
+    <ClInclude Include="Structs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SensorClass.h">
-	</ClInclude>
-    <ClInclude Include="Structs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

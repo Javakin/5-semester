@@ -22,38 +22,28 @@ int main(int argc, char** argv) {
 		
 	// setup SeekAndDeliver
 	std::string filename("Images/Bane5.pgm");
+	std::string filename2("Images/targets.pgm");
 	std::cout << filename << std::endl;
 
 	std::cout << "loading image..." << std::endl;
 	Image* img = PPMLoader::load(filename);
+	Image* target = PPMLoader::load(filename2);
 	Mapping brusfireMapping(img);
+	SensorClass sensor(img, target);
 
-
-	SeekAndDeliver port3(img, &brusfireMapping);
+	SeekAndDeliver port3(img, &brusfireMapping, &sensor);
 	
-	// setup SensorClass
-	std::string filename2("targets.pgm");
-	std::cout << filename << std::endl;
-
-	std::cout << "loading image..." << std::endl;
-	Image* img2 = PPMLoader::load(filename2);
-
-	SensorClass task1(img,img2);
-
-	task1.sensoring({ 25,15 });
 	
-
 	// call relevant funcioctions
 	port3.coverragePlaning();
 	
-
 	// dump image output
 	port3.saveAllAsPGM();
-		
+	
 	
 	// cleanup
 	delete img;
-	delete img2;
+	delete target;
 	//system("pause");
 	
 	return 0;
