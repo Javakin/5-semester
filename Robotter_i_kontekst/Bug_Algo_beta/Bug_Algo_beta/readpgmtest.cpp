@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 	// cleanup
 	delete img;
 	delete target;
-	//system("pause");
+	system("pause");
 	
 	return 0;
 }

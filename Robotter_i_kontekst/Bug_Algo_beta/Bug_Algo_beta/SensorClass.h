@@ -18,6 +18,8 @@ class SensorClass
 public:
 	SensorClass(Image* amap, Image* atargetmap);
 	~SensorClass();
+	
+	Image* getTargetMap();
 
 	vector<pixel> sensoring(point theCurrentLocation);
 	
@@ -25,10 +27,8 @@ private:
 	int rows, cols, val;
 	int rows2, cols2, val2;
 	pixel outputPixel;
-	vector<pixel> pixelVector;
+	
 
 	Image* map;
 	Image* targets;
-	
-	
 };

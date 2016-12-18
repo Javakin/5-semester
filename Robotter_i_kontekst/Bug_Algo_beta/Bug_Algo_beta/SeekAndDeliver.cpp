@@ -46,13 +46,15 @@ void SeekAndDeliver::saveAllAsPGM()
 	fireMap->getVoronoiMap()->saveAsPGM("Images/voronoidPoints.pgm");
 	fireMap->getCellDecMap()->saveAsPGM("Images/cellDecMap.pgm");
 
+	sensor->getTargetMap()->saveAsPGM("Images/TargetsMap.pgm");
+
 	deleveryMap->saveAsPGM("Images/deleveryMap.pgm");
 	coverageMap->saveAsPGM("Images/coverageMap.pgm");
 }
 
 void SeekAndDeliver::coverragePlaning()
 {
-	// setup
+	// setup 
 	vector<Cell> vCells = fireMap->cellDecomp();
 	vector<point> route; 
 	vector<pixel> vPixels;
@@ -69,24 +71,48 @@ void SeekAndDeliver::coverragePlaning()
 		// plan the coverage
 		unsigned int uiXVal = vCells[i].p1.xVal;
 		unsigned int uiYVal = vCells[i].p1.yVal;
+		currentLocation = { (int) uiXVal, (int) uiYVal };
 		int semYNotFound = 1;
 		int xIterator = 1;
 
 		while (semYNotFound)
 		{
-			uiXVal += xIterator;
+			currentLocation.xVal += xIterator;
+			searchPath.push_back(currentLocation);
 
-			while (uiXVal > vCells[i].p1.xVal && uiXVal < vCells[i].p2.xVal)
+			// has we reached the bottom?
+			if (vCells[i].p2.yVal - currentLocation.yVal <= 1)
+			{
+				semYNotFound = 0;
+			}
+
+			while (currentLocation.xVal > vCells[i].p1.xVal && currentLocation.xVal < vCells[i].p2.xVal)
 			{
 				// semsor mesurment
+				vPixels = sensor->sensoring(currentLocation);
 
-				uiXVal += xIterator;
-
-				// has we reached the bottom?
-				
 				// have we found an object?
+				for (pixel pix : vPixels)
+				{
+					if (pix.colorVal == 50)
+						deliverCoin((unsigned int) pix.xVal, (unsigned int) pix.yVal);
+				}
+				
+				// iterate
+				currentLocation.xVal += xIterator;
+				searchPath.push_back(currentLocation);
+
 			}
 			xIterator = -xIterator;
+
+			if (vCells[i].p2.yVal - currentLocation.yVal > 1)
+			{
+				currentLocation.yVal++;
+				searchPath.push_back(currentLocation);
+				currentLocation.yVal++;
+				searchPath.push_back(currentLocation);
+			}			
+
 		}
 
 	}
@@ -96,6 +122,11 @@ void SeekAndDeliver::coverragePlaning()
 	{
 		coverageMap->setPixel8U(p.xVal, p.yVal, 60);
 	}
+
+	// output coverage points
+	cout << "The coverage requires: " << searchPath.size() << " pixels.\n";
+	cout << "The object delevery requires: " << deleveryPath.size() << " pixels.\n";
+	cout << "The total path traveled is: " << searchPath.size() + deleveryPath.size() << " pixels.\n";
 }
 
 void SeekAndDeliver::deliverCoin(unsigned int xVal, unsigned int yVal)
