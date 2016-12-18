@@ -38,9 +38,9 @@ int main(int argc, char** argv) {
 	std::cout << "loading image..." << std::endl;
 	Image* img2 = PPMLoader::load(filename2);
 
-	SensorClass test1(img,img2);
+	SensorClass task1(img,img2);
 
-	test1.sensoring({ 25,15 });
+	task1.sensoring({ 25,15 });
 	
 
 	// call relevant funcioctions
