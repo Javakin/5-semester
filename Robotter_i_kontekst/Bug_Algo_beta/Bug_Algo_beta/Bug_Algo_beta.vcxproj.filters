@@ -39,6 +39,9 @@
     <ClCompile Include="SeekAndDeliver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SensorClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h">
@@ -68,6 +71,8 @@
     <ClInclude Include="readpgmtest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SensorClass.h">
+	</ClInclude>
     <ClInclude Include="Structs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
