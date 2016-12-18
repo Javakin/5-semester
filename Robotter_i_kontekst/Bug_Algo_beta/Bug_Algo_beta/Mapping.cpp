@@ -138,6 +138,7 @@ vector<Cell> Mapping::cellDecomp()
 	// finde the cells
 	point p1;
 	point p2;
+	Cell newCell;
 	for (unsigned int uiY = 0; uiY < vLines.size(); uiY++)
 	{
 		for (unsigned int uiX = 0; uiX < cellDecMap->getWidth() - 1; uiX++)
@@ -145,14 +146,43 @@ vector<Cell> Mapping::cellDecomp()
 			if (cellDecMap->getPixelValuei(uiX, vLines[uiY] + 1, 0) != cellDecMap->getPixelValuei(uiX + 1, vLines[uiY] + 1, 0) && cellDecMap->getPixelValuei(uiX, vLines[uiY] + 1, 0) == 0)
 			{
 				// found a new cell
+				p1.xVal = uiX + 1;
+				p1.yVal = vLines[uiY] + 1;
 
-				cellDecMap->setPixel8U(uiX + 1, vLines[uiY] + 1, 125);
+				// finde p2				cellDecMap->setPixel8U(uiX + 1, vLines[uiY] + 1, 125);
+				for (unsigned int uiXEnd = uiX + 1; uiXEnd < cellDecMap->getWidth() - 1; uiXEnd++)
+				{
+					if (cellDecMap->getPixelValuei(uiXEnd, vLines[uiY + 1], 0) != cellDecMap->getPixelValuei(uiXEnd + 1, vLines[uiY + 1], 0) && cellDecMap->getPixelValuei(uiXEnd, vLines[uiY + 1], 0) == 255)
+					{
+						p2.xVal = uiXEnd;
+						p2.yVal = vLines[uiY + 1];
+						newCell.p1 = p1;
+						newCell.p2 = p2;
+						vCells.push_back(newCell);
+						uiXEnd = UINT_MAX - 1;
+					}
+				}
 			}
 		}
 	}
-
-	// terminate and return
+	// display cells for debugging
+	unsigned int aColor = 50;
+	for (Cell c : vCells)
+	{
+		for (unsigned int x = c.p1.xVal; x <= c.p2.xVal; x++)
+		{
+			for (unsigned int y = c.p1.yVal; y <= c.p2.yVal; y++)
+			{
+				cellDecMap->setPixel8U(x, y, aColor);
+			}
+		}
+		aColor = (aColor + 60) % 250;
+		if (aColor < 80)
+			aColor += 50;
+		
+	}
 	 
+	// terminate and return
 	return vCells;
 }
 
