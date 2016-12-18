@@ -20,47 +20,7 @@ vector<pixel> SensorClass::sensoring(point theCurrentLocation)
 	// setup
 	point tempPoint;
 	vector<pixel> pixelVector; 
-	/*// get the dimensions of the picture
-	//rows = map->getHeight();
-	//cols = map->getWidth();
-
-	//val = 0; // value of the pixel
-	//point tempPoint2; // used to contain the position of the pixel being scanned
-
-	//// get the dimensions of the picture
-	//rows2 = targets->getHeight();
-	//cols2 = targets->getWidth();
-
-	//val2 = 0; // value of the pixel
-	//point tempPoint3; // used to contain the position of the pixel being scanned
-
-	//vector<vector<int>> outputVector(rows, vector<int>(cols, val)); // contains the value and position of the pixels scanned with targets
-	//vector<vector<int>> sensorVector(rows, vector<int>(cols, val)); // contains the value and position of the pixels scannd in the obstacle map
-	//
-	//int channel = 0;
-
-	//// iterate through the map
-	//for (unsigned int x = 0; x < map->getWidth(); ++x) {
-	//	for (unsigned int y = 0; y < map->getHeight(); ++y) {
-	//		int val = map->getPixelValuei(x, y, channel);
-
-	//		sensorVector[x][y] = val; // Put the value of the pixel into the vector
-	//	}
-	//}
-
-
-	//vector<vector<int>> targetsVector(rows2, vector<int>(cols2, val2)); // contains the value and position of the pixels scannd in the targets map
-	//
-	//int channel2 = 0;
-
-	//// iterate through the map
-	//for (unsigned int x = 0; x < targets->getWidth(); ++x) {
-	//	for (unsigned int y = 0; y < targets->getHeight(); ++y) {
-	//		int val2 = targets->getPixelValuei(x, y, channel2);
-
-	//		targetsVector[x][y] = val2; // Put the value of the pixel into the vector
-	//	}
-	//}*/
+	
 
 	int testIt[9][2] = { {0, 0}, { 0, 1 },{ 0, -1 },{ 1, 0 },{ -1, 0 },{ 1, 1 },{ 1, -1 },{ -1,1 },{ -1,-1 } }; // the points relative to the current position that is to be scanned
 
@@ -71,16 +31,8 @@ vector<pixel> SensorClass::sensoring(point theCurrentLocation)
 		tempPoint.xVal = theCurrentLocation.xVal + testIt[i][0];
 		tempPoint.yVal = theCurrentLocation.yVal + testIt[i][1];
 
-		/*// for debugging
-		//cout << "x" << tempPoint2.xVal << "," << "y" << tempPoint2.yVal << "= " << sensorVector[tempPoint2.xVal][tempPoint2.yVal] << " " << endl;
-		
-		// targets map
-		tempPoint3.xVal = theCurrentLocation.xVal + testIt[i][0];
-		tempPoint3.yVal = theCurrentLocation.yVal + testIt[i][1];
-
 		// for debugging
-		//cout << "x" << tempPoint3.xVal << "," << "y" << tempPoint3.yVal << "= " << targesVector[tempPoint3.xVal][tempPoint3.yVal] << " " << endl;
-		*/
+		//cout << "x" << tempPoint2.xVal << "," << "y" << tempPoint2.yVal << "= " << sensorVector[tempPoint2.xVal][tempPoint2.yVal] << " " << endl;
 
 		// test to see if one of the scanned pixels is a target. If it is then change the value of the pixel to 50
 		outputPixel.xVal = tempPoint.xVal;
@@ -92,19 +44,6 @@ vector<pixel> SensorClass::sensoring(point theCurrentLocation)
 			outputPixel.colorVal = 50;
 			targets->setPixel8U(tempPoint.xVal, tempPoint.yVal, 125);
 		}
-		/*else // take the value of the pixel from the obstacle map
-		{
-			outputVector[tempPoint2.xVal][tempPoint2.yVal] = sensorVector[tempPoint2.xVal][tempPoint2.yVal];
-		}*/
-
-		// for debugging
-		//cout << "x" << tempPoint2.xVal << "," << "y" << tempPoint2.yVal << "= " << outputVector[tempPoint2.xVal][tempPoint2.yVal] << " " << endl;
-
-		// put the value and position of the output vector into a pixel struct
-		/*outputPixel.xVal = tempPoint2.xVal;
-		outputPixel.yVal = tempPoint2.yVal;
-		outputPixel.colorVal = outputVector[tempPoint2.xVal][tempPoint2.yVal];*/
-
 		// push the pixels into the pixelVector
 		pixelVector.push_back(outputPixel);
 	}
