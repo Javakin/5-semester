@@ -1,0 +1,8 @@
+# Dockerfile
+
+FROM tutum/apache-php
+
+MAINTAINER Hello hello@world.com
+
+COPY insert.php #/hvor vi har lagt den
+COPY select.php #/hvor vi har lagt den

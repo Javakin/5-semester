@@ -1,0 +1,93 @@
+http://tecadmin.net/install-php-7-0-apache-2-4-mysql-5-6-on-ubuntu/#
+
+#sudo ufw app list
+#sudo ufw app info "Apache Full"
+sudo ufw allow in "Apache Full"
+
+apt-get -y install mysql-server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# setting up mariaDB 
+
+sudo apt-get remove --purge mariadb-server
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
+sudo add-apt-repository 'deb http://mirror.jmu.edu/pub/mariadb/repo/5.5/ubuntu trusty main'
+sudo apt-get update
+sudo apt-get install mariadb-server
+sudo service mysql stop
+
+# configure MariaDB
+sudo mysql_install_db
+sudo service mysql start
+sudo mysql_secure_installation
+
+# the software is now installed
+
+
+# setting up nginx
+sudo apt-get update
+sudo apt-get install nginx
+
+# adjust the firewall
+sudo ufw allow 'Nginx HTTP'
+
+# installing php7
+
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install -y php7.0
+
+#
+sudo apt-get install python-software-properties software-properties-common
+sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
+sudo apt-get remove php5-common -y
+sudo apt-get purge php5-common -y
+sudo apt-get install php7.0 php7.0-fpm php7.0-mysql -y
+sudo apt-get --purge autoremove -y
+
+# replacement
+sudo apt-get install php
+
+# or 
+sudo apt-get install php7.0 
+
+# installing apachie2
+sudo apt install apache2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
