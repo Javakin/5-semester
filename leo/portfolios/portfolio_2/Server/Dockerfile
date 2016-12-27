@@ -10,5 +10,5 @@
 
 
 # run container in forground
-#CMD apachectl -D FOREGROUND
+CMD apachectl -D FOREGROUND
 

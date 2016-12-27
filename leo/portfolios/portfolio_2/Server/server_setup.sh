@@ -6,14 +6,17 @@
 #
 
 # remove old container
+echo "$(docker stop server) has been stoped"
+echo "$(docker rm server) has been removed"
+
 
 # remove old image
 docker rmi apa
-
 
 
 # build new image
 docker build -t apa .
 
 # run container 
-# docker run -p 80:80 
+docker run -dit -p 80:80 --name server -v /home/daniel/Desktop/git/5-semester/leo/portfolios/portfolio_2/Server/includes/:/var/www/html apa
+# docker run -dit -p 80:80 -v (host-dir:container dir)
