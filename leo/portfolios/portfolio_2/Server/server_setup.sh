@@ -8,7 +8,7 @@
 # remove old container
 
 # remove old image
-#docker rmi apa
+docker rmi apa
 
 
 
