@@ -1,10 +1,19 @@
 #!/bin/bash
 
-# debugging
-#echo "hello world"
+#
+# This file is to do make all nessesary preparations for seting up
+# the server
+#
 
 # remove old container
 
-# build new container
-#docker build --tag="apac"
+# remove old image
+#docker rmi apa
 
+
+
+# build new image
+docker build -t apa .
+
+# run container 
+# docker run -p 80:80 
