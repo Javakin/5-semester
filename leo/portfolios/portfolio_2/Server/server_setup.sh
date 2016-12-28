@@ -18,5 +18,5 @@ docker rmi apa
 docker build -t apa .
 
 # run container 
-docker run -dit -p 80:80 --name server -v /home/daniel/Desktop/git/5-semester/leo/portfolios/portfolio_2/Server/includes/:/var/www/html apa
+docker run -dit -p 80:80 --name server -v /home/jarvis/Desktop/git/5-semester/leo/portfolios/portfolio_2/Server/includes/:/var/www/html apa
 # docker run -dit -p 80:80 -v (host-dir:container dir)

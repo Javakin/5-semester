@@ -8,7 +8,7 @@
  FROM ubuntu:latest
  MAINTAINER javakin danielharaldson@yahoo.com
  
- run apt-get update && apt-get upgrade -y
+ #run apt-get update && apt-get upgrade -y
  
  run apt-get install mariadb-server -y
  
