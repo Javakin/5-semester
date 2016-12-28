@@ -12,7 +12,7 @@
  
  run apt-get install mariadb-server -y
  
- run /etc/init.d/mysql start
+ run /etc/init.d/mysql start  &\
  
  sleep 10s &&\
  
