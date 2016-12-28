@@ -5,18 +5,27 @@
 # the server
 #
 
+imageName="apa2"
+containerName="server"
+
+
+
 # remove old container
-echo "$(docker stop server) has been stoped"
-echo "$(docker rm server) has been removed"
+echo "Stopping server container: $containerName"
+docker stop $containerName
+
+echo "Removing server container: $containerName"
+docker rm $containerName
 
 
 # remove old image
-docker rmi apa
+docker rmi $imageName
 
 
 # build new image
-docker build -t apa .
+docker build -t $imageName .
 
-# run container 
-docker run -dit -p 80:80 --name server -v /home/jarvis/Desktop/git/5-semester/leo/portfolios/portfolio_2/Server/includes/:/var/www/html apa
-# docker run -dit -p 80:80 -v (host-dir:container dir)
+
+# run the container 
+docker run -dit -p 80:80 --name $containerName -v $(pwd)/includes/:/var/www/html $imageName
+
