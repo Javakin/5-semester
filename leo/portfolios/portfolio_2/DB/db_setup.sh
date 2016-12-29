@@ -8,10 +8,10 @@ imageName="db"
 containerName="db_container"
 
 # remove old container
-#echo "Stopping database container: $containerName"
-#docker stop $containerName
-#echo "Removing database container: $containerName"
-#docker rm $containerName
+echo "Stopping database container: $containerName"
+docker stop $containerName
+echo "Removing database container: $containerName"
+docker rm $containerName
 
 # remove old image
 #docker rmi imageName
@@ -23,3 +23,4 @@ docker build -t $imageName .
 
 # run container 
 #docker run -dit --name $containerName $imageName
+#docker run -dit --name db_container db
