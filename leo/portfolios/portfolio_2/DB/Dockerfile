@@ -35,17 +35,25 @@ RUN apt-get clean
 	| mysql
 
  
- RUN sed -i "s|bind-address		= 127.0.0.1|#bind-address		= 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
+ #RUN sed -i "s|bind-address		= 127.0.0.1|#bind-address		= 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
+ RUN sed -i "s|bind-address		= 127.0.0.1|#bind-address		= 127.0.0.1|g" /etc/mysql/mysql.conf.d/mysqld.cnf
  
 
 # run container in forground
 
 CMD ["/usr/bin/mysqld_safe"]
  
- 
- 
- 
- 
+
+
+
+
+
+
+
+
+
+
+
  
  
  
