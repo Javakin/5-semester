@@ -2,9 +2,9 @@
 
 $servername = "172.17.0.3";
 
-$username   = "phpuser";
+$username   = "ubuntu";
 
-$password   = "password";
+$password   = "ubuntu";
 
 $dbname     = "abookdb";
 
