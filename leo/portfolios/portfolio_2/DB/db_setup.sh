@@ -22,5 +22,5 @@ docker build -t $imageName .
 
 
 # run container 
-docker run -dit --name $containerName $imageName
+docker run -dit -p 3306:3306 --name $containerName $imageName
 #docker run -dit --name db_container db
