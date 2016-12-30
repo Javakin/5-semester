@@ -7,7 +7,7 @@
 
 imageName="apa2"
 containerName="server"
-
+#myHostname="192.168.1.113"
 
 
 # remove old container

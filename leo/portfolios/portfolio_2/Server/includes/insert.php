@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (empty($nameErr) and empty($addressErr)) {
     
-    $servername = "172.17.0.3";
+    $servername = "192.168.1.115";
     $username   = "ubuntu";
     $password   = "ubuntu";
     
